@@ -1,6 +1,6 @@
 import numpy as np
 
-def is_numeric(val):
+def is_number(val):
   try:
     v = float(val)
     return True

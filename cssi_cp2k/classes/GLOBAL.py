@@ -1,5 +1,6 @@
 import os
 import cssi_cp2k.utilities as utilities
+
 class GLOBAL:
 
   BLACS_GRID_VALS     = ["COLUMN","ROW","SQUARE"]
@@ -26,9 +27,7 @@ class GLOBAL:
                FLUSH_SHOULD_FLUSH=True,OUTPUT_FILE_NAME=None,PREFERRED_DIAG_LIBRARY='SL',
                PREFERRED_FFT_LIBRARY='FFTW3',PRINT_LEVEL='MEDIUM',PROGRAM_NAME='CP2K',
                PROJECT_NAME='PROJECT',RUN_TYPE='ENERGY_FORCE',SAVE_MEM=False,SEED=8675309,TRACE=False,
-               TRACE_MASTER=True,TRACE_MAX=2147483647,TRACE_ROUTINES=[],WALLTIME='24:00:00',DBCSR=None,
-               FM=None,FM_DIAG_SETTINGS=None,PRINT=None,PRINT_ELPA=None,PROGRAM_RUN_INFO=None,
-               REFERENCES=None,TIMINGS=None):
+               TRACE_MASTER=True,TRACE_MAX=2147483647,TRACE_ROUTINES=[],WALLTIME='24:00:00'):
 
     self.__ALLTOALL_SGL           = ALLTOALL_SGL
     self.__BLACS_GRID             = BLACS_GRID
@@ -230,7 +229,7 @@ class GLOBAL:
     if val in BLACS_GRID_VALS:
       self.__BLACS_GRID = val
     else:
-      errrorMessage = ("Type: Setter\nVar.: BLACS_GRID\nErr.: BLACS_GRID val {} not allowed."
+      errrorMessage = ("Type: Setter\nVar.: BLACS_GRID\nErr.: BLACS_GRID val {} not allowed. "
          "Check for typo. Allowed BLACS_GRID values: {}.".format(val,BLACS_GRID_VALS))
     
   
@@ -271,7 +270,7 @@ class GLOBAL:
     if val in ELPA_KERNEL_VALS:
       self.__ELPA_KERNEL_VALS = val
     else:
-      errorMessage = ("Type: Setter\nVar.: ELPA_KERNEL\nErr.: ELPA_KERNEL val {} not allowed."
+      errorMessage = ("Type: Setter\nVar.: ELPA_KERNEL\nErr.: ELPA_KERNEL val {} not allowed. "
        "Check for typo. Allowed ELPA_KERNEL values: {}".format(val,ELPA_KERNEL_VALS))
 
   @ELPA_QR.setter
@@ -301,7 +300,7 @@ class GLOBAL:
     if val in FFTW_PLAN_TYPE_VALS:
       self.__FFTW_PLAN_TYPE = val
     else:
-      errorMessage = ("Type: Setter\nVar.: FFTW_PLAN_TYPE\nErr.: FFTW_PLAN_TYPE val {} not allowed."
+      errorMessage = ("Type: Setter\nVar.: FFTW_PLAN_TYPE\nErr.: FFTW_PLAN_TYPE val {} not allowed. "
         "Check for typo. Allowed FFTW_PLAN_TYPE values: {}".format(val,FFTW_PLAN_TYPE_VALS))
 
   @FFTW_WISDOM_FILE_NAME.setter
@@ -318,3 +317,153 @@ class GLOBAL:
     else:
       errorMessage = "Type: Setter\nVar.: FFT_POOL_SCRATCH_LIMIT\nErr.: FFT_POOL_SCRATCH_LIMIT must be numeric."
 
+  @FLUSH_SHOULD_FLUSH.setter
+  def FLUSH_SHOULD_FLUSH(self,val):
+    if isinstance(val,bool):
+      self.__FLUSH_SHOULD_FLUSH = val
+    else:
+      errorMessage = "Type: Setter\nVar.: FLUSH_SHOULD_FLUSH\nErr.: FLUSH_SHOULD_FLUSH must be a boolean."
+
+  @OUTPUT_FILE_NAME.setter
+  def OUTPUT_FILE_NAME(self,val):
+    self.__OUTPUT_FILE_NAME = val
+
+  @PREFERRED_DIAG_LIBRARY.setter
+  def PREFERRED_DIAG_LIBRARY(self,val):
+    val = str(val).upper()
+    if val in PREFERRED_DIAG_LIBRARY_VALS:
+      self.__PREFERRED_DIAG_LIBRARY = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: PREFERRED_DIAG_LIBRARY\nErr.: PREFERRED_DIAG_LIBRARY val {} not allowed. "
+        "Check for typo. Allowed values are: {}".format(val,PREFERRED_DIAG_LIBRARY_VALS))
+
+  @PREFERRED_FFT_LIBRARY.setter
+  def PREFERRED_FFT_LIBRARY(self,val):
+    val = str(val).upper()
+    if val in PREFERRED_FFT_LIBRARY_VALS:
+      self.__PREFERRED_FFT_LIBRARY = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: PREFERRED_FFT_LIBRARY\nErr.: PREFERRED_FFT_LIBRARY val {} not allowed. "
+        "Check for typo. Allowed values are: {}".format(val,PREFERRED_FFT_LIBRARY_VALS))
+ 
+  @PRINT_LEVEL.setter
+  def PRINT_LEVEL(self,val):
+    val = str(val).upper()
+    if val in PRINT_LEVEL_VALS:
+      self.__PRINT_LEVEL = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: PRINT_LEVEL\nErr.: PRINT_LEVEL val {} not allowed. "
+       "Check for typo. Allowed values are: {}".format(val,PRINT_LEVEL_VALS))
+
+  @PROGRAM_NAME.setter
+  def PROGRAM_NAME(self,val):
+    val = str(val).upper()
+    if val in PROGRAM_NAME_VALS:
+      self.__PROGRAM_NAME = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: PROGRAM_NAME\nErr.: PROGRAM_NAME {} not allowed. "
+        "Check for typo. Allowed values are: {}".format(val,PROGRAM_NAME_VALS))
+
+  @PROJECT_NAME.setter
+  def PROJECT_NAME(self,val):
+    self.__PROJECT_NAME = val
+
+  @RUN_TYPE.setter
+  def RUN_TYPE(self,val):
+    val = str(val).upper()
+    if val in RUN_TYPE_VALS:
+      self.__RUN_TYPE = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: RUN_TYPE\nErr.: RUN_TYPE {} not allowed. "
+        "Check for typo. Allowed values are: {}".format(val,RUN_TYPE_VALS))
+
+  @SAVE_MEM.setter
+  def SAVE_MEM(self,val):
+    if isinstance(val,bool):
+      self.__SAVE_MEM = val
+    else:
+      errorMessage = "Type: Setter\nVar.: SAVE_MEM\nErr.: SAVE_MEM must be a boolean."
+
+  @SEED.setter
+  def SEED(self,val):
+    if utilities.is_number(val):
+      self.__SEED = int(float(val)//1)
+
+  @TRACE.setter
+  def TRACE(self,val):
+    if isinstance(val,bool):
+      self.__TRACE = val
+    else:
+      errorMessage = "Type: Setter\nVar.: TRACE\nErr.: TRACE must be a boolean."
+
+  @TRACE_MASTER.setter
+  def TRACE_MASTER(self,val):
+    if isinstance(val,bool):
+      self.__TRACE_MASTER = val
+    else:
+      errorMessage = "Type: Setter\nVar.: TRACE_MASTER\nErr.: TRACE_MASTER must be a boolean."
+
+  @TRACE_MAX.setter
+  def TRACE_MAX(self,val):
+    if utilities.is_number(val):
+      self.__TRACE_MAX = int(float(val)//1)
+    else:
+      errorMessage = ("Type: Setter\nVar.: TRACE_MAX\nErr.: TRACE_MAX must be numeric (technically must be an"
+       "integer but this code will make ints out of floats).")
+
+  @TRACE_ROUTINES.setter
+  def TRACE_ROUTINES(self,val):
+    self.__TRACE_ROUTINES = val
+
+  @WALLTIME.setter
+  def WALLTIME(self,val):
+    hhmmss = str(val).split(":")
+    # If given in seconds, not HH:MM:SS
+    if len(hhmmss) == 1 and utilities.is_number(val):
+      self.__WALLTIME = int(float(val)//1)
+    elif len(hhmmss) == 3:
+      isn = True
+      for v in hhmmss:
+        if not(utilities.is_number(v)):
+          isn = False
+      if isn:
+        self.__WALLTIME = val
+      else:
+        errorMessage = ("Type: Setter\nVar.: WALLTIME\nErr.: Wrong format for walltime: {}. Must be in seconds"
+          "or HH:MM:SS.".format(val))
+    else:
+      errorMessage = ("Type: Setter\nVar.: WALLTIME\nErr.: Wrong format for walltime: {}. Must be in seconds"
+        "or HH:MM:SS.".format(val))
+
+# Subclasses (subsections in CP2K input files)
+class DBCSR:
+  def __init__(self):
+    pass
+
+class FM:
+  def __init__(self):
+    pass
+
+class FM_DIAG_SETTINGS:
+  def __init__(self):
+    pass
+
+class PRINT:
+  def __init__(self):
+    pass
+
+class PRINT_ELPA:
+  def __init__(self):
+    pass
+
+class PROGRAM_RUN_INFO:
+  def __init__(self):
+    pass
+
+class REFERENCES:
+  def __init__(self):
+    pass
+
+class TIMINGS:
+  def __init__(self):
+    pass
