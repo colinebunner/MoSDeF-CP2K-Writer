@@ -1,3 +1,11 @@
+import DBCSR
+import FM
+import FM_DIAG_SETTINGS
+import PRINT
+import PRINT_ELPA
+import PROGRAM_RUN_INFO
+import REFERENCES
+import TIMINGS
 import os
 import cssi_cp2k.utilities as utilities
 
@@ -434,36 +442,3 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: WALLTIME\nErr.: Wrong format for walltime: {}. Must be in seconds"
         "or HH:MM:SS.".format(val))
-
-# Subclasses (subsections in CP2K input files)
-class DBCSR:
-  def __init__(self):
-    pass
-
-class FM:
-  def __init__(self):
-    pass
-
-class FM_DIAG_SETTINGS:
-  def __init__(self):
-    pass
-
-class PRINT:
-  def __init__(self):
-    pass
-
-class PRINT_ELPA:
-  def __init__(self):
-    pass
-
-class PROGRAM_RUN_INFO:
-  def __init__(self):
-    pass
-
-class REFERENCES:
-  def __init__(self):
-    pass
-
-class TIMINGS:
-  def __init__(self):
-    pass
