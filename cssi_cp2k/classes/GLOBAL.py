@@ -1,5 +1,5 @@
 import os
-import CSSI_CP2K.utilities as utilities
+import cssi_cp2k.utilities as utilities
 class GLOBAL:
 
   BLACS_GRID_VALS     = ["COLUMN","ROW","SQUARE"]
