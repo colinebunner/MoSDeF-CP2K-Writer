@@ -1,7 +1,6 @@
 # Compiled python modules.
 *.pyc
 
-# Generic tag for output files
 *.out
 
 # Setuptools distribution folder.

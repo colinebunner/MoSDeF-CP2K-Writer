@@ -1,6 +1,9 @@
 import ACC
+import cssi_cp2k.utilities
 
 class DBCSR:
+
+  MM_DRIVER_VALS = ["AUTO","BLAS","MATMUL","SMM","XSMM"]
 
   def __init__(self,AVG_ELEMENTS_IMAGES=-1,COMM_THREAD_LOAD=-1,MAX_ELEMENTS_PER_BLOCK=32,
                MM_DRIVER="AUTO",MM_STACK_SIZE=-1,MULTREC_LIMIT=512,NUM_LAYERS_3D=1,
@@ -26,7 +29,7 @@ class DBCSR:
     return self.__AVG_ELEMENTS_IMAGES
 
   @property
-  def COM_THREAD_LOAD(self):
+  def COMM_THREAD_LOAD(self):
     return self.__COMM_THREAD_LOAD
 
   @property
@@ -68,3 +71,95 @@ class DBCSR:
   @property
   def USE_MPI_RMA(self):
     return self.__USE_MPI_RMA
+
+  @AVG_ELEMENTS_IMAGES.setter
+  def AVG_ELEMENTS_IMAGES(self,val):
+    if utilities.is_integer(val):
+      self.__AVG_ELEMENTS_IMAGES = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: AVG_ELEMENTS_IMAGES\nErr.: AVG_ELEMENTS_IMAGES must be an"
+        " integer.")
+
+  @COMM_THREAD_LOAD.setter
+  def COMM_THREAD_LOAD(self,val):
+    if utilities.is_integer(val):
+      self.__COMM_THREAD_LOAD = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: COMM_THREAD_LOAD\nErr.: COMM_THREAD_LOAD must be an"
+        " integer.")
+
+  @MAX_ELEMENTS_PER_BLOCK.setter
+  def MAX_ELEMENTS_PER_BLOCK(self,val):
+    if utilities.is_positive_integer(val):
+      self.__MAX_ELEMENTS_PER_BLOCK = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: MAX_ELEMENTS_PER_BLOCK\nErr.: MAX_ELEMENTS_PER_BLOCK must be"
+        " an integer.")
+
+  @MM_DRIVER.setter
+  def MM_DRIVER(self,val):
+    if val in MM_DRIVER_VALS:
+      self.__MM_DRIVER = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: MM_DRIVER\nErr.: MM_DRIVER val {} not allowed. "
+        "Check for typo. Allowed values are: {}".format(val,MM_DRIVER_VALS))
+
+  @MM_STACK_SIZE.setter
+  def MM_STACK_SIZE(self,val):
+    if utilities.is_integer(val):
+      self.__MM_STACK_SIZE = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: MM_STACK_SIZE\nErr.: MM_STACK_SIZE must be an integer.")
+
+  @MULTREC_LIMIT.setter
+  def MULTREC_LIMIT(self,val):
+    if utilities.is_positive_integer(val):
+      self.__MULTREC_LIMIT = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: MULTREC_LIMIT\nErr.: MULTREC_LIMIT must be positive integer.")
+
+  @NUM_LAYERS_3D.setter
+  def NUM_LAYERS_3D(self,val):
+    if utilities.is_positive_integer(val):
+      self.__NUM_LAYERS_3D = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: NUM_LAYERS_3D\nErr.: NUM_LAYERS_3D must be positive " 
+        "integer.")
+
+  @NUM_MULT_IMAGES.setter
+  def NUM_MULT_IMAGES(self,val):
+    if utilities.is_positive_integer(val):
+      self.__NUM_MULT_IMAGES = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: NUM_MULT_IMAGES\nErr.: NUM_MULT_IMAGES must be positive "
+        "integer.")
+
+  @N_SIZE_MNK_STACKS.setter
+  def N_SIZE_MNK_STACKS(self,val):
+    if utilities.is_positive_integer(val):
+      self.__N_SIZE_MNK_STACKS = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: N_SIZE_MNK_STACKS\nErr.: N_SIZE_MNK_STACKS must be positive "
+        "integer.")
+
+  @USE_COMM_THREAD.setter
+  def USE_COMM_THREAD(self,val):
+    if isinstance(val,bool):
+      self.__USE_COMM_THREAD = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: USE_COMM_THREAD\nErr.: USE_COMM_THREAD must be a boolean.")
+
+  @USE_MPI_ALLOCATOR.setter
+  def USE_MPI_ALLOCATOR(self,val):
+    if isinstance(val,bool):
+      self.__USE_MPI_ALLOCATOR = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: USE_MPI_ALLOCATOR\nErr.: USE_MPI_ALLOCATOR must be a "
+        "boolean.")
+
+  @USE_MPI_RMA.setter
+  def USE_MPI_RMA(self,val):
+    if isinstance(val,bool):
+      self.__USE_MPI_RMA = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: USE_MPI_RMA\nErr.: USE_MPI_RMA must be a boolean.")
