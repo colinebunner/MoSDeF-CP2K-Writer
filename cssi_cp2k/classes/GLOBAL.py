@@ -13,9 +13,10 @@ class GLOBAL:
 
   BLACS_GRID_VALS     = ["COLUMN","ROW","SQUARE"]
   CALLGRAPH_VALS      = ["ALL","MASTER","NONE"]
-  ELPA_KERNEL_VALS    = ["AUTO","AVX2_BLOCK2","AVX2_BLOCK4","AVX2_BLOCK6","AVX512_BLOCK2","AVX512_BLOCK4",
-                         "AVX512_BLOCK6","AVX_BLOCK2","AVX_BLOCK4","AVX_BLOCK6","BGP","BGQ","GENERIC",
-                         "GENERIC_SIMPLE","GPU","SSE","SSE_BLOCK2","SSE_BLOCK4","SSE_BLOCK6"]
+  ELPA_KERNEL_VALS    = ["AUTO","AVX2_BLOCK2","AVX2_BLOCK4","AVX2_BLOCK6","AVX512_BLOCK2",
+                         "AVX512_BLOCK4","AVX512_BLOCK6","AVX_BLOCK2","AVX_BLOCK4","AVX_BLOCK6","BGP",
+                         "BGQ","GENERIC","GENERIC_SIMPLE","GPU","SSE","SSE_BLOCK2","SSE_BLOCK4",
+                         "SSE_BLOCK6"]
   FFTW_PLAN_TYPE_VALS = ["ESTIMATE","EXHAUSTIVE","MEASURE","PATIENT"]
   PREFERRED_DIAG_LIBRARY_VALS = ["ELPA","SL","SL2"]
   PREFERRED_FFT_LIBRARY_VALS  = ["FFTSG","FFTW","FFTW3"]
@@ -35,7 +36,7 @@ class GLOBAL:
                FLUSH_SHOULD_FLUSH=True,OUTPUT_FILE_NAME=None,PREFERRED_DIAG_LIBRARY='SL',
                PREFERRED_FFT_LIBRARY='FFTW3',PRINT_LEVEL='MEDIUM',PROGRAM_NAME='CP2K',
                PROJECT_NAME='PROJECT',RUN_TYPE='ENERGY_FORCE',SAVE_MEM=False,SEED=8675309,TRACE=False,
-               TRACE_MASTER=True,TRACE_MAX=2147483647,TRACE_ROUTINES=[],WALLTIME='24:00:00'):
+               TRACE_MASTER=True,TRACE_MAX=2147483647,TRACE_ROUTINES=[],WALLTIME='24:00:00',errors=[]):
 
     self.__ALLTOALL_SGL           = ALLTOALL_SGL
     self.__BLACS_GRID             = BLACS_GRID
@@ -67,14 +68,15 @@ class GLOBAL:
     self.__TRACE_ROUTINES         = TRACE_ROUTINES
     self.__WALLTIME               = WALLTIME
     # Consider adding subsec_args options to init
-    self.__DBCSR                  = DBCSR()
-    self.__FM                     = FM()
-    self.__FM_DIAG_SETTINGS       = FM_DIAG_SETTINGS()
-    self.__PRINT                  = PRINT()
-    self.__PRINT_ELPA             = PRINT_ELPA()
-    self.__PROGRAM_RUN_INFO       = PROGRAM_RUN_INFO()
-    self.__REFERENCES             = REFERENCES()
-    self.__TIMINGS                = TIMINGS()
+    self.__DBCSR                  = DBCSR.DBCSR(errors=self.__errors)
+    self.__FM                     = FM.FM(errors=self.__errors)
+    self.__FM_DIAG_SETTINGS       = FM_DIAG_SETTINGS.FM_DIAG_SETTINGS(errors=self.__errors)
+    self.__PRINT                  = PRINT.PRINT(self.__errors)
+    self.__PRINT_ELPA             = PRINT_ELPA.PRINT_ELPA(self.__errors)
+    self.__PROGRAM_RUN_INFO       = PROGRAM_RUN_INFO.PROGRAM_RUN_INFO(self.__errors)
+    self.__REFERENCES             = REFERENCES.REFERENCES(self.__errors)
+    self.__TIMINGS                = TIMINGS.TIMINGS(self.__errors)
+    self.__errors                 = errors
 
   @property
   def ALLTOALL_SGL(self):
@@ -224,12 +226,17 @@ class GLOBAL:
   def TIMINGS(self):
     return self.__TIMINGS
 
+  @property
+  def errors(self):
+    return self.__errors
+
   @ALLTOALL_SGL.setter
   def ALLTOALL_SGL(self,val):
     if isinstance(val,bool):
       self.__ALLTOALL_SGL = val
     else:
       errorMessage = "Type: Setter\nVar.: ALLTOALL_SGL\nErr.: ALLTOALL_SGL must be a boolean."
+      self.__errors.append(errorMessage)
 
   @BLACS_GRID.setter
   def BLACS_GRID(self,val):
@@ -247,6 +254,7 @@ class GLOBAL:
       self.__BLACS_REPEATABLE = val
     else:
       errorMessage = "Type: Setter\nVar.: BLACS_REPEATABLE\nErr.: BLACS_REPEATABLE must be a boolean."
+      self.__errors.append(errorMessage)
 
   @CALLGRAPH.setter
   def CALLGRAPH(self,val):
@@ -264,6 +272,7 @@ class GLOBAL:
       self.__ECHO_ALL_HOSTS = val
     else:
       errorMessage = "Type: Setter\nVar.: ECHO_ALL_HOSTS\nErr.: ECHO_ALL_HOSTS must be a boolean."
+      self.__errors.append(errorMessage)
 
   @ECHO_INPUT.setter
   def ECHO_INPUT(self,val):
@@ -271,6 +280,7 @@ class GLOBAL:
       self.__ECHO_INPUT = val
     else:
       errorMessage = "Type: Setter\nVar.: ECHO_INPUT\nErr.: ECHO_INPUT must be a boolean."
+      self.__errors.append(errorMessage)
 
   @ELPA_KERNEL.setter
   def ELPA_KERNEL(self,val):
@@ -280,6 +290,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: ELPA_KERNEL\nErr.: ELPA_KERNEL val {} not allowed. "
        "Check for typo. Allowed ELPA_KERNEL values: {}".format(val,ELPA_KERNEL_VALS))
+      self.__errors.append(errorMessage)
 
   @ELPA_QR.setter
   def ELPA_QR(self,val):
@@ -287,6 +298,7 @@ class GLOBAL:
       self.__ELPA_QR = val
     else:
       errorMessage = "Type: Setter\nVar.: ELPA_QR\nErr.: ELPA_QR must be a boolean."
+      self.__errors.append(errorMessage)
 
   @ELPA_QR_UNSAFE.setter
   def ELPA_QR_UNSAFE(self,val):
@@ -294,6 +306,7 @@ class GLOBAL:
       self.__ELPA_QR_UNSAFE = val
     else:
       errorMessage = "Type: Setter\nVar.: ELPA_QR_UNSAFE\nErr.: ELPA_QR_UNSAFE must be a boolean."
+      self.__errors.append(errorMessage)
 
   @EXTENDED_FFT_LENGTHS.setter
   def EXTENDED_FFT_LENGTHS(self,val):
@@ -301,6 +314,7 @@ class GLOBAL:
       self.__EXTENDED_FFT_LENGTHS = val
     else:
       errorMessage = "Type: Setter\nVar.: EXTENDED_FFT_LENGTHS\nErr.: EXTENDED_FFT_LENGTHS must be a boolean."
+      self.__errors.append(errorMessage)
 
   @FFTW_PLAN_TYPE.setter
   def FFTW_PLAN_TYPE(self,val):
@@ -310,6 +324,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: FFTW_PLAN_TYPE\nErr.: FFTW_PLAN_TYPE val {} not allowed. "
         "Check for typo. Allowed FFTW_PLAN_TYPE values: {}".format(val,FFTW_PLAN_TYPE_VALS))
+      self.__errors.append(errorMessage)
 
   @FFTW_WISDOM_FILE_NAME.setter
   def FFTW_WISDOM_FILE_NAME(self,val):
@@ -317,6 +332,7 @@ class GLOBAL:
       self.__FFTW_WISDOM_FILE_NAME = val
     else:
       errorMessage = "Type: Setter\nVar.: FFTW_WISDOM_FILE_NAME\nErr.: File {} not found.".format(val)
+      self.__errors.append(errorMessage)
 
   @FFT_POOL_SCRATCH_LIMIT.setter
   def FFT_POOL_SCRATCH_LIMIT(self,val):
@@ -324,6 +340,7 @@ class GLOBAL:
       self.__FFT_POOL_SCRATCH_LIMIT = float(val)
     else:
       errorMessage = "Type: Setter\nVar.: FFT_POOL_SCRATCH_LIMIT\nErr.: FFT_POOL_SCRATCH_LIMIT must be numeric."
+      self.__errors.append(errorMessage)
 
   @FLUSH_SHOULD_FLUSH.setter
   def FLUSH_SHOULD_FLUSH(self,val):
@@ -331,6 +348,7 @@ class GLOBAL:
       self.__FLUSH_SHOULD_FLUSH = val
     else:
       errorMessage = "Type: Setter\nVar.: FLUSH_SHOULD_FLUSH\nErr.: FLUSH_SHOULD_FLUSH must be a boolean."
+      self.__errors.append(errorMessage)
 
   @OUTPUT_FILE_NAME.setter
   def OUTPUT_FILE_NAME(self,val):
@@ -344,6 +362,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: PREFERRED_DIAG_LIBRARY\nErr.: PREFERRED_DIAG_LIBRARY val {} not allowed. "
         "Check for typo. Allowed values are: {}".format(val,PREFERRED_DIAG_LIBRARY_VALS))
+      self.__errors.append(errorMessage)
 
   @PREFERRED_FFT_LIBRARY.setter
   def PREFERRED_FFT_LIBRARY(self,val):
@@ -353,6 +372,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: PREFERRED_FFT_LIBRARY\nErr.: PREFERRED_FFT_LIBRARY val {} not allowed. "
         "Check for typo. Allowed values are: {}".format(val,PREFERRED_FFT_LIBRARY_VALS))
+      self.__errors.append(errorMessage)
  
   @PRINT_LEVEL.setter
   def PRINT_LEVEL(self,val):
@@ -362,6 +382,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: PRINT_LEVEL\nErr.: PRINT_LEVEL val {} not allowed. "
        "Check for typo. Allowed values are: {}".format(val,PRINT_LEVEL_VALS))
+      self.__errors.append(errorMessage)
 
   @PROGRAM_NAME.setter
   def PROGRAM_NAME(self,val):
@@ -371,6 +392,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: PROGRAM_NAME\nErr.: PROGRAM_NAME {} not allowed. "
         "Check for typo. Allowed values are: {}".format(val,PROGRAM_NAME_VALS))
+      self.__errors.append(errorMessage)
 
   @PROJECT_NAME.setter
   def PROJECT_NAME(self,val):
@@ -384,6 +406,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: RUN_TYPE\nErr.: RUN_TYPE {} not allowed. "
         "Check for typo. Allowed values are: {}".format(val,RUN_TYPE_VALS))
+      self.__errors.append(errorMessage)
 
   @SAVE_MEM.setter
   def SAVE_MEM(self,val):
@@ -391,6 +414,7 @@ class GLOBAL:
       self.__SAVE_MEM = val
     else:
       errorMessage = "Type: Setter\nVar.: SAVE_MEM\nErr.: SAVE_MEM must be a boolean."
+      self.__errors.append(errorMessage)
 
   @SEED.setter
   def SEED(self,val):
@@ -403,6 +427,7 @@ class GLOBAL:
       self.__TRACE = val
     else:
       errorMessage = "Type: Setter\nVar.: TRACE\nErr.: TRACE must be a boolean."
+      self.__errors.append(errorMessage)
 
   @TRACE_MASTER.setter
   def TRACE_MASTER(self,val):
@@ -410,6 +435,7 @@ class GLOBAL:
       self.__TRACE_MASTER = val
     else:
       errorMessage = "Type: Setter\nVar.: TRACE_MASTER\nErr.: TRACE_MASTER must be a boolean."
+      self.__errors.append(errorMessage)
 
   @TRACE_MAX.setter
   def TRACE_MAX(self,val):
@@ -418,6 +444,7 @@ class GLOBAL:
     else:
       errorMessage = ("Type: Setter\nVar.: TRACE_MAX\nErr.: TRACE_MAX must be numeric (technically must be an"
        "integer but this code will make ints out of floats).")
+      self.__errors.append(errorMessage)
 
   @TRACE_ROUTINES.setter
   def TRACE_ROUTINES(self,val):
@@ -439,6 +466,8 @@ class GLOBAL:
       else:
         errorMessage = ("Type: Setter\nVar.: WALLTIME\nErr.: Wrong format for walltime: {}. Must be in seconds"
           "or HH:MM:SS.".format(val))
+      self.__errors.append(errorMessage)
     else:
       errorMessage = ("Type: Setter\nVar.: WALLTIME\nErr.: Wrong format for walltime: {}. Must be in seconds"
         "or HH:MM:SS.".format(val))
+      self.__errors.append(errorMessage)

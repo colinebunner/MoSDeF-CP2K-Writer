@@ -1,5 +1,5 @@
-import ACC
 import cssi_cp2k.utilities
+import ACC
 
 class DBCSR:
 
@@ -8,7 +8,7 @@ class DBCSR:
   def __init__(self,AVG_ELEMENTS_IMAGES=-1,COMM_THREAD_LOAD=-1,MAX_ELEMENTS_PER_BLOCK=32,
                MM_DRIVER="AUTO",MM_STACK_SIZE=-1,MULTREC_LIMIT=512,NUM_LAYERS_3D=1,
                NUM_MULT_IMAGES=1,N_SIZE_MNK_STACKS=3,USE_COMM_THREAD=True,
-               USE_MPI_ALLOCATOR=True,USE_MPI_RMA=False):
+               USE_MPI_ALLOCATOR=True,USE_MPI_RMA=False,errors=[]):
 
     self.__AVG_ELEMENTS_IMAGES    = AVG_ELEMENTS_IMAGES
     self.__COMM_THREAD_LOAD       = COMM_THREAD_LOAD
@@ -22,7 +22,8 @@ class DBCSR:
     self.__USE_COMM_THREAD        = USE_COMM_THREAD
     self.__USE_MPI_ALLOCATOR      = USE_MPI_ALLOCATOR
     self.__USE_MPI_RMA            = USE_MPI_RMA
-    self.__ACC                    = ACC()
+    self.__errors                 = errors
+    self.__ACC                    = ACC.ACC(errors=[])
 
   @property
   def AVG_ELEMENTS_IMAGES(self):
@@ -79,6 +80,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: AVG_ELEMENTS_IMAGES\nErr.: AVG_ELEMENTS_IMAGES must be an"
         " integer.")
+      self.__errors.append(errorMessage)
 
   @COMM_THREAD_LOAD.setter
   def COMM_THREAD_LOAD(self,val):
@@ -87,6 +89,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: COMM_THREAD_LOAD\nErr.: COMM_THREAD_LOAD must be an"
         " integer.")
+      self.__errors.append(errorMessage)
 
   @MAX_ELEMENTS_PER_BLOCK.setter
   def MAX_ELEMENTS_PER_BLOCK(self,val):
@@ -95,6 +98,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: MAX_ELEMENTS_PER_BLOCK\nErr.: MAX_ELEMENTS_PER_BLOCK must be"
         " an integer.")
+      self.__errors.append(errorMessage)
 
   @MM_DRIVER.setter
   def MM_DRIVER(self,val):
@@ -103,6 +107,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: MM_DRIVER\nErr.: MM_DRIVER val {} not allowed. "
         "Check for typo. Allowed values are: {}".format(val,MM_DRIVER_VALS))
+      self.__errors.append(errorMessage)
 
   @MM_STACK_SIZE.setter
   def MM_STACK_SIZE(self,val):
@@ -110,6 +115,7 @@ class DBCSR:
       self.__MM_STACK_SIZE = val
     else:
       errorMessage = ("Type: Setter\nVar.: MM_STACK_SIZE\nErr.: MM_STACK_SIZE must be an integer.")
+      self.__errors.append(errorMessage)
 
   @MULTREC_LIMIT.setter
   def MULTREC_LIMIT(self,val):
@@ -117,6 +123,7 @@ class DBCSR:
       self.__MULTREC_LIMIT = val
     else:
       errorMessage = ("Type: Setter\nVar.: MULTREC_LIMIT\nErr.: MULTREC_LIMIT must be positive integer.")
+      self.__errors.append(errorMessage)
 
   @NUM_LAYERS_3D.setter
   def NUM_LAYERS_3D(self,val):
@@ -125,6 +132,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: NUM_LAYERS_3D\nErr.: NUM_LAYERS_3D must be positive " 
         "integer.")
+      self.__errors.append(errorMessage)
 
   @NUM_MULT_IMAGES.setter
   def NUM_MULT_IMAGES(self,val):
@@ -133,6 +141,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: NUM_MULT_IMAGES\nErr.: NUM_MULT_IMAGES must be positive "
         "integer.")
+      self.__errors.append(errorMessage)
 
   @N_SIZE_MNK_STACKS.setter
   def N_SIZE_MNK_STACKS(self,val):
@@ -141,6 +150,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: N_SIZE_MNK_STACKS\nErr.: N_SIZE_MNK_STACKS must be positive "
         "integer.")
+      self.__errors.append(errorMessage)
 
   @USE_COMM_THREAD.setter
   def USE_COMM_THREAD(self,val):
@@ -148,6 +158,7 @@ class DBCSR:
       self.__USE_COMM_THREAD = val
     else:
       errorMessage = ("Type: Setter\nVar.: USE_COMM_THREAD\nErr.: USE_COMM_THREAD must be a boolean.")
+      self.__errors.append(errorMessage)
 
   @USE_MPI_ALLOCATOR.setter
   def USE_MPI_ALLOCATOR(self,val):
@@ -156,6 +167,7 @@ class DBCSR:
     else:
       errorMessage = ("Type: Setter\nVar.: USE_MPI_ALLOCATOR\nErr.: USE_MPI_ALLOCATOR must be a "
         "boolean.")
+      self.__errors.append(errorMessage)
 
   @USE_MPI_RMA.setter
   def USE_MPI_RMA(self,val):
@@ -163,3 +175,4 @@ class DBCSR:
       self.__USE_MPI_RMA = val
     else:
       errorMessage = ("Type: Setter\nVar.: USE_MPI_RMA\nErr.: USE_MPI_RMA must be a boolean.")
+      self.__errors.append(errorMessage)
