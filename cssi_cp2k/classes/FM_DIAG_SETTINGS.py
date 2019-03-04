@@ -1,2 +1,5 @@
 class FM_DIAG_SETTINGS:
-  pass
+
+  def __init__(self,errors=[]):
+
+    self.__errors = errors

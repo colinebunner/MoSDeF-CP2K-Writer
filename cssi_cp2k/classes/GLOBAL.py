@@ -67,6 +67,7 @@ class GLOBAL:
     self.__TRACE_MAX              = TRACE_MAX
     self.__TRACE_ROUTINES         = TRACE_ROUTINES
     self.__WALLTIME               = WALLTIME
+    self.__errors                 = errors
     # Consider adding subsec_args options to init
     self.__DBCSR                  = DBCSR.DBCSR(errors=self.__errors)
     self.__FM                     = FM.FM(errors=self.__errors)
@@ -76,7 +77,6 @@ class GLOBAL:
     self.__PROGRAM_RUN_INFO       = PROGRAM_RUN_INFO.PROGRAM_RUN_INFO(self.__errors)
     self.__REFERENCES             = REFERENCES.REFERENCES(self.__errors)
     self.__TIMINGS                = TIMINGS.TIMINGS(self.__errors)
-    self.__errors                 = errors
 
   @property
   def ALLTOALL_SGL(self):
@@ -418,8 +418,11 @@ class GLOBAL:
 
   @SEED.setter
   def SEED(self,val):
-    if utilities.is_number(val):
-      self.__SEED = int(float(val)//1)
+    if utilities.is_integer(val):
+      self.__SEED = val
+    else:
+      errorMessage = "Type: Setter\nVar.: SEED\nErr.: SEED must be an integer."
+      self.__errors.append(errorMessage)
 
   @TRACE.setter
   def TRACE(self,val):

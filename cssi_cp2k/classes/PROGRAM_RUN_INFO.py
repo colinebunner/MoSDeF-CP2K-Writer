@@ -1,2 +1,5 @@
 class PROGRAM_RUN_INFO:
-  pass
+
+  def __init__(self,errors=[]):
+
+    self.__errors = errors

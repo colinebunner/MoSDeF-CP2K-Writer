@@ -1,2 +1,5 @@
 class PRINT_ELPA:
-  pass
+
+  def __init__(self,errors=[]):
+  
+    self.__errors = errors
