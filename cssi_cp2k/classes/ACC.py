@@ -17,7 +17,7 @@ class ACC:
     self.__PRIORITY_STREAMS     = PRIORITY_STREAMS
     self.__PROCESS_INHOMOGENOUS = PROCESS_INHOMOGENOUS
     self.__STACK_SORT           = STACK_SORT
-    self.__errors               = []
+    self.__errors               = errors
 
   @property
   def AVOID_AFTER_BUSY(self):
@@ -62,6 +62,10 @@ class ACC:
   @property
   def STACK_SORT(self):
     return self.__STACK_SORT
+
+  @property
+  def errors(self):
+    return self.__errors
 
   @AVOID_AFTER_BUSY.setter
   def AVOID_AFTER_BUSY(self,val):
