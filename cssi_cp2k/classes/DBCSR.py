@@ -102,11 +102,11 @@ class DBCSR:
 
   @MM_DRIVER.setter
   def MM_DRIVER(self,val):
-    if val in MM_DRIVER_VALS:
+    if val in DBCSR.MM_DRIVER_VALS:
       self.__MM_DRIVER = val
     else:
       errorMessage = ("Type: Setter\nVar.: MM_DRIVER\nErr.: MM_DRIVER val {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,MM_DRIVER_VALS))
+        "Check for typo. Allowed values are: {}".format(val,DBCSR.MM_DRIVER_VALS))
       self.__errors.append(errorMessage)
 
   @MM_STACK_SIZE.setter

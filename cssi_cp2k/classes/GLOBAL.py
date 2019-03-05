@@ -72,11 +72,11 @@ class GLOBAL:
     self.__DBCSR                  = DBCSR.DBCSR(errors=self.__errors)
     self.__FM                     = FM.FM(errors=self.__errors)
     self.__FM_DIAG_SETTINGS       = FM_DIAG_SETTINGS.FM_DIAG_SETTINGS(errors=self.__errors)
-    self.__PRINT                  = PRINT.PRINT(self.__errors)
-    self.__PRINT_ELPA             = PRINT_ELPA.PRINT_ELPA(self.__errors)
-    self.__PROGRAM_RUN_INFO       = PROGRAM_RUN_INFO.PROGRAM_RUN_INFO(self.__errors)
-    self.__REFERENCES             = REFERENCES.REFERENCES(self.__errors)
-    self.__TIMINGS                = TIMINGS.TIMINGS(self.__errors)
+    self.__PRINT                  = PRINT.PRINT(errors=self.__errors)
+    self.__PRINT_ELPA             = PRINT_ELPA.PRINT_ELPA(errors=self.__errors)
+    self.__PROGRAM_RUN_INFO       = PROGRAM_RUN_INFO.PROGRAM_RUN_INFO(errors=self.__errors)
+    self.__REFERENCES             = REFERENCES.REFERENCES(errors=self.__errors)
+    self.__TIMINGS                = TIMINGS.TIMINGS(errors=self.__errors)
 
   @property
   def ALLTOALL_SGL(self):
@@ -241,11 +241,11 @@ class GLOBAL:
   @BLACS_GRID.setter
   def BLACS_GRID(self,val):
     val = str(val).upper()
-    if val in BLACS_GRID_VALS:
+    if val in GLOBAL.BLACS_GRID_VALS:
       self.__BLACS_GRID = val
     else:
       errrorMessage = ("Type: Setter\nVar.: BLACS_GRID\nErr.: BLACS_GRID val {} not allowed. "
-         "Check for typo. Allowed BLACS_GRID values: {}.".format(val,BLACS_GRID_VALS))
+         "Check for typo. Allowed BLACS_GRID values: {}.".format(val,GLOBAL.BLACS_GRID_VALS))
     
   
   @BLACS_REPEATABLE.setter
@@ -259,8 +259,11 @@ class GLOBAL:
   @CALLGRAPH.setter
   def CALLGRAPH(self,val):
     val = str(val).upper()
-    if val in CALLGRAPH_VALS:
+    if val in GLOBAL.CALLGRAPH_VALS:
       self.__CALLGRAPH = val
+    else:
+      errorMessage = ("Type: Setter\nVar.: CALLGRAPH\nErr.: CALLGRAPH val {} not allowed. Allowed "
+        "values are: {}".format(val,GLOBAL.CALLGRAPH_VALS))
 
   @CALLGRAPH_FILE_NAME.setter
   def CALLGRAPH_FILE_NAME(self,val):
@@ -285,11 +288,11 @@ class GLOBAL:
   @ELPA_KERNEL.setter
   def ELPA_KERNEL(self,val):
     val = str(val).upper()
-    if val in ELPA_KERNEL_VALS:
-      self.__ELPA_KERNEL_VALS = val
+    if val in GLOBAL.ELPA_KERNEL_VALS:
+      self.__ELPA_KERNEL = val
     else:
       errorMessage = ("Type: Setter\nVar.: ELPA_KERNEL\nErr.: ELPA_KERNEL val {} not allowed. "
-       "Check for typo. Allowed ELPA_KERNEL values: {}".format(val,ELPA_KERNEL_VALS))
+       "Check for typo. Allowed ELPA_KERNEL values: {}".format(val,GLOBAL.ELPA_KERNEL_VALS))
       self.__errors.append(errorMessage)
 
   @ELPA_QR.setter
@@ -319,11 +322,11 @@ class GLOBAL:
   @FFTW_PLAN_TYPE.setter
   def FFTW_PLAN_TYPE(self,val):
     val = str(val).upper()
-    if val in FFTW_PLAN_TYPE_VALS:
+    if val in GLOBAL.FFTW_PLAN_TYPE_VALS:
       self.__FFTW_PLAN_TYPE = val
     else:
       errorMessage = ("Type: Setter\nVar.: FFTW_PLAN_TYPE\nErr.: FFTW_PLAN_TYPE val {} not allowed. "
-        "Check for typo. Allowed FFTW_PLAN_TYPE values: {}".format(val,FFTW_PLAN_TYPE_VALS))
+        "Check for typo. Allowed FFTW_PLAN_TYPE values: {}".format(val,GLOBAL.FFTW_PLAN_TYPE_VALS))
       self.__errors.append(errorMessage)
 
   @FFTW_WISDOM_FILE_NAME.setter
@@ -357,41 +360,41 @@ class GLOBAL:
   @PREFERRED_DIAG_LIBRARY.setter
   def PREFERRED_DIAG_LIBRARY(self,val):
     val = str(val).upper()
-    if val in PREFERRED_DIAG_LIBRARY_VALS:
+    if val in GLOBAL.PREFERRED_DIAG_LIBRARY_VALS:
       self.__PREFERRED_DIAG_LIBRARY = val
     else:
       errorMessage = ("Type: Setter\nVar.: PREFERRED_DIAG_LIBRARY\nErr.: PREFERRED_DIAG_LIBRARY val {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,PREFERRED_DIAG_LIBRARY_VALS))
+        "Check for typo. Allowed values are: {}".format(val,GLOBAL.PREFERRED_DIAG_LIBRARY_VALS))
       self.__errors.append(errorMessage)
 
   @PREFERRED_FFT_LIBRARY.setter
   def PREFERRED_FFT_LIBRARY(self,val):
     val = str(val).upper()
-    if val in PREFERRED_FFT_LIBRARY_VALS:
+    if val in GLOBAL.PREFERRED_FFT_LIBRARY_VALS:
       self.__PREFERRED_FFT_LIBRARY = val
     else:
       errorMessage = ("Type: Setter\nVar.: PREFERRED_FFT_LIBRARY\nErr.: PREFERRED_FFT_LIBRARY val {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,PREFERRED_FFT_LIBRARY_VALS))
+        "Check for typo. Allowed values are: {}".format(val,GLOBAL.PREFERRED_FFT_LIBRARY_VALS))
       self.__errors.append(errorMessage)
  
   @PRINT_LEVEL.setter
   def PRINT_LEVEL(self,val):
     val = str(val).upper()
-    if val in PRINT_LEVEL_VALS:
+    if val in GLOBAL.PRINT_LEVEL_VALS:
       self.__PRINT_LEVEL = val
     else:
       errorMessage = ("Type: Setter\nVar.: PRINT_LEVEL\nErr.: PRINT_LEVEL val {} not allowed. "
-       "Check for typo. Allowed values are: {}".format(val,PRINT_LEVEL_VALS))
+       "Check for typo. Allowed values are: {}".format(val,GLOBAL.PRINT_LEVEL_VALS))
       self.__errors.append(errorMessage)
 
   @PROGRAM_NAME.setter
   def PROGRAM_NAME(self,val):
     val = str(val).upper()
-    if val in PROGRAM_NAME_VALS:
+    if val in GLOBAL.PROGRAM_NAME_VALS:
       self.__PROGRAM_NAME = val
     else:
       errorMessage = ("Type: Setter\nVar.: PROGRAM_NAME\nErr.: PROGRAM_NAME {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,PROGRAM_NAME_VALS))
+        "Check for typo. Allowed values are: {}".format(val,GLOBAL.PROGRAM_NAME_VALS))
       self.__errors.append(errorMessage)
 
   @PROJECT_NAME.setter
@@ -401,11 +404,11 @@ class GLOBAL:
   @RUN_TYPE.setter
   def RUN_TYPE(self,val):
     val = str(val).upper()
-    if val in RUN_TYPE_VALS:
+    if val in GLOBAL.RUN_TYPE_VALS:
       self.__RUN_TYPE = val
     else:
       errorMessage = ("Type: Setter\nVar.: RUN_TYPE\nErr.: RUN_TYPE {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,RUN_TYPE_VALS))
+        "Check for typo. Allowed values are: {}".format(val,GLOBAL.RUN_TYPE_VALS))
       self.__errors.append(errorMessage)
 
   @SAVE_MEM.setter
