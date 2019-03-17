@@ -1,5 +1,6 @@
 import cssi_cp2k.utilities
 import ACC
+import datetime
 
 class DBCSR:
 
@@ -8,7 +9,7 @@ class DBCSR:
   def __init__(self,AVG_ELEMENTS_IMAGES=-1,COMM_THREAD_LOAD=-1,MAX_ELEMENTS_PER_BLOCK=32,
                MM_DRIVER="AUTO",MM_STACK_SIZE=-1,MULTREC_LIMIT=512,NUM_LAYERS_3D=1,
                NUM_MULT_IMAGES=1,N_SIZE_MNK_STACKS=3,USE_COMM_THREAD=True,
-               USE_MPI_ALLOCATOR=True,USE_MPI_RMA=False,errors=[]):
+               USE_MPI_ALLOCATOR=True,USE_MPI_RMA=False,errorLog=[],changeLog=[]):
 
     self.__AVG_ELEMENTS_IMAGES    = AVG_ELEMENTS_IMAGES
     self.__COMM_THREAD_LOAD       = COMM_THREAD_LOAD
@@ -22,8 +23,8 @@ class DBCSR:
     self.__USE_COMM_THREAD        = USE_COMM_THREAD
     self.__USE_MPI_ALLOCATOR      = USE_MPI_ALLOCATOR
     self.__USE_MPI_RMA            = USE_MPI_RMA
-    self.__errors                 = errors
-    self.__ACC                    = ACC.ACC(errors=[])
+    self.__errorLog                 = errorLog
+    self.__ACC                    = ACC.ACC(errorLog=[],changeLog=[])
 
   @property
   def AVG_ELEMENTS_IMAGES(self):
@@ -75,104 +76,182 @@ class DBCSR:
 
   @AVG_ELEMENTS_IMAGES.setter
   def AVG_ELEMENTS_IMAGES(self,val):
-    if utilities.is_integer(val):
+    if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'AVG_ELEMENTS_IMAGES','Success':True,
+                               'Previous':self.__AVG_ELEMENTS_IMAGES,'New':val,'ErrorMessage':None})
       self.__AVG_ELEMENTS_IMAGES = val
     else:
-      errorMessage = ("Type: Setter\nVar.: AVG_ELEMENTS_IMAGES\nErr.: AVG_ELEMENTS_IMAGES must be an"
-        " integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "AVG_ELEMENTS_IMAGES must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'AVG_ELEMENTS_IMAGES','Success':False,
+                               'Previous':self.__AVG_ELEMENTS_IMAGE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'AVG_ELEMENTS_IMAGES','ErrorMessage':errorMessage})
 
   @COMM_THREAD_LOAD.setter
   def COMM_THREAD_LOAD(self,val):
-    if utilities.is_integer(val):
+    if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'COMM_THREAD_LOAD','Success':True,
+                               'Previous':self.__COMM_THREAD_LOAD,'New':val,'ErrorMessage':None})
       self.__COMM_THREAD_LOAD = val
     else:
-      errorMessage = ("Type: Setter\nVar.: COMM_THREAD_LOAD\nErr.: COMM_THREAD_LOAD must be an"
-        " integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "COMM_THREAD_LOAD must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'COMM_THREAD_LOAD','Success':False,
+                               'Previous':self.__COMM_THREAD_LOAD,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'COMM_THREAD_LOAD','ErrorMessage':errorMessage})
 
   @MAX_ELEMENTS_PER_BLOCK.setter
   def MAX_ELEMENTS_PER_BLOCK(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MAX_ELEMENTS_PER_BLOCK','Success':True,
+                               'Previous':self.__MAX_ELEMENTS_PER_BLOCK,'New':val,'ErrorMessage':None})
       self.__MAX_ELEMENTS_PER_BLOCK = val
     else:
-      errorMessage = ("Type: Setter\nVar.: MAX_ELEMENTS_PER_BLOCK\nErr.: MAX_ELEMENTS_PER_BLOCK must be"
-        " an integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "MAX_ELEMENTS_PER_BLOCK must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MAX_ELEMENTS_PER_BLOCK','Success':False,
+                               'Previous':self.__COMM_THREAD_LOAD,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'MAX_ELEMENTS_PER_BLOCK','ErrorMessage':errorMessage})
 
   @MM_DRIVER.setter
   def MM_DRIVER(self,val):
+    val = str(val).upper()
     if val in DBCSR.MM_DRIVER_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MM_DRIVER','Success':True,
+                               'Previous':self.__MM_DRIVER,'New':val,'ErrorMessage':None})
       self.__MM_DRIVER = val
     else:
-      errorMessage = ("Type: Setter\nVar.: MM_DRIVER\nErr.: MM_DRIVER val {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,DBCSR.MM_DRIVER_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("MM_DRIVER val can't be understood. You passed {}. Allowed values for MM_DRIVER are"
+                      " (case-insensitive): {}.".format(val))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MM_DRIVER','Success':False,
+                               'Previous':self.__MM_DRIVER,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'MM_DRIVER','ErrorMessage':errorMessage})
 
   @MM_STACK_SIZE.setter
   def MM_STACK_SIZE(self,val):
     if utilities.is_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MM_STACK_SIZE','Success':True,
+                               'Previous':self.__MM_STACK_SIZE,'New':val,'ErrorMessage':None})
       self.__MM_STACK_SIZE = val
     else:
-      errorMessage = ("Type: Setter\nVar.: MM_STACK_SIZE\nErr.: MM_STACK_SIZE must be an integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "MM_STACK_SIZE must be an integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MM_STACK_SIZE','Success':False,
+                               'Previous':self.__MM_STACK_SIZE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'MM_STACK_SIZE','ErrorMessage':errorMessage})
 
   @MULTREC_LIMIT.setter
   def MULTREC_LIMIT(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MULTREC_LIMIT','Success':True,
+                               'Previous':self.__MULTREC_LIMIT,'New':val,'ErrorMessage':None})
       self.__MULTREC_LIMIT = val
     else:
-      errorMessage = ("Type: Setter\nVar.: MULTREC_LIMIT\nErr.: MULTREC_LIMIT must be positive integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "MULTREC_LIMIT must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MULTREC_LIMIT','Success':False,
+                               'Previous':self.__MULTREC_LIMIT,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'MULTREC_LIMIT','ErrorMessage':errorMessage})
 
   @NUM_LAYERS_3D.setter
   def NUM_LAYERS_3D(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'NUM_LAYERS_3D','Success':True,
+                               'Previous':self.__NUM_LAYERS_3D,'New':val,'ErrorMessage':None})
       self.__NUM_LAYERS_3D = val
     else:
-      errorMessage = ("Type: Setter\nVar.: NUM_LAYERS_3D\nErr.: NUM_LAYERS_3D must be positive " 
-        "integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "NUM_LAYERS_3D must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'NUM_LAYERS_3D','Success':False,
+                               'Previous':self.__NUM_LAYERS_3D,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'NUM_LAYERS_3D','ErrorMessage':errorMessage})
 
   @NUM_MULT_IMAGES.setter
   def NUM_MULT_IMAGES(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'NUM_MULT_IMAGES','Success':True,
+                               'Previous':self.__NUM_MULT_IMAGES,'New':val,'ErrorMessage':None})
       self.__NUM_MULT_IMAGES = val
     else:
-      errorMessage = ("Type: Setter\nVar.: NUM_MULT_IMAGES\nErr.: NUM_MULT_IMAGES must be positive "
-        "integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "NUM_MULT_IMAGES must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'NUM_MULT_IMAGES','Success':False,
+                               'Previous':self.__NUM_MULT_IMAGES,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'NUM_MULT_IMAGES','ErrorMessage':errorMessage})
 
   @N_SIZE_MNK_STACKS.setter
   def N_SIZE_MNK_STACKS(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'N_SIZE_MNK_STACKS','Success':True,
+                               'Previous':self.__N_SIZE_MNK_STACKS,'New':val,'ErrorMessage':None})
       self.__N_SIZE_MNK_STACKS = val
     else:
-      errorMessage = ("Type: Setter\nVar.: N_SIZE_MNK_STACKS\nErr.: N_SIZE_MNK_STACKS must be positive "
-        "integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "N_SIZE_MNK_STACKS must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'N_SIZE_MNK_STACKS','Success':False,
+                               'Previous':self.__N_SIZE_MNK_STACKS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'N_SIZE_MNK_STACKS','ErrorMessage':errorMessage})
 
   @USE_COMM_THREAD.setter
   def USE_COMM_THREAD(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'USE_COMM_THREAD','Success':True,
+                               'Previous':self.__USE_COMM_THREAD,'New':val,'ErrorMessage':None})
       self.__USE_COMM_THREAD = val
     else:
-      errorMessage = ("Type: Setter\nVar.: USE_COMM_THREAD\nErr.: USE_COMM_THREAD must be a boolean.")
-      self.__errors.append(errorMessage)
+      errorMessage = "USE_COMM_THREAD must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'USE_COMM_THREAD','Success':False,
+                               'Previous':self.__USE_COMM_THREAD,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'USE_COMM_THREAD','ErrorMessage':errorMessage})
 
   @USE_MPI_ALLOCATOR.setter
   def USE_MPI_ALLOCATOR(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'USE_MPI_ALLOCATOR','Success':True,
+                               'Previous':self.__USE_MPI_ALLOCATOR,'New':val,'ErrorMessage':None})
       self.__USE_MPI_ALLOCATOR = val
     else:
-      errorMessage = ("Type: Setter\nVar.: USE_MPI_ALLOCATOR\nErr.: USE_MPI_ALLOCATOR must be a "
-        "boolean.")
-      self.__errors.append(errorMessage)
+      errorMessage = "USE_MPI_ALLOCATOR must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'USE_MPI_ALLOCATOR','Success':False,
+                               'Previous':self.__USE_MPI_ALLOCATOR,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'USE_MPI_ALLOCATOR','ErrorMessage':errorMessage})
 
   @USE_MPI_RMA.setter
   def USE_MPI_RMA(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'USE_MPI_RMA','Success':True,
+                               'Previous':self.__USE_MPI_RMA,'New':val,'ErrorMessage':None})
       self.__USE_MPI_RMA = val
     else:
-      errorMessage = ("Type: Setter\nVar.: USE_MPI_RMA\nErr.: USE_MPI_RMA must be a boolean.")
-      self.__errors.append(errorMessage)
+      errorMessage = "USE_MPI_RMA must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'USE_MPI_RMA','Success':False,
+                               'Previous':self.__USE_MPI_RMA,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'USE_MPI_RMA','ErrorMessage':errorMessage})

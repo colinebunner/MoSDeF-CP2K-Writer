@@ -4,7 +4,7 @@ class ACC:
 
   def __init__(self,AVOID_AFTER_BUSY=False,BINNING_BINSIZE=16,BINNING_NBINS=4096,MIN_FLOP_PROCESS=0,
                MIN_FLOP_SORT=4000,POSTERIOR_BUFFERS=80,POSTERIOR_STREAMS=4,PRIORITY_BUFFERS=40,
-               PRIORITY_STREAMS=4,PROCESS_INHOMOGENOUS=True,STACK_SORT=True,errors=[]):
+               PRIORITY_STREAMS=4,PROCESS_INHOMOGENOUS=True,STACK_SORT=True,errorLog=[],changeLog=[]):
 
     self.__AVOID_AFTER_BUSY     = AVOID_AFTER_BUSY
     self.__BINNING_BINSIZE      = BINNING_BINSIZE
@@ -17,7 +17,8 @@ class ACC:
     self.__PRIORITY_STREAMS     = PRIORITY_STREAMS
     self.__PROCESS_INHOMOGENOUS = PROCESS_INHOMOGENOUS
     self.__STACK_SORT           = STACK_SORT
-    self.__errors               = errors
+    self.__errorLog             = errorLog
+    self.__changeLog            = changeLog
 
   @property
   def AVOID_AFTER_BUSY(self):
@@ -64,79 +65,144 @@ class ACC:
     return self.__STACK_SORT
 
   @property
-  def errors(self):
-    return self.__errors
+  def errorLog(self):
+    return self.__errorLog
+
+  @property
+  def changeLog(self):
+    return self.__changeLog
 
   @AVOID_AFTER_BUSY.setter
   def AVOID_AFTER_BUSY(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'AVOID_AFTER_BUSY','Success':True,
+                               'Previous':self.__AVOID_AFTER_BUSY,'New':val,'ErrorMessage':None})
       self.__AVOID_AFTER_BUSY = val
     else:
-      errorMessage = "Type: Setter\nVar.: AVOID_AFTER_BUSY\nErr.: AVOID_AFTER_BUSY must be a logical"
-      self.__errors.append(errorMessage)
+      errorMessage = "AVOID_AFTER_BUSY must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'AVOID_AFTER_BUSY','Success':False,
+                               'Previous':self.__AVOID_AFTER_BUSY,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'AVOID_AFTER_BUSY','ErrorMessage':errorMessage})
 
   @BINNING_BINSIZE.setter
   def BINNING_BINSIZE(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'BINNING_BINSIZE','Success':True,
+                               'Previous':self.__BINNING_BINSIZE,'New':val,'ErrorMessage':None})
       self.__BINNING_BINSIZE = val
     else:
-      errorMessage = "Type: Setter\nVar.: BINNING_BINSIZE\nErr.: BINNING_BINSIZE must be an integer."
-      self.__errors.append(errorMessage)
+      errorMessage = "BINNING_BINSIZE must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'BINNING_BINSIZE','Success':False,
+                               'Previous':self.__BINNING_BINSIZE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'BINNING_BINSIZE','ErrorMessage':errorMessage})
   
   @BINNING_NBINS.setter
   def BINNING_NBINS(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'BINNING_NBINS','Success':True,
+                               'Previous':self.__BINNING_NBINS,'New':val,'ErrorMessage':None})
       self.__BINNING_NBINS = val
     else:
-      errorMessage = "Type: Setter\nVar.: BINNING_NBINS\nErr.: BINNING_NBINS must be an integer."
-      self.__errors.append(errorMessage)
+      errorMessage = "BINNING_NBINS must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'BINNING_NBINS','Success':False,
+                               'Previous':self.__BINNING_NBINS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'BINNING_NBINS','ErrorMessage':errorMessage})
 
   @MIN_FLOP_PROCESS.setter
   def MIN_FLOP_PROCESS(self,val):
     if utilities.is_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'MIN_FLOP_PROCESS','Success':True,
+                               'Previous':self.__MIN_FLOP_PROCESS,'New':val,'ErrorMessage':None})
       self.__MIN_FLOP_PROCESS = val
     else:
-      errorMessage = "Type: Setter\nVar.: MIN_FLOP_PROCESS\nErr.: MIN_FLOP_PROCESS must be an integer."
-      self.__errors.append(errorMessage)
+      errorMessage = "MIN_FLOP_PROCESS must be an integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'MIN_FLOP_PROCESS','Success':False,
+                               'Previous':self.__MIN_FLOP_PROCESS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'MIN_FLOP_PROCESS','ErrorMessage':errorMessage})
 
   @POSTERIOR_BUFFERS.setter
   def POSTERIOR_BUFFERS(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'POSTERIOR_BUFFERS','Success':True,
+                               'Previous':self.__POSTERIOR_BUFFERS,'New':val,'ErrorMessage':None})
       self.__POSTERIOR_BUFFERS = val
     else:
-      errorMessage = ("Type: Setter\nVar.: POSTERIOR_BUFFERS\nErr.: POSTERIOR_BUFFERS must be an"
-        " integer.")
-      self.__errors.append(errorMessage)
+      errorMessage = "POSTERIOR_BUFFERS must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'POSTERIOR_BUFFERS','Success':False,
+                               'Previous':self.__POSTERIOR_BUFFERS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'POSTERIOR_BUFFERS','ErrorMessage':errorMessage})
 
   @PRIORITY_BUFFERS.setter
   def PRIORITY_BUFFERS(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'PRIORITY_BUFFERS','Success':True,
+                               'Previous':self.__PRIORITY_BUFFERS,'New':val,'ErrorMessage':None})
       self.__PRIORITY_BUFFERS = val
     else:
-      errorMessage = "Type: Setter\nVar.: PRIORITY_BUFFERS\nErr.: PRIORITY_BUFFERS must be an integer."
-      self.__errors.append(errorMessage)
+      errorMessage = "PRIORITY_BUFFERS must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'PRIORITY_BUFFERS','Success':False,
+                               'Previous':self.__PRIORITY_BUFFERS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'PRIORITY_BUFFERS','ErrorMessage':errorMessage})
 
   @PRIORITY_STREAMS.setter
   def PRIORITY_STREAMS(self,val):
     if utilities.is_positive_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'PRIORITY_STREAMS','Success':True,
+                               'Previous':self.__PRIORITY_STREAMS,'New':val,'ErrorMessage':None})
       self.__PRIORITY_STREAMS = val
     else:
-      errorMessage = "Type: Setter\nVar.: PRIORITY_STREAMS\nErr.: PRIORITY_STREAMS must be an integer."
-      self.__errors.append(errorMessage)
+      errorMessage = "PRIORITY_STREAMS must be a positive integer. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'PRIORITY_STREAMS','Success':False,
+                               'Previous':self.__PRIORITY_STREAMS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'PRIORITY_STREAMS','ErrorMessage':errorMessage})
 
   @PROCESS_INHOMOGENOUS.setter
   def PROCESS_INHOMOGENOUS(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'PROCESS_INHOMOGENOUS','Success':True,
+                               'Previous':self.__PROCESS_INHOMOGENOUS,'New':val,'ErrorMessage':None})
       self.__PROCESS_INHOMOGENOUS = val
     else:
-      errorMessage = ("Type: Setter\nVar.: PROCESS_INHOMOGENOUS\nErr.: PROCESS_INHOMOGENOUS must be a "
-        "boolean.")
-      self.__errors.append(errorMessage)
+      errorMessage = "PROCESS_INHOMOGENOUS must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'PROCESS_INHOMOGENOUS','Success':False,
+                               'Previous':self.__PROCESS_INHOMOGENOUS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'PROCESS_INHOMOGENOUS','ErrorMessage':errorMessage})
 
   @STACK_SORT.setter
   def STACK_SORT(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'ACC',
+                               'Variable':'STACK_SORT','Success':True,
+                               'Previous':self.__STACK_SORT,'New':val,'ErrorMessage':None})
       self.__STACK_SORT = val
     else:
-      errorMessage = "Type: Setter\nVar.: STACK_SORT\nErr.: STACK_SORT must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "STACK_SORT must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
+                               'Variable':'STACK_SORT','Success':False,
+                               'Previous':self.__STACK_SORT,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
+                              'Variable':'STACK_SORT','ErrorMessage':errorMessage})

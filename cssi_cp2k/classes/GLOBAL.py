@@ -233,37 +233,66 @@ class GLOBAL:
   @ALLTOALL_SGL.setter
   def ALLTOALL_SGL(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ALLTOALL_SGL','Success':True,
+                               'Previous':self.__ALLTOALL_SGL,'New':val,'ErrorMessage':None})
       self.__ALLTOALL_SGL = val
     else:
-      errorMessage = "Type: Setter\nVar.: ALLTOALL_SGL\nErr.: ALLTOALL_SGL must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "ALLTOALL_SGL must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ALLTOALL_SGL','Success':False,
+                               'Previous':self.__ALLTOALL_SGL,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'ALLTOALL_SGL','ErrorMessage':errorMessage})
 
   @BLACS_GRID.setter
   def BLACS_GRID(self,val):
     val = str(val).upper()
     if val in GLOBAL.BLACS_GRID_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'BLACS_GRID','Success':True,
+                               'Previous':self.__BLACS_GRID,'New':val,'ErrorMessage':None})
       self.__BLACS_GRID = val
     else:
-      errrorMessage = ("Type: Setter\nVar.: BLACS_GRID\nErr.: BLACS_GRID val {} not allowed. "
-         "Check for typo. Allowed BLACS_GRID values: {}.".format(val,GLOBAL.BLACS_GRID_VALS))
-    
+      errorMessage = ("BLACS_GRID value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,BLACS_GRID_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'BLACS_GRID','Success':False,
+                               'Previous':self.__BLACS_GRID,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'BLACS_GRID','ErrorMessage':errorMessage})
   
   @BLACS_REPEATABLE.setter
   def BLACS_REPEATABLE(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'BLACS_REPEATABLE','Success':True,
+                               'Previous':self.__BLACS_REPEATABLE,'New':val,'ErrorMessage':None})
       self.__BLACS_REPEATABLE = val
     else:
-      errorMessage = "Type: Setter\nVar.: BLACS_REPEATABLE\nErr.: BLACS_REPEATABLE must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "BLACS_REPEATABLE must be a boolean. You passed {}".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'BLACS_REPEATABLE','Success':False,
+                               'Previous':self.__BLACS_REPEATABLE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'BLACS_REPEATABLE','ErrorMessage':errorMessage})
 
   @CALLGRAPH.setter
   def CALLGRAPH(self,val):
     val = str(val).upper()
     if val in GLOBAL.CALLGRAPH_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'CALLGRAPH','Success':True,
+                               'Previous':self.__CALLGRAPH,'New':val,'ErrorMessage':None})
       self.__CALLGRAPH = val
     else:
-      errorMessage = ("Type: Setter\nVar.: CALLGRAPH\nErr.: CALLGRAPH val {} not allowed. Allowed "
-        "values are: {}".format(val,GLOBAL.CALLGRAPH_VALS))
+      errorMessage = ("CALLGRAPH value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,CALLGRAPH_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'CALLGRAPH','Success':False,
+                               'Previous':self.__CALLGRAPH,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'CALLGRAPH','ErrorMessage':errorMessage})
 
   @CALLGRAPH_FILE_NAME.setter
   def CALLGRAPH_FILE_NAME(self,val):
@@ -272,86 +301,156 @@ class GLOBAL:
   @ECHO_ALL_HOSTS.setter
   def ECHO_ALL_HOSTS(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ECHO_ALL_HOSTS','Success':True,
+                               'Previous':self.__ECHO_ALL_HOSTS,'New':val,'ErrorMessage':None})
       self.__ECHO_ALL_HOSTS = val
     else:
-      errorMessage = "Type: Setter\nVar.: ECHO_ALL_HOSTS\nErr.: ECHO_ALL_HOSTS must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "ECHO_ALL_HOSTS must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ECHO_ALL_HOSTS','Success':False,
+                               'Previous':self.__ECHO_ALL_HOSTS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'ECHO_ALL_HOSTS','ErrorMessage':errorMessage})
 
   @ECHO_INPUT.setter
   def ECHO_INPUT(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ECHO_INPUT','Success':True,
+                               'Previous':self.__ECHO_INPUT,'New':val,'ErrorMessage':None})
       self.__ECHO_INPUT = val
     else:
-      errorMessage = "Type: Setter\nVar.: ECHO_INPUT\nErr.: ECHO_INPUT must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "ECHO_INPUT must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ECHO_INPUT','Success':False,
+                               'Previous':self.__ECHO_INPUT,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'ECHO_INPUT','ErrorMessage':errorMessage})
 
   @ELPA_KERNEL.setter
   def ELPA_KERNEL(self,val):
     val = str(val).upper()
     if val in GLOBAL.ELPA_KERNEL_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ELPA_KERNEL','Success':True,
+                               'Previous':self.__ELPA_KERNEL,'New':val,'ErrorMessage':None})
       self.__ELPA_KERNEL = val
     else:
-      errorMessage = ("Type: Setter\nVar.: ELPA_KERNEL\nErr.: ELPA_KERNEL val {} not allowed. "
-       "Check for typo. Allowed ELPA_KERNEL values: {}".format(val,GLOBAL.ELPA_KERNEL_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("ELPA_KERNEL value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,ELPA_KERNEL_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ELPA_KERNEL','Success':False,
+                               'Previous':self.__ELPA_KERNEL,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'ELPA_KERNEL','ErrorMessage':errorMessage})
 
   @ELPA_QR.setter
   def ELPA_QR(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ELPA_QR','Success':True,
+                               'Previous':self.__ELPA_QR,'New':val,'ErrorMessage':None})
       self.__ELPA_QR = val
     else:
-      errorMessage = "Type: Setter\nVar.: ELPA_QR\nErr.: ELPA_QR must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "ELPA_QR must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ELPA_QR','Success':False,
+                               'Previous':self.__ELPA_QR,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'ELPA_QR','ErrorMessage':errorMessage})
 
   @ELPA_QR_UNSAFE.setter
   def ELPA_QR_UNSAFE(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ELPA_QR_UNSAFE','Success':True,
+                               'Previous':self.__ELPA_QR_UNSAFE,'New':val,'ErrorMessage':None})
       self.__ELPA_QR_UNSAFE = val
     else:
-      errorMessage = "Type: Setter\nVar.: ELPA_QR_UNSAFE\nErr.: ELPA_QR_UNSAFE must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "ELPA_QR_UNSAFE must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'ELPA_QR_UNSAFE','Success':False,
+                               'Previous':self.__ELPA_QR_UNSAFE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'ELPA_QR_UNSAFE','ErrorMessage':errorMessage})
 
   @EXTENDED_FFT_LENGTHS.setter
   def EXTENDED_FFT_LENGTHS(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'EXTENDED_FFT_LENGTHS','Success':True,
+                               'Previous':self.__EXTENDED_FFT_LENGTHS,'New':val,'ErrorMessage':None})
       self.__EXTENDED_FFT_LENGTHS = val
     else:
-      errorMessage = "Type: Setter\nVar.: EXTENDED_FFT_LENGTHS\nErr.: EXTENDED_FFT_LENGTHS must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "EXTENDED_FFT_LENGTHS must be a boolean. You passed {}.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'EXTENDED_FFT_LENGTHS','Success':False,
+                               'Previous':self.__EXTENDED_FFT_LENGTHS,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'EXTENDED_FFT_LENGTHS','ErrorMessage':errorMessage})
 
   @FFTW_PLAN_TYPE.setter
   def FFTW_PLAN_TYPE(self,val):
     val = str(val).upper()
     if val in GLOBAL.FFTW_PLAN_TYPE_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FFTW_PLAN_TYPE','Success':True,
+                               'Previous':self.__FFTW_PLAN_TYPE,'New':val,'ErrorMessage':None})
       self.__FFTW_PLAN_TYPE = val
     else:
-      errorMessage = ("Type: Setter\nVar.: FFTW_PLAN_TYPE\nErr.: FFTW_PLAN_TYPE val {} not allowed. "
-        "Check for typo. Allowed FFTW_PLAN_TYPE values: {}".format(val,GLOBAL.FFTW_PLAN_TYPE_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("FFTW_PLAN_TYPE value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,FFTW_PLAN_TYPE_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FFTW_PLAN_TYPE','Success':False,
+                               'Previous':self.__FFTW_PLAN_TYPE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'FFTW_PLAN_TYPE','ErrorMessage':errorMessage})
 
   @FFTW_WISDOM_FILE_NAME.setter
   def FFTW_WISDOM_FILE_NAME(self,val):
     if os.path.isfile(val):
-      self.__FFTW_WISDOM_FILE_NAME = val
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FFT_WISDOM_FILE_NAME','Success':True,
+                               'Previous':self.__FFT_WISDOM_FILE_NAME,'New':val,'ErrorMessage':None})
+      self.__FFT_WISDOM_FILE_NAME = val
     else:
-      errorMessage = "Type: Setter\nVar.: FFTW_WISDOM_FILE_NAME\nErr.: File {} not found.".format(val)
-      self.__errors.append(errorMessage)
+      errorMessage = "FFT_WISDOM_FILE_NAME can't be set: file {} doesn't exist.".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FFTW_WISDOM_FILE_NAME','Success':False,
+                               'Previous':self.__FFTW_WISDOM_FILE_NAME,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'EXTENDED_FFT_LENGTHS','ErrorMessage':errorMessage})
 
   @FFT_POOL_SCRATCH_LIMIT.setter
   def FFT_POOL_SCRATCH_LIMIT(self,val):
     if utilities.is_number(val):
-      self.__FFT_POOL_SCRATCH_LIMIT = float(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FFT_POOL_SCRATCH_LIMIT','Success':True,
+                               'Previous':self.__FFT_POOL_SCRATCH_LIMIT,'New':val,'ErrorMessage':None})
+      self.__FFT_POOL_SCRATCH_LIMIT = val
     else:
-      errorMessage = "Type: Setter\nVar.: FFT_POOL_SCRATCH_LIMIT\nErr.: FFT_POOL_SCRATCH_LIMIT must be numeric."
-      self.__errors.append(errorMessage)
+      errorMessage = "FFT_POOL_SCRATCH_LIMIT must be a number. You passed {}".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FFTW_POOL_SCRATCH_LIMIT','Success':False,
+                               'Previous':self.__FFTW_POOL_SCRATCH_LIMIT,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'EXTENDED_FFTW_POOL_SCRATCH_LIMIT','ErrorMessage':errorMessage})
 
   @FLUSH_SHOULD_FLUSH.setter
   def FLUSH_SHOULD_FLUSH(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FLUSH_SHOULD_FLUSH','Success':True,
+                               'Previous':self.__FLUSH_SHOULD_FLUSH,'New':val,'ErrorMessage':None})
       self.__FLUSH_SHOULD_FLUSH = val
     else:
-      errorMessage = "Type: Setter\nVar.: FLUSH_SHOULD_FLUSH\nErr.: FLUSH_SHOULD_FLUSH must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "FLUSH_SHOULD_FLUSH must be a boolean. You passed {}".format(val)
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'FLUSH_SHOULD_FLUSH','Success':False,
+                               'Previous':self.__FLUSH_SHOULD_FLUSH,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'FLUSH_SHOULD_FLUSH','ErrorMessage':errorMessage})
 
   @OUTPUT_FILE_NAME.setter
   def OUTPUT_FILE_NAME(self,val):
@@ -361,41 +460,69 @@ class GLOBAL:
   def PREFERRED_DIAG_LIBRARY(self,val):
     val = str(val).upper()
     if val in GLOBAL.PREFERRED_DIAG_LIBRARY_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PREFERRED_DIAG_LIBRARY','Success':True,
+                               'Previous':self.__PREFERRED_DIAG_LIBRARY,'New':val,'ErrorMessage':None})
       self.__PREFERRED_DIAG_LIBRARY = val
     else:
-      errorMessage = ("Type: Setter\nVar.: PREFERRED_DIAG_LIBRARY\nErr.: PREFERRED_DIAG_LIBRARY val {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,GLOBAL.PREFERRED_DIAG_LIBRARY_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("PREFERRED_DIAG_LIBRARY value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,PREFERRED_DIAG_LIBRARY_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PREFERRED_DIAG_LIBRARY','Success':False,
+                               'Previous':self.__PREFERRED_DIAG_LIBRARY,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'PREFERRED_DIAG_LIBRARY','ErrorMessage':errorMessage})
 
   @PREFERRED_FFT_LIBRARY.setter
   def PREFERRED_FFT_LIBRARY(self,val):
     val = str(val).upper()
     if val in GLOBAL.PREFERRED_FFT_LIBRARY_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PREFERRED_FFT_LIBRARY','Success':True,
+                               'Previous':self.__PREFERRED_FFT_LIBRARY,'New':val,'ErrorMessage':None})
       self.__PREFERRED_FFT_LIBRARY = val
     else:
-      errorMessage = ("Type: Setter\nVar.: PREFERRED_FFT_LIBRARY\nErr.: PREFERRED_FFT_LIBRARY val {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,GLOBAL.PREFERRED_FFT_LIBRARY_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("PREFERRED_FFT_LIBRARY value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,PREFERRED_FFT_LIBRARY_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PREFERRED_FFT_LIBRARY','Success':False,
+                               'Previous':self.__PREFERRED_FFT_LIBRARY,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'PREFERRED_FFT_LIBRARY','ErrorMessage':errorMessage})
  
   @PRINT_LEVEL.setter
   def PRINT_LEVEL(self,val):
     val = str(val).upper()
     if val in GLOBAL.PRINT_LEVEL_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PRINT_LEVEL','Success':True,
+                               'Previous':self.__PRINT_LEVEL,'New':val,'ErrorMessage':None})
       self.__PRINT_LEVEL = val
     else:
-      errorMessage = ("Type: Setter\nVar.: PRINT_LEVEL\nErr.: PRINT_LEVEL val {} not allowed. "
-       "Check for typo. Allowed values are: {}".format(val,GLOBAL.PRINT_LEVEL_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("PRINT_LEVEL value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,PRINT_LEVEL_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PRINT_LEVEL','Success':False,
+                               'Previous':self.__PRINT_LEVEL,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'PRINT_LEVEL','ErrorMessage':errorMessage})
 
   @PROGRAM_NAME.setter
   def PROGRAM_NAME(self,val):
     val = str(val).upper()
     if val in GLOBAL.PROGRAM_NAME_VALS:
-      self.__PROGRAM_NAME = val
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PROGRAM_NAME','Success':True,
+                               'Previous':self.__PROGRAM_NAME,'New':val,'ErrorMessage':None})
+      self.__PRINT_LEVEL = val
     else:
-      errorMessage = ("Type: Setter\nVar.: PROGRAM_NAME\nErr.: PROGRAM_NAME {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,GLOBAL.PROGRAM_NAME_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("PRINT_LEVEL value not understood. You passed {}. Possible values are: "
+                     "{}.".format(val,PRINT_LEVEL_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'PRINT_LEVEL','Success':False,
+                               'Previous':self.__PRINT_LEVEL,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'PRINT_LEVEL','ErrorMessage':errorMessage})
 
   @PROJECT_NAME.setter
   def PROJECT_NAME(self,val):

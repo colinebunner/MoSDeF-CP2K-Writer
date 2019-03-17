@@ -10,10 +10,11 @@ class SIM:
     self.__nstep              = 0
     self.__time               = 0.0e0
     self.__errorLog           = []
+    self.__changeLog          = []
     self.__restartWFN         = "RESTART.wfn"
     self.__homeDirectory      = os.getcwd()
     self.__scratchDirectory   = "/tmp/cssi-cp2k-{}".format(int(random.random()*123456789))
-    self.__GLOBAL             = GLOBAL.GLOBAL(errors=self.__errorLog)
+    self.__GLOBAL             = GLOBAL.GLOBAL(errorLog=self.__errorLog,changeLog=self.__changeLog)
     
   @property
   def prod(self):
@@ -30,6 +31,10 @@ class SIM:
   @property
   def errorLog(self):
     return self.__errorLog
+
+  @property
+  def changeLog(self):
+    return self.__changeLog
 
   @property
   def restartWFN(self):
