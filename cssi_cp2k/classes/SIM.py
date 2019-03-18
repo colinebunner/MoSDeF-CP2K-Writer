@@ -1,5 +1,6 @@
 import os
 import random
+import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import GLOBAL
 from cssi_cp2k.classes import MOTION
 
@@ -81,8 +82,64 @@ class SIM:
       for error in self.__errorLog:
         print(error)
 
-  def write_changeLog(self,fn=None):
+  def write_changeLog(self,success=None,keys=None,fn=None):
+
+    logString = ""
+
+    if keys is not None: 
+      keys = [str(key).upper() for key in keys]
+
+    for change in self.__changeLog:
+      if keys is None:
+        if success is None:
+          logString += "{}\n".format(change["Variable"])
+          logString += "{}: {}\n".format("New",change["New"])
+          logString += "{}: {}\n".format("Previous",change["Previous"])
+          logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
+          logString += "{}: {}\n".format("Success",change["Success"])
+          logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
+        elif success in [True,False]:
+          if change["Success"] == success:
+            logString += "{}\n".format(change["Variable"])
+            logString += "{}: {}\n".format("New",change["New"])
+            logString += "{}: {}\n".format("Previous",change["Previous"])
+            logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
+            logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
+        else:
+          print("Invalid value for success passed to write_changeLog")
+          raise ValueError
+ 
+      else:
+        if success is None:
+          logString += "{}\n".format(change["Variable"])
+          if "NEW" in keys:
+            logString += "{}: {}\n".format("New",change["New"])
+          if "PREVIOUS" in keys:
+            logString += "{}: {}\n".format("Previous",change["Previous"])
+          if "DATE" in keys:
+            logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
+          if "SUCCESS" in keys:
+            logString += "{}: {}\n".format("Success",change["Success"])
+          if "ERRORMESSAGE" in keys:
+            logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
+        elif success in [True,False]:
+          if change["Success"] == success:
+            logString += "{}\n".format(change["Variable"])
+            if "NEW" in keys:
+              logString += "{}: {}\n".format("New",change["New"])
+            if "PREVIOUS" in keys:
+              logString += "{}: {}\n".format("Previous",change["Previous"])
+            if "DATE" in keys:
+              logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
+            if "ERRORMESSAGE" in keys:
+              logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
+        else:
+          print("Invalid value for success passed to write_changeLog")
+          raise ValueError
+
     # No argument or explicit None prints to screen
     if fn is None:
-      for change in self.__changeLog:
-        print(change)
+      print(logString)
+    else:
+      with open(fn,"w") as out:
+        out.write(logString)

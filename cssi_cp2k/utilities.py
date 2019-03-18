@@ -1,5 +1,7 @@
 import numpy as np
+import datetime
 
+# Numerical stuff
 def is_number(val):
   try:
     v = float(val)
@@ -22,3 +24,7 @@ def is_positive_number(val):
     return val >= 0
   else:
     return False
+
+#Make datetime string prettier
+def datetimePrettify(dt):
+  return dt
