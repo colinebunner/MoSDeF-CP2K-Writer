@@ -26,7 +26,7 @@ class GLOBAL:
                                  "SWARM","TEST","TMC"]
   RUN_TYPE_VALS               = ["BAND","BSSE","CELL_OPT","DEBUG","DRIVER","EHRENFEST_DYN",
                                  "ELECTRONIC_SPECTRA","ENERGY","ENERGY_FORCE","GEOMETRY_OPTIMIZATION",
-                                 "GEO_OPT","LINEAR_RESPONSE","LR","MC","MOLECULAR_DYNAMICS","MONTECARLO",
+                                 "GEO_OPT","LINEAR_RESPONSE","LR","MC","MOLECULAR_DYNAMICS","MD","MONTECARLO",
                                  "NEGF","NONE","NORMAL_MODES","PINT","RT_PROPAGATION","SPECTRA","TAMC",
                                  "TMC","VIBRATIONAL_ANALYSIS","WAVEFUNCTION_OPTIMIZATION","WFN_OPT"]
 

@@ -104,7 +104,7 @@ class NOSE:
   @TIMECON.setter
   def TIMECON(self,val):
     if utilities.is_positive_number(val):
-      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'NOSE','Variable':'MTS',
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'NOSE','Variable':'TIMECON',
                                'Success':True,'Previous':self.__MTS,'New':val,'ErrorMessage':None})
       self.__TIMECON = val
     else:
