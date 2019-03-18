@@ -1,3 +1,5 @@
+import datetime
+
 class FM_DIAG_SETTINGS:
 
   def __init__(self,ELPA_FORCE_REDISTRIBUTE=False,PARAMETER_A=4,PARAMETER_X=60,

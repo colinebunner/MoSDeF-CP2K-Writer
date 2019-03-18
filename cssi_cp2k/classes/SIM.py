@@ -1,6 +1,6 @@
 import os
 import random
-import GLOBAL
+from cssi_cp2k.classes import GLOBAL
 
 class SIM:
 
@@ -68,3 +68,15 @@ class SIM:
   @scratchDirectory.setter
   def scratchDirectory(self,val):
     self.__scratchDirectory = scratchDirectory
+
+  def write_errorLog(self,fn=None):
+    # No argument or explicit None prints to screen
+    if fn is None:
+      for error in self.__errorLog:
+        print(error)
+
+  def write_changeLog(self,fn=None):
+    # No argument or explicit None prints to screen
+    if fn is None:
+      for change in self.__changeLog:
+        print(change)

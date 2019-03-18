@@ -1,6 +1,6 @@
-import cssi_cp2k.utilities
-import ACC
 import datetime
+import cssi_cp2k.utilities
+from cssi_cp2k.classes import ACC
 
 class DBCSR:
 
@@ -73,6 +73,14 @@ class DBCSR:
   @property
   def USE_MPI_RMA(self):
     return self.__USE_MPI_RMA
+
+  @property
+  def errorLog(self):
+    return self.__errorLog
+ 
+  @property
+  def changeLog(self):
+    return self.__changeLog
 
   @AVG_ELEMENTS_IMAGES.setter
   def AVG_ELEMENTS_IMAGES(self,val):

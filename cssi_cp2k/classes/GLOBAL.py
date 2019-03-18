@@ -1,12 +1,13 @@
-import DBCSR
-import FM
-import FM_DIAG_SETTINGS
-import PRINT
-import PRINT_ELPA
-import PROGRAM_RUN_INFO
-import REFERENCES
-import TIMINGS
 import os
+import datetime
+from cssi_cp2k.classes import DBCSR
+from cssi_cp2k.classes import FM
+from cssi_cp2k.classes import FM_DIAG_SETTINGS
+from cssi_cp2k.classes import PRINT
+from cssi_cp2k.classes import PRINT_ELPA
+from cssi_cp2k.classes import PROGRAM_RUN_INFO
+from cssi_cp2k.classes import REFERENCES
+from cssi_cp2k.classes import TIMINGS
 import cssi_cp2k.utilities as utilities
 
 class GLOBAL:
@@ -36,7 +37,8 @@ class GLOBAL:
                FLUSH_SHOULD_FLUSH=True,OUTPUT_FILE_NAME=None,PREFERRED_DIAG_LIBRARY='SL',
                PREFERRED_FFT_LIBRARY='FFTW3',PRINT_LEVEL='MEDIUM',PROGRAM_NAME='CP2K',
                PROJECT_NAME='PROJECT',RUN_TYPE='ENERGY_FORCE',SAVE_MEM=False,SEED=8675309,TRACE=False,
-               TRACE_MASTER=True,TRACE_MAX=2147483647,TRACE_ROUTINES=[],WALLTIME='24:00:00',errors=[]):
+               TRACE_MASTER=True,TRACE_MAX=2147483647,TRACE_ROUTINES=[],WALLTIME='24:00:00',errorLog=[],
+               changeLog=[]):
 
     self.__ALLTOALL_SGL           = ALLTOALL_SGL
     self.__BLACS_GRID             = BLACS_GRID
@@ -67,16 +69,17 @@ class GLOBAL:
     self.__TRACE_MAX              = TRACE_MAX
     self.__TRACE_ROUTINES         = TRACE_ROUTINES
     self.__WALLTIME               = WALLTIME
-    self.__errors                 = errors
+    self.__errorLog               = errorLog
+    self.__changeLog              = changeLog
     # Consider adding subsec_args options to init
-    self.__DBCSR                  = DBCSR.DBCSR(errors=self.__errors)
-    self.__FM                     = FM.FM(errors=self.__errors)
-    self.__FM_DIAG_SETTINGS       = FM_DIAG_SETTINGS.FM_DIAG_SETTINGS(errors=self.__errors)
-    self.__PRINT                  = PRINT.PRINT(errors=self.__errors)
-    self.__PRINT_ELPA             = PRINT_ELPA.PRINT_ELPA(errors=self.__errors)
-    self.__PROGRAM_RUN_INFO       = PROGRAM_RUN_INFO.PROGRAM_RUN_INFO(errors=self.__errors)
-    self.__REFERENCES             = REFERENCES.REFERENCES(errors=self.__errors)
-    self.__TIMINGS                = TIMINGS.TIMINGS(errors=self.__errors)
+    self.__DBCSR                  = DBCSR.DBCSR(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__FM                     = FM.FM(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__FM_DIAG_SETTINGS       = FM_DIAG_SETTINGS.FM_DIAG_SETTINGS(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__PRINT                  = PRINT.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__PRINT_ELPA             = PRINT_ELPA.PRINT_ELPA(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__PROGRAM_RUN_INFO       = PROGRAM_RUN_INFO.PROGRAM_RUN_INFO(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__REFERENCES             = REFERENCES.REFERENCES(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__TIMINGS                = TIMINGS.TIMINGS(errorLog=self.__errorLog,changeLog=self.__changeLog)
 
   @property
   def ALLTOALL_SGL(self):
@@ -227,8 +230,12 @@ class GLOBAL:
     return self.__TIMINGS
 
   @property
-  def errors(self):
-    return self.__errors
+  def errorLog(self):
+    return self.__errorLog
+
+  @property
+  def changeLog(self):
+    return self.__changeLog
 
   @ALLTOALL_SGL.setter
   def ALLTOALL_SGL(self,val):
@@ -532,52 +539,93 @@ class GLOBAL:
   def RUN_TYPE(self,val):
     val = str(val).upper()
     if val in GLOBAL.RUN_TYPE_VALS:
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'RUN_TYPE','Success':True,
+                               'Previous':self.__RUN_TYPE,'New':val,'ErrorMessage':None})
       self.__RUN_TYPE = val
     else:
-      errorMessage = ("Type: Setter\nVar.: RUN_TYPE\nErr.: RUN_TYPE {} not allowed. "
-        "Check for typo. Allowed values are: {}".format(val,GLOBAL.RUN_TYPE_VALS))
-      self.__errors.append(errorMessage)
+      errorMessage = ("RUN_TYPE {} not allowed. Check for typo. Allowed values " 
+        "are: {}".format(val,GLOBAL.RUN_TYPE_VALS))
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'RUN_TYPE','Success':False,
+                               'Previous':self.__RUN_TYPE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'RUN_TYPE','ErrorMessage':errorMessage})
 
   @SAVE_MEM.setter
   def SAVE_MEM(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'SAVE_MEM','Success':True,
+                               'Previous':self.__SAVE_MEM,'New':val,'ErrorMessage':None})
       self.__SAVE_MEM = val
     else:
-      errorMessage = "Type: Setter\nVar.: SAVE_MEM\nErr.: SAVE_MEM must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "SAVE_MEM must be a boolean."
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'SAVE_MEM','Success':False,
+                               'Previous':self.__SAVE_MEM,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'SAVE_MEM','ErrorMessage':errorMessage})
 
   @SEED.setter
   def SEED(self,val):
     if utilities.is_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'SEED','Success':True,
+                               'Previous':self.__SEED,'New':val,'ErrorMessage':None})
       self.__SEED = val
     else:
-      errorMessage = "Type: Setter\nVar.: SEED\nErr.: SEED must be an integer."
-      self.__errors.append(errorMessage)
+      errorMessage = "SEED must be an integer."
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'SEED','Success':False,
+                               'Previous':self.__SEED,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'SEED','ErrorMessage':errorMessage})
 
   @TRACE.setter
   def TRACE(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'TRACE','Success':True,
+                               'Previous':self.__TRACE,'New':val,'ErrorMessage':None})
       self.__TRACE = val
     else:
-      errorMessage = "Type: Setter\nVar.: TRACE\nErr.: TRACE must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "TRACE must be a boolean."
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'TRACE','Success':False,
+                               'Previous':self.__TRACE,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'TRACE','ErrorMessage':errorMessage})
 
   @TRACE_MASTER.setter
   def TRACE_MASTER(self,val):
     if isinstance(val,bool):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'TRACE_MASTER','Success':True,
+                               'Previous':self.__TRACE_MASTER,'New':val,'ErrorMessage':None})
       self.__TRACE_MASTER = val
     else:
-      errorMessage = "Type: Setter\nVar.: TRACE_MASTER\nErr.: TRACE_MASTER must be a boolean."
-      self.__errors.append(errorMessage)
+      errorMessage = "TRACE_MASTER must be a boolean."
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'TRACE_MASTER','Success':False,
+                               'Previous':self.__TRACE_MASTER,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'TRACE_MASTER','ErrorMessage':errorMessage})
 
   @TRACE_MAX.setter
   def TRACE_MAX(self,val):
-    if utilities.is_number(val):
-      self.__TRACE_MAX = int(float(val)//1)
+    if utilities.is_integer(val):
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'TRACE_MAX','Success':True,
+                               'Previous':self.__TRACE_MAX,'New':val,'ErrorMessage':None})
+      self.__TRACE_MAX = val
     else:
-      errorMessage = ("Type: Setter\nVar.: TRACE_MAX\nErr.: TRACE_MAX must be numeric (technically must be an"
-       "integer but this code will make ints out of floats).")
-      self.__errors.append(errorMessage)
+      errorMessage = "TRACE_MAX must be an integer"
+      self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
+                               'Variable':'TRACE_MAX','Success':False,
+                               'Previous':self.__TRACE_MAX,'New':val,'ErrorMessage':errorMessage})
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'TRACE_MAX','ErrorMessage':errorMessage})
 
   @TRACE_ROUTINES.setter
   def TRACE_ROUTINES(self,val):
@@ -597,10 +645,13 @@ class GLOBAL:
       if isn:
         self.__WALLTIME = val
       else:
-        errorMessage = ("Type: Setter\nVar.: WALLTIME\nErr.: Wrong format for walltime: {}. Must be in seconds"
+        errorMessage = ("Wrong format for walltime: {}. Must be in seconds"
           "or HH:MM:SS.".format(val))
-      self.__errors.append(errorMessage)
+        self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                                'Variable':'WALLTIME','ErrorMessage':errorMessage})
     else:
-      errorMessage = ("Type: Setter\nVar.: WALLTIME\nErr.: Wrong format for walltime: {}. Must be in seconds"
+      errorMessage = ("Wrong format for walltime: {}. Must be in seconds"
         "or HH:MM:SS.".format(val))
-      self.__errors.append(errorMessage)
+      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'GLOBAL',
+                              'Variable':'WALLTIME','ErrorMessage':errorMessage})
+
