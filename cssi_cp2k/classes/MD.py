@@ -3,47 +3,48 @@ import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import THERMOSTAT as thermostat
 from cssi_cp2k.classes import MD_PRINT as md_print
 
+
+MD_ENSEMBLE_VALS = ["HYDROSTATICSHOCK","ISOKIN","LANGEVIN","MSST","MSST_DAMPED","NPE_F","NPE_I",
+                    "NPT_F","NPT_I","NVE","NVT","NVT_ADIABATIC","REFTRAJ"]
+
+def _validate_ensemble(val):
+  val = str(val).upper()
+  if val in MD_ENSEMBLE_VALS:
+    return val
+  else:
+    errorMessage = "Invalid option for MD ENSEMBLE: {}. Valid options are: {}".format(MD_ENSEMBLE_VALS)
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+                            'Variable':'ENSEMBLE','ErrorMessage':errorMessage})
+    raise TypeError
+
+def _validate_steps(val):
+  if utilities.is_positive_integer(val):
+    return val
+  else:
+    errorMessage = "MD STEPS must be an integer."
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+                            'Variable':'STEPS','ErrorMessage':errorMessage})
+    raise TypeError
+
+def _validate_timestep(val):
+  if utilities.is_number(val):
+    return val
+  else:
+    errorMessage = "MD TIMESTEP must be a number."
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+                            'Variable':'TIMESTEP','ErrorMessage':errorMessage})
+    raise TypeError
+
+def _validate_temperature(val):
+  if utilities.is_number(val):
+    return val
+  else:
+    errorMessage = "MD TEMPERATURE must be a number."
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+                            'Variable':'TEMPERATURE','ErrorMessage':errorMessage})
+    raise TypeError
+
 class MD:
-
-  MD_ENSEMBLE_VALS = ["HYDROSTATICSHOCK","ISOKIN","LANGEVIN","MSST","MSST_DAMPED","NPE_F","NPE_I",
-                      "NPT_F","NPT_I","NVE","NVT","NVT_ADIABATIC","REFTRAJ"]
-
-  def _validate_ensemble(val):
-    val = str(val).upper()
-    if val in MD_ENSEMBLE_VALS:
-      return val
-    else:
-      errorMessage = "Invalid option for MD ENSEMBLE: {}. Valid options are: {}".format(MD_ENSEMBLE_VALS)
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
-                              'Variable':'ENSEMBLE','ErrorMessage':errorMessage})
-      raise TypeError
-
-  def _validate_steps(val):
-    if utilities.is_positive_integer(val):
-      return val
-    else:
-      errorMessage = "MD STEPS must be an integer."
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
-                              'Variable':'STEPS','ErrorMessage':errorMessage})
-      raise TypeError
-
-  def _validate_timestep(val):
-    if utilities.is_number(val):
-      return val
-    else:
-      errorMessage = "MD TIMESTEP must be a number."
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
-                              'Variable':'TIMESTEP','ErrorMessage':errorMessage})
-      raise TypeError
-
-  def _validate_temperature(val):
-    if utilities.is_number(val):
-      return val
-    else:
-      errorMessage = "MD TEMPERATURE must be a number."
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
-                              'Variable':'TEMPERATURE','ErrorMessage':errorMessage})
-      raise TypeError
 
   def __init__(self,ENSEMBLE="NVE",STEPS=3,TIMESTEP=0.5,TEMPERATURE=300.0,errorLog=[],changeLog=[]):
    

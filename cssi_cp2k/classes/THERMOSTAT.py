@@ -2,32 +2,33 @@ import datetime
 import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import NOSE
 
+
+REGION_VALS = ["DEFINED","GLOBAL","MASSIVE","MOLECULE","NONE"]
+TYPE_VALS   = ["AD_LANGEVIN","CSVR","GLE","NOSE"]
+
+def _validate_region(val):
+  val = str(val).upper()
+  if val in REGION_VALS:
+    return val
+  else:
+    errorMessage = ("Invalid option for MD THERMOSTAT REGION: {}. Valid options are: {}".format(
+                   REGION_VALS))
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'THERMOSTAT',
+                            'Variable':'REGION','ErrorMessage':errorMessage})
+    raise TypeError
+
+def _validate_type(val):
+  val = str(val).upper()
+  if val in TYPE_VALS:
+    return val
+  else:
+    errorMessage = ("Invalid option for MD THERMOSTAT TYPE: {}. Valid options are: {}".format(
+                     TYPE_VALS))
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'THERMOSTAT',
+                            'Variable':'TYPE','ErrorMessage':errorMessage})
+    raise TypeError
+
 class THERMOSTAT:
-
-  REGION_VALS = ["DEFINED","GLOBAL","MASSIVE","MOLECULE","NONE"]
-  TYPE_VALS   = ["AD_LANGEVIN","CSVR","GLE","NOSE"]
-
-  def _validate_region(val):
-    val = str(val).upper()
-    if val in REGION_VALS:
-      return val
-    else:
-      errorMessage = ("Invalid option for MD THERMOSTAT REGION: {}. Valid options are: {}".format(
-                     REGION_VALS))
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'THERMOSTAT',
-                              'Variable':'REGION','ErrorMessage':errorMessage})
-      raise TypeError
-
-  def _validate_type(val):
-    val = str(val).upper()
-    if val in TYPE_VALS:
-      return val
-    else:
-      errorMessage = ("Invalid option for MD THERMOSTAT TYPE: {}. Valid options are: {}".format(
-                       TYPE_VALS))
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'THERMOSTAT',
-                              'Variable':'TYPE','ErrorMessage':errorMessage})
-      raise TypeError
 
   def __init__(self,TYPE="NOSE",REGION="GLOBAL",errorLog=[],changeLog=[]):
 
@@ -36,7 +37,7 @@ class THERMOSTAT:
     self.__errorLog  = errorLog
     self.__changeLog = changeLog
     #THERMOSTAT subsections
-    self.__NOSE      = NOSE(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__NOSE      = NOSE.NOSE(errorLog=self.__errorLog,changeLog=self.__changeLog)
 
   @property
   def REGION(self):

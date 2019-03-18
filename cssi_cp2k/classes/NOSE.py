@@ -1,43 +1,44 @@
 import datetime
 import cssi_cp2k.utilities as utilities
 
+
+def _validate_length(val):
+  if utilities.is_positive_integer(val):
+    return val
+  else:
+    errorMessage = "Nose LENGTH must be a positive integer."
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
+                            'Variable':'LENGTH','ErrorMessage':errorMessage})
+    raise TypeError
+
+def _validate_yoshida(val):
+  if utilities.is_positive_integer(val):
+    return val
+  else:
+    errorMessage = "Nose YOSHIDA integrator order must be a positive integer."
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
+                            'Variable':'YOSHIDA','ErrorMessage':errorMessage})
+    raise TypeError
+
+def _validate_timecon(val):
+  if utilities.is_positive_number(val):
+    return val
+  else:
+    errorMessage = "Nose TIMECON must be a positive number."
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
+                            'Variable':'YOSHIDA','ErrorMessage':errorMessage})
+    raise TypeError
+
+def _validate_mts(val):
+  if utilities.is_positive_integer(val):
+    return val
+  else:
+    errorMessage = "Nose MTS must be a positive number."
+    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
+                            'Variable':'YOSHIDA','ErrorMessage':errorMessage})
+    raise TypeError
+
 class NOSE:
-
-  def _validate_length(val):
-    if utilities.is_positive_integer(val):
-      return val
-    else:
-      errorMessage = "Nose LENGTH must be a positive integer."
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
-                              'Variable':'LENGTH','ErrorMessage':errorMessage})
-      raise TypeError
-
-  def _validate_yoshida(val):
-    if utilities.is_positive_integer(val):
-      return val
-    else:
-      errorMessage = "Nose YOSHIDA integrator order must be a positive integer."
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
-                              'Variable':'YOSHIDA','ErrorMessage':errorMessage})
-      raise TypeError
-
-  def _validate_timecon(val):
-    if utilities.is_positive_number(val):
-      return val
-    else:
-      errorMessage = "Nose TIMECON must be a positive number."
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
-                              'Variable':'YOSHIDA','ErrorMessage':errorMessage})
-      raise TypeError
-
-  def _validate_mts(val):
-    if utilities.is_positive_integer(val):
-      return val
-    else:
-      errorMessage = "Nose MTS must be a positive number."
-      self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'NOSE',
-                              'Variable':'YOSHIDA','ErrorMessage':errorMessage})
-      raise TypeError
 
   def __init__(self,LENGTH=3,MTS=2,TIMECON=1000.0,YOSHIDA=3,errorLog=[],changeLog=[]):
     

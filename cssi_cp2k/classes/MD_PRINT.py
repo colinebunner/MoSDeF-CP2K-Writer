@@ -3,7 +3,7 @@ import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import ENERGY
 from cssi_cp2k.classes import PROGRAM_RUN_INFO
 
-class MD_PRINT:
+class PRINT:
 
   def __init__(self,errorLog=[],changeLog=[]):
   

@@ -10,8 +10,8 @@ class MOTION:
     self.__errorLog  = errorLog
     self.__changeLog = changeLog
     # Subsections of MOTION
-    self.__PRINT     = PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog)
-    self.__MD        = MD(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__PRINT     = PRINT.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__MD        = MD.MD(errorLog=self.__errorLog,changeLog=self.__changeLog)
 
   @property
   def errorLog(self):
@@ -20,3 +20,11 @@ class MOTION:
   @property
   def changeLog(self):
     return self.__changeLog
+
+  @property
+  def PRINT(self):
+    return self.__PRINT
+
+  @property
+  def MD(self):
+    return self.__MD

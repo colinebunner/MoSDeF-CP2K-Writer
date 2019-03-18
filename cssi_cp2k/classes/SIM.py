@@ -1,6 +1,7 @@
 import os
 import random
 from cssi_cp2k.classes import GLOBAL
+from cssi_cp2k.classes import MOTION
 
 class SIM:
 
@@ -15,6 +16,7 @@ class SIM:
     self.__homeDirectory      = os.getcwd()
     self.__scratchDirectory   = "/tmp/cssi-cp2k-{}".format(int(random.random()*123456789))
     self.__GLOBAL             = GLOBAL.GLOBAL(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__MOTION             = MOTION.MOTION(errorLog=self.__errorLog,changeLog=self.__changeLog)
     
   @property
   def prod(self):
@@ -51,6 +53,10 @@ class SIM:
   @property
   def GLOBAL(self):
     return self.__GLOBAL
+
+  @property
+  def MOTION(self):
+    return self.__MOTION
 
   @restartWFN.setter
   def restartWFN(self,val):
