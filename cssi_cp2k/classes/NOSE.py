@@ -40,7 +40,8 @@ def _validate_mts(val):
 
 class NOSE:
 
-  def __init__(self,LENGTH=3,MTS=2,TIMECON=1000.0,YOSHIDA=3,errorLog=[],changeLog=[]):
+  def __init__(self,LENGTH=3,MTS=2,TIMECON=1000.0,YOSHIDA=3,errorLog=[],changeLog=[],
+               location=""):
     
     self.__LENGTH    = _validate_length(LENGTH)
     self.__MTS       = _validate_mts(MTS)
@@ -48,6 +49,7 @@ class NOSE:
     self.__YOSHIDA   = _validate_yoshida(YOSHIDA)
     self.__errorLog  = errorLog
     self.__changeLog = changeLog
+    self.__location  = "{}/NOSE".format(location)
 
   @property
   def LENGTH(self):
@@ -72,6 +74,10 @@ class NOSE:
   @property
   def changeLog(self):
     return self.__changeLog
+
+  @property
+  def location(self):
+    return self.__location
 
   @LENGTH.setter
   def LENGTH(self,val):

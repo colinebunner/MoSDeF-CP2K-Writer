@@ -46,7 +46,8 @@ def _validate_temperature(val):
 
 class MD:
 
-  def __init__(self,ENSEMBLE="NVE",STEPS=3,TIMESTEP=0.5,TEMPERATURE=300.0,errorLog=[],changeLog=[]):
+  def __init__(self,ENSEMBLE="NVE",STEPS=3,TIMESTEP=0.5,TEMPERATURE=300.0,errorLog=[],changeLog=[],
+               location=""):
    
     self.__ENSEMBLE    = _validate_ensemble(ENSEMBLE)
     self.__STEPS       = _validate_steps(STEPS)
@@ -54,9 +55,12 @@ class MD:
     self.__TEMPERATURE = _validate_temperature(TEMPERATURE)
     self.__errorLog    = errorLog
     self.__changeLog   = changeLog
+    self.__location    = "{}/MD".format(location)
     #MD subesctions
-    self.__THERMOSTAT  = thermostat.THERMOSTAT(errorLog=self.__errorLog,changeLog=self.__changeLog)
-    self.__PRINT       = md_print.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__THERMOSTAT  = thermostat.THERMOSTAT(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                           location=self.__location)
+    self.__PRINT       = md_print.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                           location=self.__location)
 
   @property
   def ENSEMBLE(self):
@@ -81,6 +85,10 @@ class MD:
   @property
   def changeLog(self):
     return self.__changeLog
+
+  @property
+  def location(self):
+    return self.__location
 
   @property
   def THERMOSTAT(self):

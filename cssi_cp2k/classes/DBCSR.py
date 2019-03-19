@@ -23,7 +23,8 @@ class DBCSR:
     self.__USE_COMM_THREAD        = USE_COMM_THREAD
     self.__USE_MPI_ALLOCATOR      = USE_MPI_ALLOCATOR
     self.__USE_MPI_RMA            = USE_MPI_RMA
-    self.__errorLog                 = errorLog
+    self.__errorLog               = errorLog
+    self.__changeLog              = changeLog
     self.__ACC                    = ACC.ACC(errorLog=[],changeLog=[])
 
   @property

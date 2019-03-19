@@ -2,7 +2,11 @@
 from cssi_cp2k.classes import SIM as sim
 
 mySim = sim.SIM()
+
 mySim.GLOBAL.RUN_TYPE = "MD"
+mySim.GLOBAL.PROJECT  = "iodine-liquid"
+mySim.GLOBAL.PRINT_LEVEL = "LOW"
+
 mySim.MOTION.MD.ENSEMBLE = "NVT"
 mySim.MOTION.MD.STEPS  = 1000000
 mySim.MOTION.MD.TIMESTEP = 0.5
@@ -14,4 +18,7 @@ mySim.MOTION.MD.THERMOSTAT.NOSE.YOSHIDA = 3
 mySim.MOTION.MD.THERMOSTAT.NOSE.TIMECON = 1000.0
 mySim.MOTION.MD.THERMOSTAT.NOSE.MTS = 2
 mySim.MOTION.MD.PRINT.ENERGY.EACH.MD = 20
-mySim.write_changeLog()
+mySim.MOTION.MD.PRINT.PROGRAM_RUN_INFO.EACH.MD = 20
+
+mySim.write_changeLog(fn="iodine-changeLog.out")
+mySim.write_inputFile()

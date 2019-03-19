@@ -38,7 +38,7 @@ class GLOBAL:
                PREFERRED_FFT_LIBRARY='FFTW3',PRINT_LEVEL='MEDIUM',PROGRAM_NAME='CP2K',
                PROJECT_NAME='PROJECT',RUN_TYPE='ENERGY_FORCE',SAVE_MEM=False,SEED=8675309,TRACE=False,
                TRACE_MASTER=True,TRACE_MAX=2147483647,TRACE_ROUTINES=[],WALLTIME='24:00:00',errorLog=[],
-               changeLog=[]):
+               changeLog=[],location=""):
 
     self.__ALLTOALL_SGL           = ALLTOALL_SGL
     self.__BLACS_GRID             = BLACS_GRID
@@ -71,6 +71,7 @@ class GLOBAL:
     self.__WALLTIME               = WALLTIME
     self.__errorLog               = errorLog
     self.__changeLog              = changeLog
+    self.__location               = "{}/GLOBAL".format(location)
     # Consider adding subsec_args options to init
     self.__DBCSR                  = DBCSR.DBCSR(errorLog=self.__errorLog,changeLog=self.__changeLog)
     self.__FM                     = FM.FM(errorLog=self.__errorLog,changeLog=self.__changeLog)
@@ -236,6 +237,10 @@ class GLOBAL:
   @property
   def changeLog(self):
     return self.__changeLog
+
+  @property
+  def location(self):
+    return self.__location
 
   @ALLTOALL_SGL.setter
   def ALLTOALL_SGL(self,val):

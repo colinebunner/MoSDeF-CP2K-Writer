@@ -1,6 +1,7 @@
 import os
 import random
 import cssi_cp2k.utilities as utilities
+import cssi_cp2k.FileWriters as FileWriters
 from cssi_cp2k.classes import GLOBAL
 from cssi_cp2k.classes import MOTION
 
@@ -16,8 +17,15 @@ class SIM:
     self.__restartWFN         = "RESTART.wfn"
     self.__homeDirectory      = os.getcwd()
     self.__scratchDirectory   = "/tmp/cssi-cp2k-{}".format(int(random.random()*123456789))
-    self.__GLOBAL             = GLOBAL.GLOBAL(errorLog=self.__errorLog,changeLog=self.__changeLog)
-    self.__MOTION             = MOTION.MOTION(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    # Some sections occur in multiple places (e.g. a PRINT/EACH section). Passing this string
+    # allows each module to track their full path within the Simulation object structure. Care
+    # needs to be taken, though, since Python passes by reference.
+    self.__location           = "SIM"
+    # SIM subsections. Most correspond to sections of the CP2K input file structure.
+    self.__GLOBAL             = GLOBAL.GLOBAL(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                                  location=self.__location)
+    self.__MOTION             = MOTION.MOTION(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                                  location=self.__location)
     
   @property
   def prod(self):
@@ -50,6 +58,10 @@ class SIM:
   @property
   def scratchDirectory(self):
     return self.__scratchDirectory
+
+  @property
+  def location(self):
+    return self.__location
 
   @property
   def GLOBAL(self):
@@ -92,15 +104,17 @@ class SIM:
     for change in self.__changeLog:
       if keys is None:
         if success is None:
-          logString += "{}\n".format(change["Variable"])
+          logString += "{}/{}\n".format(change["Module"],change["Variable"])
           logString += "{}: {}\n".format("New",change["New"])
           logString += "{}: {}\n".format("Previous",change["Previous"])
           logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
           logString += "{}: {}\n".format("Success",change["Success"])
           logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
+          if 'Location' in change.keys():
+            logString += "{}: {}\n\n".format("Location",change["Location"])
         elif success in [True,False]:
           if change["Success"] == success:
-            logString += "{}\n".format(change["Variable"])
+            logString += "{}/{}\n".format(change["Module"],change["Variable"])
             logString += "{}: {}\n".format("New",change["New"])
             logString += "{}: {}\n".format("Previous",change["Previous"])
             logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
@@ -111,7 +125,7 @@ class SIM:
  
       else:
         if success is None:
-          logString += "{}\n".format(change["Variable"])
+          logString += "{}/{}\n".format(change["Module"],change["Variable"])
           if "NEW" in keys:
             logString += "{}: {}\n".format("New",change["New"])
           if "PREVIOUS" in keys:
@@ -124,7 +138,7 @@ class SIM:
             logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
         elif success in [True,False]:
           if change["Success"] == success:
-            logString += "{}\n".format(change["Variable"])
+            logString += "{}/{}\n".format(change["Module"],change["Variable"])
             if "NEW" in keys:
               logString += "{}: {}\n".format("New",change["New"])
             if "PREVIOUS" in keys:
@@ -143,3 +157,11 @@ class SIM:
     else:
       with open(fn,"w") as out:
         out.write(logString)
+
+  def write_inputFile(self,fn=None):
+    inputFile = FileWriters.write_input(self)
+    if fn is None:
+      print(inputFile)
+    else:
+      with open(fn,"w") as out:
+        out.write(inputFile)

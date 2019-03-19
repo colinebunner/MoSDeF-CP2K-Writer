@@ -30,14 +30,16 @@ def _validate_type(val):
 
 class THERMOSTAT:
 
-  def __init__(self,TYPE="NOSE",REGION="GLOBAL",errorLog=[],changeLog=[]):
+  def __init__(self,TYPE="NOSE",REGION="GLOBAL",errorLog=[],changeLog=[],location=""):
 
     self.__TYPE      = _validate_type(TYPE)
     self.__REGION    = _validate_region(REGION)
     self.__errorLog  = errorLog
     self.__changeLog = changeLog
+    self.__location  = "{}/THERMOSTAT".format(location)
     #THERMOSTAT subsections
-    self.__NOSE      = NOSE.NOSE(errorLog=self.__errorLog,changeLog=self.__changeLog)
+    self.__NOSE      = NOSE.NOSE(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                         location=self.__location)
 
   @property
   def REGION(self):
@@ -54,6 +56,10 @@ class THERMOSTAT:
   @property
   def changeLog(self):
     return self.__changeLog
+
+  @property
+  def location(self):
+    return self.__location
 
   @property
   def NOSE(self):
