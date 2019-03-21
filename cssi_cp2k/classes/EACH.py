@@ -2,194 +2,196 @@ import datetime
 import cssi_cp2k.utilities as utilities
 
 
-def _validate_band(val):
-  if utilities.is_positive_integer(val):
+def _validate_band(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "BAND iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'BAND','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_bsse(val):
-  if utilities.is_positive_integer(val):
+def _validate_bsse(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "BSSE iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'BSSE','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_cell_opt(val):
-  if utilities.is_positive_integer(val):
+def _validate_cell_opt(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "CELL_OPT iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'CELL_OPT','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_ep_lin_solver(val):
-  if utilities.is_positive_integer(val):
+def _validate_ep_lin_solver(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "EP_LIN_SOLVER iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'EP_LIN_SOLVER','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_geo_opt(val):
-  if utilities.is_positive_integer(val):
+def _validate_geo_opt(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "GEO_OPT iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'GEO_OPT','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_just_energy(val):
-  if utilities.is_positive_integer(val):
+def _validate_just_energy(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "JUST_ENERGY iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'JUST_ENERGY','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_md(val):
-  if utilities.is_positive_integer(val):
+def _validate_md(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "MD iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'MD','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_metadynamics(val):
-  if utilities.is_positive_integer(val):
+def _validate_metadynamics(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "METADYNAMICS iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'METADYNAMICS','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_pint(val):
-  if utilities.is_positive_integer(val):
+def _validate_pint(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "PINT iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'PINT','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_powell_opt(val):
-  if utilities.is_positive_integer(val):
+def _validate_powell_opt(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "POWELL_OPT iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'POWELL_OPT','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_qs_scf(val):
-  if utilities.is_positive_integer(val):
+def _validate_qs_scf(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "QS_SCF iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'QS_SCF','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_replica_eval(val):
-  if utilities.is_positive_integer(val):
+def _validate_replica_eval(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "REPLICA_EVAL iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'REPLICA_EVAL','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_rot_opt(val):
-  if utilities.is_positive_integer(val):
+def _validate_rot_opt(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "ROT_OPT iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'ROT_OPT','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_shell_opt(val):
-  if utilities.is_positive_integer(val):
+def _validate_shell_opt(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "SHELL_OPT iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'SHELL_OPT','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_spline_find_coeffs(val):
-  if utilities.is_positive_integer(val):
+def _validate_spline_find_coeffs(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "SPLINE_FIND_COEFFS iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'SPLINE_FIND_COEFFS','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_tddft_scf(val):
-  if utilities.is_positive_integer(val):
+def _validate_tddft_scf(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "TDDFT_SCF iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'TDDFT_SCF','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_xas_scf(val):
-  if utilities.is_positive_integer(val):
+def _validate_xas_scf(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "XAS_SCF iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'XAS_SCF','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_root(val):
-  if utilities.is_positive_integer(val):
+def _validate_root(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "ROOT iteration level must be a positive integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'EACH',
                             'Variable':'ROOT','ErrorMessage':errorMessage})
     raise TypeError
 
 class EACH:
 
-  def __init__(self,BAND=1,BSSE=1,CELL_OPT=1,EP_LIN_SOLVER=1,GEO_OPT=1,JUST_ENERGY=1,MD=1,POWELL_OPT=1,
-               METADYNAMICS=1,PINT=1,QS_SCF=1,REPLICA_EVAL=1,ROT_OPT=1,SHELL_OPT=1,SPLINE_FIND_COEFFS=1,
-               TDDFT_SCF=1,XAS_SCF=1,ROOT=1,errorLog=[],changeLog=[],location=""):
+  def __init__(self,BAND=None,BSSE=None,CELL_OPT=None,EP_LIN_SOLVER=None,GEO_OPT=None,
+               JUST_ENERGY=None,MD=None,POWELL_OPT=None,METADYNAMICS=None,PINT=None,
+               QS_SCF=None,REPLICA_EVAL=None,ROT_OPT=None,SHELL_OPT=None,
+               SPLINE_FIND_COEFFS=None,TDDFT_SCF=None,XAS_SCF=None,ROOT=None,errorLog=[],
+               changeLog=[],location=""):
 
-    self.__BAND               = _validate_band(BAND)
-    self.__BSSE               = _validate_bsse(BSSE)
-    self.__CELL_OPT           = _validate_cell_opt(CELL_OPT)
-    self.__EP_LIN_SOLVER      = _validate_ep_lin_solver(EP_LIN_SOLVER)
-    self.__GEO_OPT            = _validate_geo_opt(GEO_OPT)
-    self.__JUST_ENERGY        = _validate_just_energy(JUST_ENERGY)
-    self.__MD                 = _validate_md(MD)
-    self.__METADYNAMICS       = _validate_metadynamics(METADYNAMICS)
-    self.__PINT               = _validate_pint(PINT)
-    self.__POWELL_OPT         = _validate_powell_opt(POWELL_OPT)
-    self.__QS_SCF             = _validate_qs_scf(QS_SCF)
-    self.__REPLICA_EVAL       = _validate_replica_eval(REPLICA_EVAL)
-    self.__ROT_OPT            = _validate_rot_opt(ROT_OPT)
-    self.__SHELL_OPT          = _validate_shell_opt(SHELL_OPT)
-    self.__SPLINE_FIND_COEFFS = _validate_spline_find_coeffs(SPLINE_FIND_COEFFS)
-    self.__TDDFT_SCF          = _validate_tddft_scf(TDDFT_SCF)
-    self.__XAS_SCF            = _validate_xas_scf(XAS_SCF)
-    self.__ROOT               = _validate_root(ROOT)
     self.__errorLog           = errorLog
     self.__changeLog          = changeLog
+    self.__BAND               = _validate_band(BAND,errorLog=self.__errorLog)
+    self.__BSSE               = _validate_bsse(BSSE,errorLog=self.__errorLog)
+    self.__CELL_OPT           = _validate_cell_opt(CELL_OPT,errorLog=self.__errorLog)
+    self.__EP_LIN_SOLVER      = _validate_ep_lin_solver(EP_LIN_SOLVER,errorLog=self.__errorLog)
+    self.__GEO_OPT            = _validate_geo_opt(GEO_OPT,errorLog=self.__errorLog)
+    self.__JUST_ENERGY        = _validate_just_energy(JUST_ENERGY,errorLog=self.__errorLog)
+    self.__MD                 = _validate_md(MD,errorLog=self.__errorLog)
+    self.__METADYNAMICS       = _validate_metadynamics(METADYNAMICS,errorLog=self.__errorLog)
+    self.__PINT               = _validate_pint(PINT,errorLog=self.__errorLog)
+    self.__POWELL_OPT         = _validate_powell_opt(POWELL_OPT,errorLog=self.__errorLog)
+    self.__QS_SCF             = _validate_qs_scf(QS_SCF,errorLog=self.__errorLog)
+    self.__REPLICA_EVAL       = _validate_replica_eval(REPLICA_EVAL,errorLog=self.__errorLog)
+    self.__ROT_OPT            = _validate_rot_opt(ROT_OPT,errorLog=self.__errorLog)
+    self.__SHELL_OPT          = _validate_shell_opt(SHELL_OPT,errorLog=self.__errorLog)
+    self.__SPLINE_FIND_COEFFS = _validate_spline_find_coeffs(SPLINE_FIND_COEFFS,errorLog=self.__errorLog)
+    self.__TDDFT_SCF          = _validate_tddft_scf(TDDFT_SCF,errorLog=self.__errorLog)
+    self.__XAS_SCF            = _validate_xas_scf(XAS_SCF,errorLog=self.__errorLog)
+    self.__ROOT               = _validate_root(ROOT,errorLog=self.__errorLog)
     self.__location           = "{}/EACH".format(location)
 
   @property

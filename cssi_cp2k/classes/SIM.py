@@ -104,17 +104,15 @@ class SIM:
     for change in self.__changeLog:
       if keys is None:
         if success is None:
-          logString += "{}/{}\n".format(change["Module"],change["Variable"])
+          logString += "{}/{}\n\n".format(change["Location"],change["Variable"])
           logString += "{}: {}\n".format("New",change["New"])
           logString += "{}: {}\n".format("Previous",change["Previous"])
           logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
           logString += "{}: {}\n".format("Success",change["Success"])
           logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
-          if 'Location' in change.keys():
-            logString += "{}: {}\n\n".format("Location",change["Location"])
         elif success in [True,False]:
           if change["Success"] == success:
-            logString += "{}/{}\n".format(change["Module"],change["Variable"])
+            logString += "{}/{}\n\n".format(change["Location"],change["Variable"])
             logString += "{}: {}\n".format("New",change["New"])
             logString += "{}: {}\n".format("Previous",change["Previous"])
             logString += "{}: {}\n".format("Date",utilities.datetimePrettify(change["Date"]))
@@ -125,7 +123,7 @@ class SIM:
  
       else:
         if success is None:
-          logString += "{}/{}\n".format(change["Module"],change["Variable"])
+          logString += "{}/{}\n\n".format(change["Location"],change["Variable"])
           if "NEW" in keys:
             logString += "{}: {}\n".format("New",change["New"])
           if "PREVIOUS" in keys:
@@ -138,7 +136,7 @@ class SIM:
             logString += "{}: {}\n\n".format("ErrorMessage",change["ErrorMessage"])
         elif success in [True,False]:
           if change["Success"] == success:
-            logString += "{}/{}\n".format(change["Module"],change["Variable"])
+            logString += "{}/{}\n\n".format(change["Location"],change["Variable"])
             if "NEW" in keys:
               logString += "{}: {}\n".format("New",change["New"])
             if "PREVIOUS" in keys:

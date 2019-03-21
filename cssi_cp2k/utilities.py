@@ -6,7 +6,7 @@ def is_number(val):
   try:
     v = float(val)
     return True
-  except ValueError:
+  except (ValueError,TypeError):
     return False
 
 def is_integer(val):

@@ -21,4 +21,5 @@ mySim.MOTION.MD.PRINT.ENERGY.EACH.MD = 20
 mySim.MOTION.MD.PRINT.PROGRAM_RUN_INFO.EACH.MD = 20
 
 mySim.write_changeLog(fn="iodine-changeLog.out")
+mySim.write_errorLog()
 mySim.write_inputFile()

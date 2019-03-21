@@ -7,54 +7,55 @@ from cssi_cp2k.classes import MD_PRINT as md_print
 MD_ENSEMBLE_VALS = ["HYDROSTATICSHOCK","ISOKIN","LANGEVIN","MSST","MSST_DAMPED","NPE_F","NPE_I",
                     "NPT_F","NPT_I","NVE","NVT","NVT_ADIABATIC","REFTRAJ"]
 
-def _validate_ensemble(val):
-  val = str(val).upper()
-  if val in MD_ENSEMBLE_VALS:
+def _validate_ensemble(val,errorLog=[]):
+  if val is not None:
+    val = str(val).upper()
+  if val in MD_ENSEMBLE_VALS or (val is None):
     return val
   else:
-    errorMessage = "Invalid option for MD ENSEMBLE: {}. Valid options are: {}".format(MD_ENSEMBLE_VALS)
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+    errorMessage = "Invalid option for MD ENSEMBLE: {}. Valid options are: {}".format(val,MD_ENSEMBLE_VALS)
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
                             'Variable':'ENSEMBLE','ErrorMessage':errorMessage})
-    raise TypeError
+    raise TypeError("{}".format(val))
 
-def _validate_steps(val):
-  if utilities.is_positive_integer(val):
+def _validate_steps(val,errorLog=[]):
+  if utilities.is_positive_integer(val) or (val is None):
     return val
   else:
     errorMessage = "MD STEPS must be an integer."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
                             'Variable':'STEPS','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_timestep(val):
-  if utilities.is_number(val):
+def _validate_timestep(val,errorLog=[]):
+  if utilities.is_number(val) or (val is None):
     return val
   else:
     errorMessage = "MD TIMESTEP must be a number."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
                             'Variable':'TIMESTEP','ErrorMessage':errorMessage})
     raise TypeError
 
-def _validate_temperature(val):
-  if utilities.is_number(val):
+def _validate_temperature(val,errorLog=[]):
+  if utilities.is_number(val) or (val is None):
     return val
   else:
     errorMessage = "MD TEMPERATURE must be a number."
-    self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
                             'Variable':'TEMPERATURE','ErrorMessage':errorMessage})
     raise TypeError
 
 class MD:
 
-  def __init__(self,ENSEMBLE="NVE",STEPS=3,TIMESTEP=0.5,TEMPERATURE=300.0,errorLog=[],changeLog=[],
+  def __init__(self,ENSEMBLE=None,STEPS=None,TIMESTEP=None,TEMPERATURE=None,errorLog=[],changeLog=[],
                location=""):
-   
-    self.__ENSEMBLE    = _validate_ensemble(ENSEMBLE)
-    self.__STEPS       = _validate_steps(STEPS)
-    self.__TIMESTEP    = _validate_timestep(TIMESTEP)
-    self.__TEMPERATURE = _validate_temperature(TEMPERATURE)
+
     self.__errorLog    = errorLog
     self.__changeLog   = changeLog
+    self.__ENSEMBLE    = _validate_ensemble(ENSEMBLE,errorLog=self.__errorLog)
+    self.__STEPS       = _validate_steps(STEPS,errorLog=self.__errorLog)
+    self.__TIMESTEP    = _validate_timestep(TIMESTEP,errorLog=self.__errorLog)
+    self.__TEMPERATURE = _validate_temperature(TEMPERATURE,errorLog=self.__errorLog)
     self.__location    = "{}/MD".format(location)
     #MD subesctions
     self.__THERMOSTAT  = thermostat.THERMOSTAT(errorLog=self.__errorLog,changeLog=self.__changeLog,
@@ -103,55 +104,59 @@ class MD:
     val = str(val).upper()
     if val in MD_ENSEMBLE_VALS:
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'ENSEMBLE',
-                               'Success':True,'Previous':self.__ENSEMBLE,'New':val,'ErrorMessage':None})
+                               'Success':True,'Previous':self.__ENSEMBLE,'New':val,'ErrorMessage':None,
+                               'Location':self.__location})
       self.__ENSEMBLE = val
     else:
       errorMessage = "Invalid option for MD ENSEMBLE: {}. Valid options are: {}".format(MD_ENSEMBLE_VALS)
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'ENSEMBLE',
                                'Success':False,'Previous':self.__ENSEMBLE,'New':val,
-                               'ErrorMessage':errorMessage})
+                               'ErrorMessage':errorMessage,'Location':self.__location})
       self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'MD',
-                              'Variable':'ENSEMBLE','ErrorMessage':errorMessage})
+                              'Variable':'ENSEMBLE','ErrorMessage':errorMessage,'Location':self.__location})
      
   @STEPS.setter
   def STEPS(self,val):
     if utilities.is_positive_integer(val):
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'STEPS',
-                               'Success':True,'Previous':self.__STEPS,'New':val,'ErrorMessage':None})
+                               'Success':True,'Previous':self.__STEPS,'New':val,'ErrorMessage':None,
+                               'Location':self.__location})
       self.__STEPS = val
     else:
       errorMessage = "STEPS must be a positive integer."
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'STEPS',
                                'Success':False,'Previous':self.__STEPS,'New':val,
-                               'ErrorMessage':errorMessage})
+                               'ErrorMessage':errorMessage,'Location':self.__location})
       self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'MD',
-                              'Variable':'STEPS','ErrorMessage':errorMessage})
+                              'Variable':'STEPS','ErrorMessage':errorMessage,'Location':self.__location})
 
   @TIMESTEP.setter
   def TIMESTEP(self,val):
     if utilities.is_positive_number(val):
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'TIMESTEP',
-                               'Success':True,'Previous':self.__TIMESTEP,'New':val,'ErrorMessage':None})
+                               'Success':True,'Previous':self.__TIMESTEP,'New':val,'ErrorMessage':None,
+                               'Location':self.__location})
       self.__TIMESTEP = val
     else:
       errorMessage = "TIMESTEP must be a positive integer."
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'TIMESTEP',
                                'Success':False,'Previous':self.__TIMESTEP,'New':val,
-                               'ErrorMessage':errorMessage})
+                               'ErrorMessage':errorMessage,'Location':self.__location})
       self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'MD',
-                              'Variable':'TIMESTEP','ErrorMessage':errorMessage})
+                              'Variable':'TIMESTEP','ErrorMessage':errorMessage,'Location':self.__location})
 
   @TEMPERATURE.setter
   def TEMPERATURE(self,val):
     if utilities.is_positive_number(val):
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'TEMPERATURE',
                                'Success':True,'Previous':self.__TEMPERATURE,'New':val,
-                               'ErrorMessage':None})
+                               'ErrorMessage':None,'Location':self.__location})
       self.__TEMPERATURE = val
     else:
       errorMessage = "TEMPERATURE must be a positive integer."
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'TEMPERATURE',
                                'Success':False,'Previous':self.__TEMPERATURE,'New':val,
-                               'ErrorMessage':errorMessage})
+                               'ErrorMessage':errorMessage,'Location':self.__location})
       self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'MD',
-                              'Variable':'TEMPERATURE','ErrorMessage':errorMessage})
+                              'Variable':'TEMPERATURE','ErrorMessage':errorMessage,
+                              'Location':self.__location})

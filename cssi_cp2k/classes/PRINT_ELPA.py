@@ -1,9 +1,10 @@
 class PRINT_ELPA:
 
-  def __init__(self,errorLog=[],changeLog=[]):
+  def __init__(self,errorLog=[],changeLog=[],location=""):
   
-    self.__errorLog = errorLog
+    self.__errorLog  = errorLog
     self.__changeLog = changeLog
+    self.__location  = "{}/PRINT_ELPA"
 
   @property
   def errorLog(self):
@@ -12,3 +13,7 @@ class PRINT_ELPA:
   @property
   def changeLog(self):
     return self.__changeLog
+
+  @property
+  def location(self):
+    return self.__location

@@ -2,8 +2,8 @@ import datetime
 
 class FM_DIAG_SETTINGS:
 
-  def __init__(self,ELPA_FORCE_REDISTRIBUTE=False,PARAMETER_A=4,PARAMETER_X=60,
-               PRINT_FM_REDISTRIBUTE=False,errorLog=[],changeLog=[]):
+  def __init__(self,ELPA_FORCE_REDISTRIBUTE=None,PARAMETER_A=None,PARAMETER_X=None,
+               PRINT_FM_REDISTRIBUTE=None,errorLog=[],changeLog=[],location=""):
 
     self.__ELPA_FORCE_REDISTRIBUTE = ELPA_FORCE_REDISTRIBUTE
     self.__PARAMETER_A             = PARAMETER_A
@@ -11,6 +11,7 @@ class FM_DIAG_SETTINGS:
     self.__PRINT_FM_REDISTRIBUTE   = PRINT_FM_REDISTRIBUTE
     self.__errorLog                = errorLog
     self.__changeLog               = changeLog
+    self.__location                = "{}/FM_DIAG_SETTINGS".format(location)
 
   @property
   def ELPA_FORCE_REDISTRIBUTE(self):
@@ -41,12 +42,15 @@ class FM_DIAG_SETTINGS:
     if isinstance(val,bool):
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
                                'Variable':'ELPA_FORCE_REDISTRIBUTE','Success':True,
-                               'Previous':self.__ELPA_FORCE_REDISTRIBUTE,'New':val,'ErrorMessage':None})
+                               'Previous':self.__ELPA_FORCE_REDISTRIBUTE,'New':val,'ErrorMessage':None,
+                               'Location':self.__location})
       self.__ELPA_FORCE_REDISTRIBUTE = val
     else:
       errorMessage = "ELPA_FORCE_REDISTRIBUTE must be a boolean. You passed {}.".format(val)
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'DBCSR',
                                'Variable':'ELPA_FORCE_REDISTRIBUTE','Success':False,
-                               'Previous':self.__ELPA_FORCE_REDISTRIBUTE,'New':val,'ErrorMessage':errorMessage})
+                               'Previous':self.__ELPA_FORCE_REDISTRIBUTE,'New':val,'ErrorMessage':errorMessage,
+                               'Location':self.__location})
       self.__errorLog.append({'Date':datetime.datetime.now(),'Type':'Setter','Module':'DBCSR',
-                              'Variable':'ELPA_FORCE_REDISTRIBUTE','ErrorMessage':errorMessage})
+                              'Variable':'ELPA_FORCE_REDISTRIBUTE','ErrorMessage':errorMessage,
+                              'Location':self.__location})

@@ -1,6 +1,6 @@
 class TIMINGS:
 
-  def __init__(self,errorLog=[],changeLog=[]):
+  def __init__(self,errorLog=[],changeLog=[],location=""):
 
     self.__errorLog = errorLog
     self.__changeLog = changeLog
@@ -12,3 +12,7 @@ class TIMINGS:
   @property
   def changeLog(self):
     return self.__changeLog
+
+  @property
+  def location(self):
+    return self.__location
