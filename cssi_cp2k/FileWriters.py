@@ -12,4 +12,47 @@ def write_input(SimObject):
   inputFile += "  PRINT_LEVEL  {}\n".format(glob.PRINT_LEVEL)
   inputFile += "&END GLOBAL\n"
 
+  # MOTION section
+  mot = SimObject.MOTION
+
+
+    # MD section
+  inputFile += "&MOTION\n"
+  inputFile += "  &MD\n"
+  inputFile += "    ENSEMBLE        {}\n".format(mot.MD.ENSEMBLE)
+  inputFile += "    TIMESTEP        {}\n".format(mot.MD.TIMESTEP)
+  inputFile += "    STEPS           {}\n".format(mot.MD.STEPS)
+  inputFile += "    TEMPERATURE     {}\n".format(mot.MD.TEMPERATURE)
+  inputFile += "    &THERMOSTAT       \n"
+  inputFile += "      &{}             \n".format(mot.MD.THERMOSTAT.TYPE )
+
+  if mot.MD.THERMOSTAT.TYPE=='NOSE':
+    inputFile += "        LENGTH       {}\n".format(mot.MD.THERMOSTAT.NOSE.LENGTH )
+    inputFile += "        MTS          {}\n".format(mot.MD.THERMOSTAT.NOSE.MTS )
+    inputFile += "        TIMECON      {}\n".format(mot.MD.THERMOSTAT.NOSE.TIMECON )
+    inputFile += "        YOSHIDA      {}\n".format(mot.MD.THERMOSTAT.NOSE.YOSHIDA )
+
+  if mot.MD.THERMOSTAT.TYPE=='GLE':
+    inputFile += "       NDIM       {}\n".format(mot.MD.THERMOSTAT.GLE.NDIM)
+
+    inputFile += "       A_SCALE    {}\n".format(mot.MD.THERMOSTAT.GLE.A_SCALE )
+    #inputFile += "       TIMECON      {}\n".format(mot.MD.THERMOSTAT.NOSE.TIMECON )
+    #inputFile += "       YOSHIDA      {}\n".format(mot.MD.THERMOSTAT.NOSE.YOSHIDA )
+  inputFile += "      &END {}             \n".format(mot.MD.THERMOSTAT.TYPE )
+  inputFile += "  &END MD\n \n"
+
+    # GEO_OPT section
+  geo=SimObject.MOTION.GEO_OPT
+  inputFile += "  &GEO_OPT \n"
+
+  inputFile += "    MAX_DR        {}\n".format(geo.MAX_DR)
+  inputFile += "    MAX_FORCE        {}\n".format(geo.MAX_FORCE)
+  inputFile += "    MAX_ITER        {}\n".format(geo.MAX_ITER)
+  inputFile += "    OPTIMIZER        {}\n".format(geo.OPTIMIZER)
+  inputFile += "    RMS_DR      {}\n".format(geo.RMS_DR)
+  inputFile += "    RMS_FORCE {}\n".format(geo.RMS_FORCE)
+  inputFile += "    STEP_START_VAL {}\n".format(geo.STEP_START_VAL)
+  inputFile += "    TYPE {}\n".format(geo.TYPE)
+  inputFile += "  &END GEO_OPT \n"
   return inputFile
+

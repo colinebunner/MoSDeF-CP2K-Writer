@@ -1,7 +1,7 @@
 import datetime
 import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import NOSE
-
+from cssi_cp2k.classes import GLE
 
 REGION_VALS = ["DEFINED","GLOBAL","MASSIVE","MOLECULE","NONE"]
 TYPE_VALS   = ["AD_LANGEVIN","CSVR","GLE","NOSE"]
@@ -46,6 +46,8 @@ class THERMOSTAT:
     #THERMOSTAT subsections
     self.__NOSE      = NOSE.NOSE(errorLog=self.__errorLog,changeLog=self.__changeLog,
                          location=self.__location)
+    self.__GLE = GLE.GLE(errorLog=self.__errorLog, changeLog=self.__changeLog,
+                            location=self.__location)
 
   @property
   def REGION(self):
@@ -70,6 +72,10 @@ class THERMOSTAT:
   @property
   def NOSE(self):
     return self.__NOSE
+
+  @property
+  def GLE(self):
+    return self.__GLE
 
   @REGION.setter
   def REGION(self,val):
