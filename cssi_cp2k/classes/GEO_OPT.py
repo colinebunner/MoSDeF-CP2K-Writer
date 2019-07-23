@@ -73,7 +73,7 @@ def _validate_TYPE(val,errorLog=[]):
 
 class GEO_OPT:
 
-  def __init__(self,MAX_DR=0.003,MAX_FORCE=0.00045,MAX_ITER=200,OPTIMIZER=None,RMS_DR=None,RMS_FORCE=None,STEP_START_VAL=None,TYPE=None, errorLog=[],changeLog=[],
+  def __init__(self,MAX_DR=None,MAX_FORCE=None,MAX_ITER=None,OPTIMIZER=None,RMS_DR=None,RMS_FORCE=None,STEP_START_VAL=None,TYPE=None, errorLog=[],changeLog=[],
                location=""):
 
     self.__errorLog    = errorLog

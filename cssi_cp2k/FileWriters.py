@@ -44,13 +44,18 @@ def write_input(SimObject):
     # GEO_OPT section
   geo=SimObject.MOTION.GEO_OPT
   inputFile += "  &GEO_OPT \n"
-
-  inputFile += "    MAX_DR        {}\n".format(geo.MAX_DR)
-  inputFile += "    MAX_FORCE        {}\n".format(geo.MAX_FORCE)
-  inputFile += "    MAX_ITER        {}\n".format(geo.MAX_ITER)
-  inputFile += "    OPTIMIZER        {}\n".format(geo.OPTIMIZER)
-  inputFile += "    RMS_DR      {}\n".format(geo.RMS_DR)
-  inputFile += "    RMS_FORCE {}\n".format(geo.RMS_FORCE)
+  if geo.MAX_DR is not None:
+    inputFile += "    MAX_DR        {}\n".format(geo.MAX_DR)
+  if geo.MAX_DR is not None:
+    inputFile += "    MAX_FORCE        {}\n".format(geo.MAX_FORCE)
+  if geo.MAX_DR is not None:
+    inputFile += "    MAX_ITER        {}\n".format(geo.MAX_ITER)
+  if geo.MAX_DR is not None:
+    inputFile += "    OPTIMIZER        {}\n".format(geo.OPTIMIZER)
+  if geo.MAX_DR is not None:
+    inputFile += "    RMS_DR      {}\n".format(geo.RMS_DR)
+  if geo.MAX_DR is not None:
+    inputFile += "    RMS_FORCE {}\n".format(geo.RMS_FORCE)
   inputFile += "    STEP_START_VAL {}\n".format(geo.STEP_START_VAL)
   inputFile += "    TYPE {}\n".format(geo.TYPE)
   inputFile += "  &END GEO_OPT \n"
