@@ -37,6 +37,17 @@ def _validate_type(val,errorLog=[]):
 class THERMOSTAT:
 
   def __init__(self,TYPE=None,REGION=None,errorLog=[],changeLog=[],location=""):
+    """
+
+    :param TYPE:
+    :param REGION:
+    :param errorLog:
+    :type errorLog: list
+    :param changeLog:
+    :type changeLog: list
+    :param location:
+    :returns None
+    """
 
     self.__errorLog  = errorLog
     self.__changeLog = changeLog
@@ -86,7 +97,7 @@ class THERMOSTAT:
                                'ErrorMessage':None,'Location':self.__location})
       self.__REGION = val
     else:
-      errorMessage = ("Invalid option for MD THERMOSTAT REGION: {}. Valid options are: {}".format(
+      errorMessage = ("Invalid option for MD THERMOSTAT REGION: {}. Valid options are: {}".format(val,
                        REGION_VALS))
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'THERMOSTAT','Variable':'REGION',
                                'Success':False,'Previous':self.__REGION,'New':val,
@@ -103,7 +114,7 @@ class THERMOSTAT:
                                'ErrorMessage':None,'Location':self.__location})
       self.__TYPE = val
     else:
-      errorMessage = ("Invalid option for MD THERMOSTAT TYPE: {}. Valid options are: {}".format(
+      errorMessage = ("Invalid option for MD THERMOSTAT TYPE: {}. Valid options are: {}".format(val,
                        TYPE_VALS))
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'THERMOSTAT','Variable':'TYPE',
                                'Success':False,'Previous':self.__TYPE,'New':val,
