@@ -92,6 +92,10 @@ class AVERAGES:
   def RESTART_AVERAGES(self):
     return self.__RESTART_AVERAGES
 
+  @property
+  def AVERAGE_COLVAR(self):
+      return self.__AVERAGE_COLVAR
+
   @SECTION_PARAMETERS.setter
   def SECTION_PARAMETERS(self,val):
     val = str(val).upper()
