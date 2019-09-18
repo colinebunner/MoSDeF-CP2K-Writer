@@ -3,6 +3,7 @@ import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import PRINT
 from cssi_cp2k.classes import MD
 from cssi_cp2k.classes import DFT
+from cssi_cp2k.classes import SUBSYS
 
 METHOD_VALS=['EIP','EMBED','FIST','MIXED','QMMM','QS','QUICKSTEP','SIRIUS']
 STRESS_TENSOR_VALS=['ANALYTICAL','DIAGONAL_ANALYTICAL','DIAGONAL_NUMERICAL','NUMERICAL','NONE']
@@ -54,6 +55,8 @@ class FORCE_EVAL:
                          location=self.__location)
     self.__DFT        = DFT.DFT(errorLog=self.__errorLog,changeLog=self.__changeLog,
                          location=self.__location)
+    self.__SUBSYS        = SUBSYS.SUBSYS(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                         location=self.__location)
     
   @property
   def METHOD(self):
@@ -86,6 +89,9 @@ class FORCE_EVAL:
   @property
   def DFT(self):
     return self.__DFT
+  @property
+  def SUBSYS(self):
+    return self.__SUBSYS
 
 
 

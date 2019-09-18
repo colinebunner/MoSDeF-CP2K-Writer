@@ -1,7 +1,8 @@
 import datetime
 import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import EACH
-#from cssi_cp2k.classes import OT
+from cssi_cp2k.classes import OT
+from cssi_cp2k.classes import SCF_PRINT
 BOOL_VALS   = [".TRUE.",".FALSE"]
 CHOLESKY_VALS=['INVERSE','INVERSE_DBCSR','OFF','REDUCE','RESTORE']
 ROKS_SCHEME_VALS=['GENERAL','HIGH-SPIN']
@@ -197,11 +198,12 @@ class SCF:
     
 
     self.__location  = "{}/SCF".format(location)
+    self.__OT=OT.OT(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
+    self.__PRINT=SCF_PRINT.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
     #ENERGY subsections
     #self.__EACH      = EACH.EACH(errorLog=self.__errorLog,changeLog=self.__changeLog,
                       #   location=self.__location)
-#    self.__OT=OT.OT(errorLog=self.__errorLog,changeLog=self.__changeLog,
-                         #location=self.__location)
+
   @property
   def errorLog(self):
     return self.__errorLog
@@ -293,9 +295,12 @@ class SCF:
   def SCF_GUESS(self):
     return self.__SCF_GUESS
 
-  #@property
- # def OT(self):
- #   return self.__OT
+  @property
+  def OT(self):
+    return self.__OT
+  @property
+  def PRINT(self):
+    return self.__PRINT
 #
 
 

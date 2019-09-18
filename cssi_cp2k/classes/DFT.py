@@ -4,11 +4,12 @@ from cssi_cp2k.classes import QS
 from cssi_cp2k.classes import POISSON
 from cssi_cp2k.classes import DFT_PRINT
 from cssi_cp2k.classes import SCF
+from cssi_cp2k.classes import XC
 
 
 
 
-BOOL_VALS   = [".TRUE.",".FALSE"]
+BOOL_VALS   = [".TRUE.",".FALSE."]
 EXCITATIONS_VALS=['NONE','TDDFT','TDLR'];
 PLUS_U_METHOD_VALS=['LOWDIN','MULLIKEN','MULLIKEN_CHARGES'];
 SURF_DIP_DIR_VALS=['X','Y','Z'];
@@ -183,6 +184,8 @@ class DFT:
                            location=self.__location)
     self.__SCF       = SCF.SCF(errorLog=self.__errorLog,changeLog=self.__changeLog,
                            location=self.__location)
+    self.__XC       = XC.XC(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                           location=self.__location)
     
     #ENERGY subsections
     #self.__EACH      = EACH.EACH(errorLog=self.__errorLog,changeLog=self.__changeLog,
@@ -273,6 +276,9 @@ class DFT:
   @property
   def SCF(self):
       return self.__SCF
+  @property
+  def XC(self):
+      return self.__XC
 
   @AUTO_BASIS.setter
   def AUTO_BASIS(self, val):

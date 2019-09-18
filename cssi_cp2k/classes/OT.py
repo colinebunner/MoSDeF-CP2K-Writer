@@ -7,6 +7,7 @@ CHOLESKY_VALS=['INVERSE','INVERSE_DBCSR','OFF','REDUCE','RESTORE']
 LINESEARCH_VALS=['2PNT','3PNT','GOLD','NONE']
 MINIMIZER_VALS=['BROYDEN','CG','DIIS','SD']
 PRECONDITIONER_VALS=['FULL_ALL','FULL_KINETIC','FULL_SINGLE','FULL_SINGLE_INVERSE','FULL_S_INVERSE','NONE']
+ORTHO_IRAC_VALS=['CHOL','POLY','LWDN'];
 
 PRECOND_SOLVER_VALS=['DEFAULT','DIRECT','INVERSE_CHOLESKY','INVERSE_UPDATE']
 
@@ -172,7 +173,14 @@ def _validate_EPS_TAYLOR(val,errorLog=[]):
 
 def _validate_GOLD_TARGET(val,errorLog=[]):
     return val  
-
+def _validate_IRAC_DEGREE(val,errorLog=[]):
+  if utilities.is_integer(val) or (val is None):
+    return val
+  else:
+    errorMessage = "IRAC_DEGREE  must be AN integer."
+    errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'SCF OT',
+                            'Variable':'IRAC_DEGREE','ErrorMessage':errorMessage})
+    raise TypeError
         
 def _validate_LINESEARCH(val,errorLog=[]):
   if val is not None:
@@ -586,7 +594,7 @@ class OT:
                                'ErrorMessage': None, 'Location': self.__location})
       self.__SECTION_PARAMETERS= val
     else:
-      errorMessage = ("Invalid option for CHOLESKY: {}. Valid options are: {}".format(val,CHOLESKY_VALS))
+      errorMessage = ("Invalid option for Section parameter OT: {}. Valid options are: {}".format(val,CHOLESKY_VALS))
       self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'SECTION_PARAMETERS',
                                'Success': False, 'Previous': self.__SECTION_PARAMETERS, 'New': val,
                                'ErrorMessage': errorMessage, 'Location': self.__location})
@@ -796,263 +804,220 @@ class OT:
                                'Success': True, 'Previous': self.__GOLD_TARGET, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
     
-    
-    
-
-  @ADDED_MOS.setter
-  def ADDED_MOS(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'ADDED_MOS',
-                               'Success': True, 'Previous': self.__ADDED_MOS, 'New': val,
+  @IRAC_DEGREE.setter
+  def IRAC_DEGREE(self,val):
+    self.__IRAC_DEGREE=val
+    self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'IRAC_DEGREE',
+                               'Success': True, 'Previous': self.__IRAC_DEGREE, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__ADDED_MOS = val
-    else:
-      errorMessage = "ADDED_MOS must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'ADDED_MOS',
-                               'Success': False, 'Previous': self.__ADDED_MOS, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'ADDED_MOS', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})
-
     
     
 
-  @CHOLESKY.setter
-  def CHOLESKY(self, val):
+  @LINESEARCH.setter
+  def LINESEARCH(self, val):
     val = str(val).upper()
-    if val in CHOLESKY_VALS:
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'CHOLESKY',
-                               'Success': True, 'Previous': self.__CHOLESKY, 'New': val,
+    if val in LINESEARCH_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'LINESEARCH',
+                               'Success': True, 'Previous': self.__LINESEARCH, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__CHOLESKY= val
+      self.__LINESEARCH= val
     else:
-      errorMessage = ("Invalid option for CHOLESKY: {}. Valid options are: {}".format(val,CHOLESKY_VALS))
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'CHOLESKY',
-                               'Success': False, 'Previous': self.__CHOLESKY, 'New': val,
+      errorMessage = ("Invalid option for LINESEARCH: {}. Valid options are: {}".format(val,LINESEARCH_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'LINESEARCH',
+                               'Success': False, 'Previous': self.__LINESEARCH, 'New': val,
                                'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'CHOLESKY', 'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'LINESEARCH', 'ErrorMessage': errorMessage, 'Location': self.__location})  
     
+  @MAX_IRAC.setter
+  def MAX_IRAC(self,val):
+    self.__MAX_IRAC=val
+    self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'MAX_IRAC',
+                               'Success': True, 'Previous': self.__MAX_IRAC, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})   
     
-    
-    
-    
-  @EPS_DIIS.setter
-  def EPS_DIIS(self,val):
-    self.__EPS_DIIS=val
- 
-
-    
-  @EPS_EIGVAL.setter
-  def EPS_EIGVAL(self,val):
-    self.__EPS_EIGVAL=val
- 
-    
-  @EPS_LUMO.setter
-  def EPS_LUMO(self,val):
-    self.__EPS_LUMO=val
- 
-    
-  @EPS_SCF.setter
-  def EPS_SCF(self,val):
-    self.__EPS_SCF=val
- 
-    
-  @EPS_SCF_HISTORY.setter
-  def EPS_SCF_HISTORY(self,val):
-    self.__EPS_SCF_HISTORY=val
- 
-    
-  @LEVEL_SHIFT.setter
-  def LEVEL_SHIFT(self,val):
-    self.__LEVEL_SHIFT=val
- 
-
-
-
-
-
-  @MAX_DIIS.setter
-  def MAX_DIIS(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_DIIS',
-                               'Success': True, 'Previous': self.__MAX_DIIS, 'New': val,
+  @MAX_TAYLOR.setter
+  def MAX_TAYLOR(self,val):
+    self.__MAX_TAYLOR=val
+    self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'MAX_TAYLOR',
+                               'Success': True, 'Previous': self.__MAX_TAYLOR, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__MAX_DIIS = val
-    else:
-      errorMessage = "MAX_DIIS must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_DIIS',
-                               'Success': False, 'Previous': self.__MAX_DIIS, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'MAX_DIIS', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})
-
     
-  @MAX_DIIS.setter
-  def MAX_DIIS(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_DIIS',
-                               'Success': True, 'Previous': self.__MAX_DIIS, 'New': val,
+    
+  @MINIMIZER.setter
+  def MINIMIZER(self, val):
+    val = str(val).upper()
+    if val in MINIMIZER_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'MINIMIZER',
+                               'Success': True, 'Previous': self.__MINIMIZER, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__MAX_DIIS = val
+      self.__MINIMIZER= val
     else:
-      errorMessage = "MAX_DIIS must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_DIIS',
-                               'Success': False, 'Previous': self.__MAX_DIIS, 'New': val,
+      errorMessage = ("Invalid option for MINIMIZER: {}. Valid options are: {}".format(val,MINIMIZER_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'MINIMIZER',
+                               'Success': False, 'Previous': self.__MINIMIZER, 'New': val,
                                'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'MAX_DIIS', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})
-
-    
-  @MAX_ITER_LUMO.setter
-  def MAX_ITER_LUMO(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_ITER_LUMO',
-                               'Success': True, 'Previous': self.__MAX_ITER_LUMO, 'New': val,
-                               'ErrorMessage': None, 'Location': self.__location})
-      self.__MAX_ITER_LUMO = val
-    else:
-      errorMessage = "MAX_ITER_LUMO must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_ITER_LUMO',
-                               'Success': False, 'Previous': self.__MAX_ITER_LUMO, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'MAX_ITER_LUMO', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})
-
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'MINIMIZER', 'ErrorMessage': errorMessage, 'Location': self.__location}) 
     
     
-  @MAX_SCF.setter
-  def MAX_SCF(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_SCF',
-                               'Success': True, 'Previous': self.__MAX_SCF, 'New': val,
-                               'ErrorMessage': None, 'Location': self.__location})
-      self.__MAX_SCF = val
-    else:
-      errorMessage = "MAX_SCF must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_SCF',
-                               'Success': False, 'Previous': self.__MAX_SCF, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'MAX_SCF', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})
-
-    
-    
-  @MAX_SCF_HISTORY.setter
-  def MAX_SCF_HISTORY(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_SCF_HISTORY',
-                               'Success': True, 'Previous': self.__MAX_SCF_HISTORY, 'New': val,
-                               'ErrorMessage': None, 'Location': self.__location})
-      self.__MAX_SCF_HISTORY = val
-    else:
-      errorMessage = "MAX_SCF_HISTORY must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'MAX_SCF_HISTORY',
-                               'Success': False, 'Previous': self.__MAX_SCF_HISTORY, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'MAX_SCF_HISTORY', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})
-
-    
-    
-  @NCOL_BLOCK.setter
-  def NCOL_BLOCK(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'NCOL_BLOCK',
-                               'Success': True, 'Previous': self.__NCOL_BLOCK, 'New': val,
-                               'ErrorMessage': None, 'Location': self.__location})
-      self.__NCOL_BLOCK = val
-    else:
-      errorMessage = "NCOL_BLOCK must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'NCOL_BLOCK',
-                               'Success': False, 'Previous': self.__NCOL_BLOCK, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'NCOL_BLOCK', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})
-    
-    
-    
-  @NOTCONV_STOPALL.setter
-  def NOTCONV_STOPALL(self, val):
+  @NONDIAG_ENERGY.setter
+  def NONDIAG_ENERGY(self, val):
     val = str(val).upper()
     if val in BOOL_VALS:
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'NOTCONV_STOPALL',
-                               'Success': True, 'Previous': self.__NOTCONV_STOPALL, 'New': val,
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'NONDIAG_ENERGY',
+                               'Success': True, 'Previous': self.__NONDIAG_ENERGY, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__NOTCONV_STOPALL= val
+      self.__NONDIAG_ENERGY= val
     else:
-      errorMessage = ("Invalid option for NOTCONV_STOPALL: {}. Valid options are: {}".format(val,BOOL_VALS))
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'NOTCONV_STOPALL',
-                               'Success': False, 'Previous': self.__NOTCONV_STOPALL, 'New': val,
+      errorMessage = ("Invalid option for NONDIAG_ENERGY: {}. Valid options are: {}".format(val,BOOL_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'NONDIAG_ENERGY',
+                               'Success': False, 'Previous': self.__NONDIAG_ENERGY, 'New': val,
                                'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'NOTCONV_STOPALL', 'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'NONDIAG_ENERGY', 'ErrorMessage': errorMessage, 'Location': self.__location})
     
-
-  @NROW_BLOCK.setter
-  def NROW_BLOCK(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'NROW_BLOCK',
-                               'Success': True, 'Previous': self.__NROW_BLOCK, 'New': val,
+    
+  @NONDIAG_ENERGY_STRENGTH.setter
+  def NONDIAG_ENERGY_STRENGTH(self,val):
+    self.__NONDIAG_ENERGY_STRENGTH=val
+    self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'NONDIAG_ENERGY_STRENGTH',
+                               'Success': True, 'Previous': self.__NONDIAG_ENERGY_STRENGTH, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__NROW_BLOCK = val
-    else:
-      errorMessage = "NROW_BLOCK must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'NROW_BLOCK',
-                               'Success': False, 'Previous': self.__NROW_BLOCK, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'NROW_BLOCK', 'ErrorMessage': errorMessage,
-                              'Location': self.__location})   
     
-    
-  @ROKS_F.setter
-  def ROKS_F(self,val):
-    self.__ROKS_F=val
- 
-    
-  @ROKS_PARAMETERS.setter
-  def ROKS_PARAMETERS(self,val):
-    self.__ROKS_PARAMETERS=val
-    
-    
-  @ROKS_SCHEME.setter
-  def ROKS_SCHEME(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'ROKS_SCHEME',
-                               'Success': True, 'Previous': self.__ROKS_SCHEME, 'New': val,
+  @N_HISTORY_VEC.setter
+  def N_HISTORY_VEC(self,val):
+    self.__N_HISTORY_VEC=val
+    self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'N_HISTORY_VEC',
+                               'Success': True, 'Previous': self.__N_HISTORY_VEC, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__ROKS_SCHEME = val
-    else:
-      errorMessage = "ROKS_SCHEME must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'ROKS_SCHEME',
-                               'Success': False, 'Previous': self.__ROKS_SCHEME, 'New': val,
-                               'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'ROKS_SCHEME', 'ErrorMessage': errorMessage,
-                              'Location': self.__location}) 
     
-    
-  @SCF_GUESS.setter
-  def SCF_GUESS(self, val):
-    if utilities.is_integer(val):
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'SCF_GUESS',
-                               'Success': True, 'Previous': self.__SCF_GUESS, 'New': val,
+  @OCCUPATION_PRECONDITIONER.setter
+  def OCCUPATION_PRECONDITIONER(self, val):
+    val = str(val).upper()
+    if val in BOOL_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'OCCUPATION_PRECONDITIONER',
+                               'Success': True, 'Previous': self.__OCCUPATION_PRECONDITIONER, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__SCF_GUESS = val
+      self.__OCCUPATION_PRECONDITIONER= val
     else:
-      errorMessage = "SCF_GUESS must be a positive integer."
-      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'SCF_GUESS',
-                               'Success': False, 'Previous': self.__SCF_GUESS, 'New': val,
+      errorMessage = ("Invalid option for OCCUPATION_PRECONDITIONER: {}. Valid options are: {}".format(val,BOOL_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'OCCUPATION_PRECONDITIONER',
+                               'Success': False, 'Previous': self.__OCCUPATION_PRECONDITIONER, 'New': val,
                                'ErrorMessage': errorMessage, 'Location': self.__location})
-      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'SCF_GUESS', 'ErrorMessage': errorMessage,
-                              'Location': self.__location}) 
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'OCCUPATION_PRECONDITIONER', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+    
+    
+  @ON_THE_FLY_LOC.setter
+  def ON_THE_FLY_LOC(self, val):
+    val = str(val).upper()
+    if val in BOOL_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'ON_THE_FLY_LOC',
+                               'Success': True, 'Previous': self.__ON_THE_FLY_LOC, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})
+      self.__ON_THE_FLY_LOC= val
+    else:
+      errorMessage = ("Invalid option for ON_THE_FLY_LOC: {}. Valid options are: {}".format(val,BOOL_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'ON_THE_FLY_LOC',
+                               'Success': False, 'Previous': self.__ON_THE_FLY_LOC, 'New': val,
+                               'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'ON_THE_FLY_LOC', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+  @ORTHO_IRAC.setter
+  def ORTHO_IRAC(self, val):
+    val = str(val).upper()
+    if val in ORTHO_IRAC_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'ORTHO_IRAC',
+                               'Success': True, 'Previous': self.__ORTHO_IRAC, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})
+      self.__ORTHO_IRAC= val
+    else:
+      errorMessage = ("Invalid option for ORTHO_IRAC: {}. Valid options are: {}".format(val,ORTHO_IRAC_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'ORTHO_IRAC',
+                               'Success': False, 'Previous': self.__ORTHO_IRAC, 'New': val,
+                               'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'ORTHO_IRAC', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+  @PRECONDITIONER.setter
+  def PRECONDITIONER(self, val):
+    val = str(val).upper()
+    if val in PRECONDITIONER_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'PRECONDITIONER',
+                               'Success': True, 'Previous': self.__PRECONDITIONER, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})
+      self.__PRECONDITIONER= val
+    else:
+      errorMessage = ("Invalid option for PRECONDITIONER: {}. Valid options are: {}".format(val,PRECONDITIONER_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'PRECONDITIONER',
+                               'Success': False, 'Previous': self.__PRECONDITIONER, 'New': val,
+                               'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'PRECONDITIONER', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+  @PRECOND_SOLVER.setter
+  def PRECOND_SOLVER(self, val):
+    val = str(val).upper()
+    if val in PRECOND_SOLVER_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'PRECOND_SOLVER',
+                               'Success': True, 'Previous': self.__PRECOND_SOLVER, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})
+      self.__PRECOND_SOLVER= val
+    else:
+      errorMessage = ("Invalid option for PRECOND_SOLVER: {}. Valid options are: {}".format(val,PRECOND_SOLVER_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'PRECOND_SOLVER',
+                               'Success': False, 'Previous': self.__PRECOND_SOLVER, 'New': val,
+                               'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'PRECOND_SOLVER', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+    
+  @SAFE_DIIS.setter
+  def SAFE_DIIS(self, val):
+    val = str(val).upper()
+    if val in BOOL_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'SAFE_DIIS',
+                               'Success': True, 'Previous': self.__SAFE_DIIS, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})
+      self.SAFE_DIIS= val
+    else:
+      errorMessage = ("Invalid option for SAFE_DIIS: {}. Valid options are: {}".format(val,BOOL_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'SAFE_DIIS',
+                               'Success': False, 'Previous': self.__SAFE_DIIS, 'New': val,
+                               'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'SAFE_DIIS', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+  @ROTATION.setter
+  def ROTATION(self, val):
+    val = str(val).upper()
+    if val in BOOL_VALS:
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'ROTATION',
+                               'Success': True, 'Previous': self.__ROTATION, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})
+      self.__ROTATIONC= val
+    else:
+      errorMessage = ("Invalid option for ROTATION: {}. Valid options are: {}".format(val,BOOL_VALS))
+      self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'ROTATION',
+                               'Success': False, 'Previous': self.__ROTATION, 'New': val,
+                               'ErrorMessage': errorMessage, 'Location': self.__location})
+      self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF OT',
+                              'Variable': 'ROTATION', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+    
+    
+  @STEPSIZE.setter
+  def STEPSIZE(self,val):
+    self.__STEPSIZE=val
+    self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'STEPSIZE',
+                               'Success': True, 'Previous': self.__STEPSIZE, 'New': val,
+                               'ErrorMessage': None, 'Location': self.__location})
+    
+    
+    
+    
+  
  

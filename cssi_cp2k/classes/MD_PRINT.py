@@ -27,7 +27,7 @@ class PRINT:
     self.__errorLog  = errorLog
     self.__changeLog = changeLog
     self.__FORCE_LAST      = _validate_FORCE_LAST(FORCE_LAST,errorLog=self.__errorLog)
-    self.__location  = "{}/THERMOSTAT".format(location)
+    self.__location  = "{}/MD_PRINT".format(location)
     #THERMOSTAT subsections
     self.__ENERGY      = ENERGY.ENERGY(errorLog=self.__errorLog,changeLog=self.__changeLog,
                          location=self.__location)
