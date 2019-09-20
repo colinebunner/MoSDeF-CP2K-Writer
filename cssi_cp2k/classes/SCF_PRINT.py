@@ -1,6 +1,6 @@
 import datetime
 import cssi_cp2k.utilities as utilities
-
+from cssi_cp2k.classes import SCF_RESTART
 
 BOOL_VALS   = [".TRUE.",".FALSE"]
 
@@ -27,6 +27,8 @@ class PRINT:
     self.__changeLog = changeLog
     self.__DM_RESTART_WRITE      = _validate_DM_RESTART_WRITE(DM_RESTART_WRITE,errorLog=self.__errorLog)
     self.__location  = "{}/SCF_PRINT".format(location)
+    self.__RESTART=SCF_RESTART.RESTART(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
+    
     #THERMOSTAT subsections
 
 
@@ -45,6 +47,10 @@ class PRINT:
   @property
   def location(self):
     return self.__location
+  @property
+  def RESTART(self):
+    return self.__RESTART
+
 
 
   @DM_RESTART_WRITE.setter

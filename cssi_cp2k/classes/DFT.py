@@ -5,6 +5,7 @@ from cssi_cp2k.classes import POISSON
 from cssi_cp2k.classes import DFT_PRINT
 from cssi_cp2k.classes import SCF
 from cssi_cp2k.classes import XC
+from cssi_cp2k.classes import MGRID
 
 
 
@@ -186,6 +187,8 @@ class DFT:
                            location=self.__location)
     self.__XC       = XC.XC(errorLog=self.__errorLog,changeLog=self.__changeLog,
                            location=self.__location)
+    self.__MGRID      = MGRID.MGRID(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                           location=self.__location)
     
     #ENERGY subsections
     #self.__EACH      = EACH.EACH(errorLog=self.__errorLog,changeLog=self.__changeLog,
@@ -279,6 +282,10 @@ class DFT:
   @property
   def XC(self):
       return self.__XC
+    
+  @property
+  def MGRID(self):
+      return self.__MGRID
 
   @AUTO_BASIS.setter
   def AUTO_BASIS(self, val):

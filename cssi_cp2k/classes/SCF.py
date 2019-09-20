@@ -3,6 +3,7 @@ import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import EACH
 from cssi_cp2k.classes import OT
 from cssi_cp2k.classes import SCF_PRINT
+from cssi_cp2k.classes import OUTER_SCF
 BOOL_VALS   = [".TRUE.",".FALSE"]
 CHOLESKY_VALS=['INVERSE','INVERSE_DBCSR','OFF','REDUCE','RESTORE']
 ROKS_SCHEME_VALS=['GENERAL','HIGH-SPIN']
@@ -200,6 +201,7 @@ class SCF:
     self.__location  = "{}/SCF".format(location)
     self.__OT=OT.OT(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
     self.__PRINT=SCF_PRINT.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
+    self.__OUTER_SCF=OUTER_SCF.OUTER_SCF(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
     #ENERGY subsections
     #self.__EACH      = EACH.EACH(errorLog=self.__errorLog,changeLog=self.__changeLog,
                       #   location=self.__location)
@@ -301,6 +303,10 @@ class SCF:
   @property
   def PRINT(self):
     return self.__PRINT
+  @property
+  def OUTER_SCF(self):
+    return self.__OUTER_SCF
+
 #
 
 
@@ -547,20 +553,24 @@ class SCF:
                               'Variable': 'ROKS_SCHEME', 'ErrorMessage': errorMessage,
                               'Location': self.__location}) 
     
+
+    
     
   @SCF_GUESS.setter
   def SCF_GUESS(self, val):
-    if utilities.is_integer(val):
+    val = str(val).upper()
+    if val in SCF_GUESS_VALS:
       self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'SCF_GUESS',
                                'Success': True, 'Previous': self.__SCF_GUESS, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-      self.__SCF_GUESS = val
+      self.__SCF_GUESS= val
     else:
-      errorMessage = "SCF_GUESS must be a positive integer."
+      errorMessage = ("Invalid option for SCF_GUESS: {}. Valid options are: {}".format(val,SCF_GUESS_VALS))
       self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF', 'Variable': 'SCF_GUESS',
                                'Success': False, 'Previous': self.__SCF_GUESS, 'New': val,
                                'ErrorMessage': errorMessage, 'Location': self.__location})
       self.__errorLog.append({'Date': datetime.datetime.now(), 'Type': 'Setter', 'Module': 'SCF',
-                              'Variable': 'SCF_GUESS', 'ErrorMessage': errorMessage,
-                              'Location': self.__location}) 
+                              'Variable': 'SCF_GUESS', 'ErrorMessage': errorMessage, 'Location': self.__location})
+    
+    
  

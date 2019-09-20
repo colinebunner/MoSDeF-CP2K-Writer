@@ -11,7 +11,7 @@ def _validate_SECTION_PARAMETERS(val,errorLog=[]):
   if val in SECTION_PARAMETERS_VALS or (val is None):
     return val
   else:
-    errorMessage = ("Invalid option for SECTION_PARAMETERS: {}. Valid options are: {}".format(
+    errorMessage = ("Invalid option for SECTION_PARAMETERS RESTART SCF PRINT: {}. Valid options are: {}".format(
                      val,SECTION_PARAMETERS_VALS))
     errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'PRINT / RESTART',
                             'Variable':'SECTION_PARAMETERS','ErrorMessage':errorMessage})

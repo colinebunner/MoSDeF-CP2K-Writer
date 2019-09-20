@@ -594,7 +594,7 @@ class OT:
                                'ErrorMessage': None, 'Location': self.__location})
       self.__SECTION_PARAMETERS= val
     else:
-      errorMessage = ("Invalid option for Section parameter OT: {}. Valid options are: {}".format(val,CHOLESKY_VALS))
+      errorMessage = ("Invalid option for Section parameter OT: {}. Valid options are: {}".format(val,SECTION_PARAMETERS_VALS))
       self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SCF OT', 'Variable': 'SECTION_PARAMETERS',
                                'Success': False, 'Previous': self.__SECTION_PARAMETERS, 'New': val,
                                'ErrorMessage': errorMessage, 'Location': self.__location})

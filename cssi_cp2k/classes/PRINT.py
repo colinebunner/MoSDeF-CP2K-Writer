@@ -3,6 +3,8 @@ from cssi_cp2k.classes import RESTART_HISTORY as rest
 from cssi_cp2k.classes import RESTART as restart
 from cssi_cp2k.classes import TRAJECTORY as traj
 from cssi_cp2k.classes import VELOCITIES as vel
+from cssi_cp2k.classes import STRESS 
+
 
 
 class PRINT:
@@ -22,6 +24,8 @@ class PRINT:
     self.__TRAJECTORY = traj.TRAJECTORY(errorLog=self.__errorLog, changeLog=self.__changeLog,
                                      location=self.__location)
     self.__VELOCITIES = vel.VELOCITIES(errorLog=self.__errorLog, changeLog=self.__changeLog,
+                                        location=self.__location)
+    self.__STRESS = STRESS.STRESS(errorLog=self.__errorLog, changeLog=self.__changeLog,
                                         location=self.__location)
 
   @property
@@ -55,3 +59,7 @@ class PRINT:
   @property
   def VELOCITIES(self):
     return self.__VELOCITIES
+
+  @property
+  def STRESS(self):
+    return self.__STRESS

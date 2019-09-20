@@ -243,7 +243,7 @@ class KIND:
   def __init__(self,SECTION_PARAMETERS=None,AUX_BASIS_SET=None,AUX_FIT_BASIS_SET=None,BASIS_SET=None,CORE_CORRECTION=None,DFTB3_PARAM=None, ELEC_CONF=None, ELEMENT=None, FLOATING_BASIS_CENTER=None, GHOST=None, GPW_TYPE=None, HARD_EXP_RADIUS=None,KG_POTENTIAL=None, KG_POTENTIAL_FILE_NAME=None, LEBEDEV_GRID=None,LMAX_DFTB=None,LRI_BASIS_SET=None,MAGNETIZATION=None,MAO=None,MASS=None,MAX_RAD_LOCAL=None,MM_RADIUS=None,NO_OPTIMIZE=None,PAO_BASIS_SIZE=None,POTENTIAL=None,POTENTIAL_FILE_NAME=None,POTENTIAL_TYPE=None,RADIAL_GRID=None,RHO0_EXP_RADIUS=None,RI_AUX_BASIS_SET=None,SE_P_ORBITALS_ON_H=None,errorLog=[],changeLog=[],location=""):
     self.__errorLog = errorLog
     self.__changeLog = changeLog
-    self.__location  = "{}/DFT".format(location)
+    self.__location  = "{}/KIND".format(location)
     self.__SECTION_PARAMETERS=_validate_SECTION_PARAMETERS(SECTION_PARAMETERS, errorLog=self.__errorLog)
     self.__AUX_BASIS_SET=_validate_AUX_BASIS_SET(AUX_BASIS_SET, errorLog=self.__errorLog)
     self.__AUX_FIT_BASIS_SET=_validate_AUX_FIT_BASIS_SET(AUX_FIT_BASIS_SET, errorLog=self.__errorLog)
@@ -269,6 +269,7 @@ class KIND:
     self.__NO_OPTIMIZE=_validate_NO_OPTIMIZE(NO_OPTIMIZE,errorLog=self.__errorLog)
     self.__PAO_BASIS_SIZE=_validate_PAO_BASIS_SIZE(PAO_BASIS_SIZE,errorLog=self.__errorLog)
     self.__POTENTIAL=_validate_POTENTIAL(POTENTIAL,errorLog=self.__errorLog)
+    
     self.__POTENTIAL_FILE_NAME=_validate_POTENTIAL_FILE_NAME(POTENTIAL_FILE_NAME,errorLog=self.__errorLog)
     self.__POTENTIAL_TYPE=_validate_POTENTIAL_TYPE(POTENTIAL_TYPE,errorLog=self.__errorLog)
     self.__RADIAL_GRID=_validate_RADIAL_GRID(RADIAL_GRID,errorLog=self.__errorLog)
@@ -748,7 +749,6 @@ class KIND:
                               'Variable': 'PAO_BASIS_SIZE', 'ErrorMessage': errorMessage,
                               'Location': self.__location})        
    
-
   @POTENTIAL.setter
   def POTENTIAL(self, val):
     
@@ -756,7 +756,8 @@ class KIND:
     self.__changeLog.append({'Date': datetime.datetime.now(), 'Module': 'SUBSYS.KIND', 'Variable': 'POTENTIAL',
                                'Success': True, 'Previous': self.__POTENTIAL, 'New': val,
                                'ErrorMessage': None, 'Location': self.__location})
-    self.POTENTIAL =val
+    self.__POTENTIAL =val
+
     
     
     
