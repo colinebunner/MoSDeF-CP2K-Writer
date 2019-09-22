@@ -15,7 +15,7 @@ mySim.FORCE_EVAL.METHOD='QUICKSTEP'
 mySim.FORCE_EVAL.STRESS_TENSOR='ANALYTICAL';
 
 mySim.FORCE_EVAL.DFT.BASIS_SET_FILE_NAME='/home/siepmann/singh891/cp2k-6.1.0/data/BASIS_MOLOPT'
-mySim.FORCE_EVAL.DFT.POTENTIAL_FILE_NAME='/home/siepmann/singh891/cp2k-6.1.0/data/GTH-POTENTIALS'
+mySim.FORCE_EVAL.DFT.POTENTIAL_FILE_NAME='/home/siepmann/singh891/cp2k-6.1.0/data/GTH_POTENTIALS'
 mySim.FORCE_EVAL.DFT.CHARGE=0
 mySim.FORCE_EVAL.DFT.MULTIPLICITY=1
 mySim.FORCE_EVAL.DFT.MGRID.CUTOFF=600
@@ -88,4 +88,4 @@ mySim.MOTION.PRINT.RESTART.EACH.MD=1
 
 mySim.write_changeLog(fn="iodine-changeLog.out")
 mySim.write_errorLog()
-mySim.write_inputFile()
+mySim.write_inputFile(fn='md.inp')

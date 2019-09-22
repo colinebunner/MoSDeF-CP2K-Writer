@@ -26,6 +26,14 @@ def write_input(SimObject):
 
       #THERMOSTAT SUBSECTION
   inputFile += "    &THERMOSTAT       \n"
+  if mot.MD.THERMOSTAT.TYPE is not None:
+        
+    inputFile += "      TYPE            {} \n".format(mot.MD.THERMOSTAT.TYPE)
+    
+  if mot.MD.THERMOSTAT.REGION is not None:
+        
+    inputFile += "      REGION          {} \n".format(mot.MD.THERMOSTAT.REGION )
+    
   inputFile += "      &{}             \n".format(mot.MD.THERMOSTAT.TYPE )
 
   if mot.MD.THERMOSTAT.TYPE=='NOSE':
@@ -39,7 +47,8 @@ def write_input(SimObject):
 
     inputFile += "       A_SCALE    {}\n".format(mot.MD.THERMOSTAT.GLE.A_SCALE )
   inputFile += "      &END {}             \n".format(mot.MD.THERMOSTAT.TYPE )
-
+  inputFile += "    &END THERMOSTAT       \n"
+  
       #AVERAGES subsection
   inputFile += "    &AVERAGES       \n"
   if mot.MD.AVERAGES.SECTION_PARAMETERS is not None:
