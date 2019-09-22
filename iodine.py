@@ -7,7 +7,7 @@ mySim = sim.SIM()
 
 mySim.GLOBAL.RUN_TYPE = "MD"
 mySim.GLOBAL.PROJECT  = "iodine-liquid"
-mySim.GLOBAL.IO_LEVEL = "LOW"
+mySim.GLOBAL.PRINT_LEVEL = "LOW"
 
 
 #FORCE EVAL SECTION

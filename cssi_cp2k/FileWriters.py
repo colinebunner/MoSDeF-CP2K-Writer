@@ -9,7 +9,11 @@ def write_input(SimObject):
   inputFile += "&GLOBAL\n"
   inputFile += "  RUN_TYPE     {}\n".format(glob.RUN_TYPE)
   inputFile += "  PROJECT      {}\n".format(glob.PROJECT)
-  inputFile += "  PRINT_LEVEL  {}\n".format(glob.PRINT_LEVEL)
+  if glob.PRINT_LEVEL is not None:
+   inputFile += "  PRINT_LEVEL  {}\n".format(glob.PRINT_LEVEL)
+
+
+  
   inputFile += "&END GLOBAL\n"
 
   # MOTION section

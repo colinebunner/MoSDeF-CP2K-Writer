@@ -1,7 +1,7 @@
 &GLOBAL
   RUN_TYPE     MD
   PROJECT      iodine-liquid
-  PRINT_LEVEL  None
+  PRINT_LEVEL  LOW
 &END GLOBAL
 &MOTION
   &MD
