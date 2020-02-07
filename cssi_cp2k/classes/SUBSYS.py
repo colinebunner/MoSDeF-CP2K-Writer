@@ -1,8 +1,10 @@
 import datetime
 import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import CELL
-from cssi_cp2k.classes import KIND
+from cssi_cp2k.classes import KINDs
 from cssi_cp2k.classes import COORD
+from cssi_cp2k.utilities1 import oneDimArray as oda
+from cssi_cp2k.utilities1 import objectArray as oba
 
 
 
@@ -29,14 +31,15 @@ class SUBSYS:
     self.__errorLog = errorLog
     self.__changeLog = changeLog
     self.__location  = "{}/SUBSYS".format(location)
+    self.__KIND=None
     self.__SEED=_validate_SEED(SEED, errorLog=self.__errorLog)
 
     self.__CELL = CELL.CELL(errorLog=self.__errorLog, changeLog=self.__changeLog,
                          location=self.__location)
     self.__COORD = COORD.COORD(errorLog=self.__errorLog, changeLog=self.__changeLog,
                          location=self.__location)
-    self.__KIND       = KIND.KIND(errorLog=self.__errorLog,changeLog=self.__changeLog,
-                           location=self.__location)
+    #self.__KIND       = KIND.KIND(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                           #location=self.__location)
 
     
     #ENERGY subsections
@@ -67,13 +70,19 @@ class SUBSYS:
   @property
   def COORD(self):
       return self.__COORD
+
+
   @property
   def KIND(self):
-      return self.__KIND
-
-
+    return self.__KIND
     
-    
+  def init_atoms(self,natomty):
+    KIND = []
+    for i in range(natomty):
+      KIND.append(KINDs.KINDs(number=i+1,errorLog=self.__errorLog,changeLog=self.__changeLog,
+                                location=self.__location))
+    self.__KIND = oba.objectArray.listToOBA(KIND,errorLog=self.__errorLog,changeLog=self.__changeLog,
+                                                location=self.__location)
     
     
   @SEED.setter

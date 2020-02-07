@@ -1,7 +1,8 @@
 import datetime
 import cssi_cp2k.utilities as utilities
 
-
+from cssi_cp2k.utilities1 import oneDimArray as oda
+from cssi_cp2k.utilities1 import objectArray as oba
 
 
 
@@ -238,9 +239,9 @@ def _validate_SE_P_ORBITALS_ON_H(val,errorLog=[]):
     
 
 
-class KIND:
+class KINDs:
 
-  def __init__(self,SECTION_PARAMETERS=None,AUX_BASIS_SET=None,AUX_FIT_BASIS_SET=None,BASIS_SET=None,CORE_CORRECTION=None,DFTB3_PARAM=None, ELEC_CONF=None, ELEMENT=None, FLOATING_BASIS_CENTER=None, GHOST=None, GPW_TYPE=None, HARD_EXP_RADIUS=None,KG_POTENTIAL=None, KG_POTENTIAL_FILE_NAME=None, LEBEDEV_GRID=None,LMAX_DFTB=None,LRI_BASIS_SET=None,MAGNETIZATION=None,MAO=None,MASS=None,MAX_RAD_LOCAL=None,MM_RADIUS=None,NO_OPTIMIZE=None,PAO_BASIS_SIZE=None,POTENTIAL=None,POTENTIAL_FILE_NAME=None,POTENTIAL_TYPE=None,RADIAL_GRID=None,RHO0_EXP_RADIUS=None,RI_AUX_BASIS_SET=None,SE_P_ORBITALS_ON_H=None,errorLog=[],changeLog=[],location=""):
+  def __init__(self,SECTION_PARAMETERS=None,AUX_BASIS_SET=None,AUX_FIT_BASIS_SET=None,BASIS_SET=None,CORE_CORRECTION=None,DFTB3_PARAM=None, ELEC_CONF=None, ELEMENT=None, FLOATING_BASIS_CENTER=None, GHOST=None, GPW_TYPE=None, HARD_EXP_RADIUS=None,KG_POTENTIAL=None, KG_POTENTIAL_FILE_NAME=None, LEBEDEV_GRID=None,LMAX_DFTB=None,LRI_BASIS_SET=None,MAGNETIZATION=None,MAO=None,MASS=None,MAX_RAD_LOCAL=None,MM_RADIUS=None,NO_OPTIMIZE=None,PAO_BASIS_SIZE=None,POTENTIAL=None,POTENTIAL_FILE_NAME=None,POTENTIAL_TYPE=None,RADIAL_GRID=None,RHO0_EXP_RADIUS=None,RI_AUX_BASIS_SET=None,SE_P_ORBITALS_ON_H=None,errorLog=[],changeLog=[],location="",number=None):
     self.__errorLog = errorLog
     self.__changeLog = changeLog
     self.__location  = "{}/KIND".format(location)

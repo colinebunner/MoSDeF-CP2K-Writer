@@ -3,7 +3,8 @@ import random
 import cssi_cp2k.utilities as utilities
 import cssi_cp2k.FileWriters as FileWriters
 from cssi_cp2k.classes import GLOBAL
-
+from cssi_cp2k.utilities1 import oneDimArray as oda
+from cssi_cp2k.utilities1 import objectArray as oba
 from cssi_cp2k.classes import MOTION
 from cssi_cp2k.classes import FORCE_EVAL
 

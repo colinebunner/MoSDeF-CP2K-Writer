@@ -1260,84 +1260,87 @@ def write_input(SimObject):
     
     #start KIND
     
- 
+  if force.SUBSYS.KIND is not None:
+   
+    for i in range(force.SUBSYS.KIND.length):
+    
+        
 
 
-
-  if force.SUBSYS.KIND.SECTION_PARAMETERS is not None:
-    inputFile += "    &KIND      {}\n".format(force.SUBSYS.KIND.SECTION_PARAMETERS)
-    if force.SUBSYS.KIND.AUX_BASIS_SET is not None:
-      inputFile += "      AUX_BASIS_SET       {}\n".format(force.SUBSYS.KIND.AUX_BASIS_SET)
-    if force.SUBSYS.KIND.AUX_FIT_BASIS_SET is not None:
-      inputFile += "      AUX_FIT_BASIS_SET       {}\n".format(force.SUBSYS.KIND.AUX_FIT_BASIS_SET)
-    if force.SUBSYS.KIND.BASIS_SET is not None:
-      inputFile += "      BASIS_SET       {}\n".format(force.SUBSYS.KIND.BASIS_SET)
-    if force.SUBSYS.KIND.CORE_CORRECTION is not None:
-      inputFile += "      CORE_CORRECTION       {}\n".format(force.SUBSYS.KIND.CORE_CORRECTION)
-    if force.SUBSYS.KIND.DFTB3_PARAM is not None:
-      inputFile += "      DFTB3_PARAM       {}\n".format(force.SUBSYS.KIND.DFTB3_PARAM)
-    if force.SUBSYS.KIND.ELEC_CONF is not None:
-      inputFile += "      ELEC_CONF       {}\n".format(force.SUBSYS.KIND.ELEC_CONF)
-    if force.SUBSYS.KIND.ELEMENT is not None:
-      inputFile += "      ELEMENT       {}\n".format(force.SUBSYS.KIND.ELEMENT)
-    if force.SUBSYS.KIND.FLOATING_BASIS_CENTER is not None:
-      inputFile += "      FLOATING_BASIS_CENTER       {}\n".format(force.SUBSYS.KIND.FLOATING_BASIS_CENTER)
+     if force.SUBSYS.KIND[i+1].SECTION_PARAMETERS is not None:
+      inputFile += "    &KIND      {}\n".format(force.SUBSYS.KIND[i+1].SECTION_PARAMETERS)
+      if force.SUBSYS.KIND[i+1].AUX_BASIS_SET is not None:
+        inputFile += "      AUX_BASIS_SET       {}\n".format(force.SUBSYS.KIND[i+1].AUX_BASIS_SET)
+      if force.SUBSYS.KIND[i+1].AUX_FIT_BASIS_SET is not None:
+        inputFile += "      AUX_FIT_BASIS_SET       {}\n".format(force.SUBSYS.KIND[i+1].AUX_FIT_BASIS_SET)
+      if force.SUBSYS.KIND[i+1].BASIS_SET is not None:
+        inputFile += "      BASIS_SET       {}\n".format(force.SUBSYS.KIND[i+1].BASIS_SET)
+      if force.SUBSYS.KIND[i+1].CORE_CORRECTION is not None:
+        inputFile += "      CORE_CORRECTION       {}\n".format(force.SUBSYS.KIND[i+1].CORE_CORRECTION)
+      if force.SUBSYS.KIND[i+1].DFTB3_PARAM is not None:
+        inputFile += "      DFTB3_PARAM       {}\n".format(force.SUBSYS.KIND[i+1].DFTB3_PARAM)
+      if force.SUBSYS.KIND[i+1].ELEC_CONF is not None:
+        inputFile += "      ELEC_CONF       {}\n".format(force.SUBSYS.KIND[i+1].ELEC_CONF)
+      if force.SUBSYS.KIND[i+1].ELEMENT is not None:
+        inputFile += "      ELEMENT       {}\n".format(force.SUBSYS.KIND[i+1].ELEMENT)
+      if force.SUBSYS.KIND[i+1].FLOATING_BASIS_CENTER is not None:
+        inputFile += "      FLOATING_BASIS_CENTER       {}\n".format(force.SUBSYS.KIND[i+1].FLOATING_BASIS_CENTER)
       
-    if force.SUBSYS.KIND.GHOST is not None:
-      inputFile += "      GHOST       {}\n".format(force.SUBSYS.KIND.GHOST)
+      if force.SUBSYS.KIND[i+1].GHOST is not None:
+        inputFile += "      GHOST       {}\n".format(force.SUBSYS.KIND[i+1].GHOST)
+        
+      if force.SUBSYS.KIND[i+1].GPW_TYPE is not None:
+        inputFile += "      GPW_TYPE       {}\n".format(force.SUBSYS.KIND[i+1].GPW_TYPE)
+      if force.SUBSYS.KIND[i+1].HARD_EXP_RADIUS is not None:
+        inputFile += "      HARD_EXP_RADIUS       {}\n".format(force.SUBSYS.KIND[i+1].HARD_EXP_RADIUS)
+      if force.SUBSYS.KIND[i+1].KG_POTENTIAL is not None:
+        inputFile += "      KG_POTENTIAL       {}\n".format(force.SUBSYS.KIND[i+1].KG_POTENTIAL)
+      if force.SUBSYS.KIND[i+1].KG_POTENTIAL_FILE_NAME is not None:
+        inputFile += "      KG_POTENTIAL_FILE_NAME       {}\n".format(force.SUBSYS.KIND[i+1].KG_POTENTIAL_FILE_NAME)
+      if force.SUBSYS.KIND[i+1].LEBEDEV_GRID is not None:
+        inputFile += "      LEBEDEV_GRID       {}\n".format(force.SUBSYS.KIND[i+1].LEBEDEV_GRID)
+      if force.SUBSYS.KIND[i+1].LMAX_DFTB is not None:
+        inputFile += "      LMAX_DFTB       {}\n".format(force.SUBSYS.KIND[i+1].LMAX_DFTB)
       
-    if force.SUBSYS.KIND.GPW_TYPE is not None:
-      inputFile += "      GPW_TYPE       {}\n".format(force.SUBSYS.KIND.GPW_TYPE)
-    if force.SUBSYS.KIND.HARD_EXP_RADIUS is not None:
-      inputFile += "      HARD_EXP_RADIUS       {}\n".format(force.SUBSYS.KIND.HARD_EXP_RADIUS)
-    if force.SUBSYS.KIND.KG_POTENTIAL is not None:
-      inputFile += "      KG_POTENTIAL       {}\n".format(force.SUBSYS.KIND.KG_POTENTIAL)
-    if force.SUBSYS.KIND.KG_POTENTIAL_FILE_NAME is not None:
-      inputFile += "      KG_POTENTIAL_FILE_NAME       {}\n".format(force.SUBSYS.KIND.KG_POTENTIAL_FILE_NAME)
-    if force.SUBSYS.KIND.LEBEDEV_GRID is not None:
-      inputFile += "      LEBEDEV_GRID       {}\n".format(force.SUBSYS.KIND.LEBEDEV_GRID)
-    if force.SUBSYS.KIND.LMAX_DFTB is not None:
-      inputFile += "      LMAX_DFTB       {}\n".format(force.SUBSYS.KIND.LMAX_DFTB)
-    
-    if force.SUBSYS.KIND.LRI_BASIS_SET is not None:
-      inputFile += "      LRI_BASIS_SET       {}\n".format(force.SUBSYS.KIND.LRI_BASIS_SET)
-    if force.SUBSYS.KIND.MAGNETIZATION is not None:
-      inputFile += "      MAGNETIZATION       {}\n".format(force.SUBSYS.KIND.MAGNETIZATION)
-    if force.SUBSYS.KIND.MAO is not None:
-      inputFile += "      MAO       {}\n".format(force.SUBSYS.KIND.MAO)
-    if force.SUBSYS.KIND.MASS is not None:
-      inputFile += "      MASS       {}\n".format(force.SUBSYS.KIND.MASS)
-    if force.SUBSYS.KIND.MAX_RAD_LOCAL is not None:
-      inputFile += "      MAX_RAD_LOCAL       {}\n".format(force.SUBSYS.KIND.MAX_RAD_LOCAL)
-    if force.SUBSYS.KIND.MM_RADIUS is not None:
-      inputFile += "      MM_RADIUS       {}\n".format(force.SUBSYS.KIND.MM_RADIUS)
-    if force.SUBSYS.KIND.NO_OPTIMIZE is not None:
-      inputFile += "      NO_OPTIMIZE       {}\n".format(force.SUBSYS.KIND.NO_OPTIMIZE)
-    if force.SUBSYS.KIND.PAO_BASIS_SIZE is not None:
-      inputFile += "      PAO_BASIS_SIZE       {}\n".format(force.SUBSYS.KIND.PAO_BASIS_SIZE)
-    
-    if force.SUBSYS.KIND.POTENTIAL is not None:
-      inputFile += "      POTENTIAL       {}\n".format(force.SUBSYS.KIND.POTENTIAL)
-    
-    if force.SUBSYS.KIND.POTENTIAL_FILE_NAME is not None:
-      inputFile += "      POTENTIAL_FILE_NAME       {}\n".format(force.SUBSYS.KIND.POTENTIAL_FILE_NAME)
-    if force.SUBSYS.KIND.POTENTIAL_TYPE is not None:
-      inputFile += "      POTENTIAL_TYPE       {}\n".format(force.SUBSYS.KIND.POTENTIAL_TYPE)
-    if force.SUBSYS.KIND.RADIAL_GRID is not None:
-      inputFile += "      RADIAL_GRID       {}\n".format(force.SUBSYS.KIND.RADIAL_GRID)
-    if force.SUBSYS.KIND.RHO0_EXP_RADIUS is not None:
-      inputFile += "      RHO0_EXP_RADIUS       {}\n".format(force.SUBSYS.KIND.RHO0_EXP_RADIUS)
-    if force.SUBSYS.KIND.RI_AUX_BASIS_SET is not None:
-      inputFile += "      RI_AUX_BASIS_SET       {}\n".format(force.SUBSYS.KIND.RI_AUX_BASIS_SET)
-    if force.SUBSYS.KIND.SE_P_ORBITALS_ON_H is not None:
-      inputFile += "      SE_P_ORBITALS_ON_H       {}\n".format(force.SUBSYS.KIND.SE_P_ORBITALS_ON_H)
+      if force.SUBSYS.KIND[i+1].LRI_BASIS_SET is not None:
+        inputFile += "      LRI_BASIS_SET       {}\n".format(force.SUBSYS.KIND[i+1].LRI_BASIS_SET)
+      if force.SUBSYS.KIND[i+1].MAGNETIZATION is not None:
+        inputFile += "      MAGNETIZATION       {}\n".format(force.SUBSYS.KIND[i+1].MAGNETIZATION)
+      if force.SUBSYS.KIND[i+1].MAO is not None:
+        inputFile += "      MAO       {}\n".format(force.SUBSYS.KIND[i+1].MAO)
+      if force.SUBSYS.KIND[i+1].MASS is not None:
+        inputFile += "      MASS       {}\n".format(force.SUBSYS.KIND[i+1].MASS)
+      if force.SUBSYS.KIND[i+1].MAX_RAD_LOCAL is not None:
+        inputFile += "      MAX_RAD_LOCAL       {}\n".format(force.SUBSYS.KIND[i+1].MAX_RAD_LOCAL)
+      if force.SUBSYS.KIND[i+1].MM_RADIUS is not None:
+        inputFile += "      MM_RADIUS       {}\n".format(force.SUBSYS.KIND[i+1].MM_RADIUS)
+      if force.SUBSYS.KIND[i+1].NO_OPTIMIZE is not None:
+        inputFile += "      NO_OPTIMIZE       {}\n".format(force.SUBSYS.KIND[i+1].NO_OPTIMIZE)
+      if force.SUBSYS.KIND[i+1].PAO_BASIS_SIZE is not None:
+        inputFile += "      PAO_BASIS_SIZE       {}\n".format(force.SUBSYS.KIND[i+1].PAO_BASIS_SIZE)
+      
+      if force.SUBSYS.KIND[i+1].POTENTIAL is not None:
+        inputFile += "      POTENTIAL       {}\n".format(force.SUBSYS.KIND[i+1].POTENTIAL)
+      
+      if force.SUBSYS.KIND[i+1].POTENTIAL_FILE_NAME is not None:
+        inputFile += "      POTENTIAL_FILE_NAME       {}\n".format(force.SUBSYS.KIND[i+1].POTENTIAL_FILE_NAME)
+      if force.SUBSYS.KIND[i+1].POTENTIAL_TYPE is not None:
+        inputFile += "      POTENTIAL_TYPE       {}\n".format(force.SUBSYS.KIND[i+1].POTENTIAL_TYPE)
+      if force.SUBSYS.KIND[i+1].RADIAL_GRID is not None:
+        inputFile += "      RADIAL_GRID       {}\n".format(force.SUBSYS.KIND[i+1].RADIAL_GRID)
+      if force.SUBSYS.KIND[i+1].RHO0_EXP_RADIUS is not None:
+        inputFile += "      RHO0_EXP_RADIUS       {}\n".format(force.SUBSYS.KIND[i+1].RHO0_EXP_RADIUS)
+      if force.SUBSYS.KIND[i+1].RI_AUX_BASIS_SET is not None:
+        inputFile += "      RI_AUX_BASIS_SET       {}\n".format(force.SUBSYS.KIND[i+1].RI_AUX_BASIS_SET)
+      if force.SUBSYS.KIND[i+1].SE_P_ORBITALS_ON_H is not None:
+        inputFile += "      SE_P_ORBITALS_ON_H       {}\n".format(force.SUBSYS.KIND[i+1].SE_P_ORBITALS_ON_H)
     
     
     
     
     
 
-    inputFile += "    &END KIND        \n"
+      inputFile += "    &END KIND        \n"
     #end KIND
     
     
