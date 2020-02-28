@@ -1,6 +1,7 @@
 &GLOBAL
   RUN_TYPE     MD
   PROJECT      iodine-liquid
+  PRINT_LEVEL  LOW
 &END GLOBAL
 &MOTION
   &MD
@@ -31,6 +32,12 @@
       &END PROGRAM_RUN_INFO     
     &END PRINT       
   &END MD
+ 
+  &CONSTRAINT
+    &FIXED_ATOMS      
+      LIST            1 
+    &FIXED_ATOMS       
+  &END CONSTRAINT
  
   &PRINT 
     &FORCES        OFF

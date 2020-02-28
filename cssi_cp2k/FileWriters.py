@@ -201,6 +201,33 @@ def write_input(SimObject):
   inputFile += "  &END MD\n \n"
     #END MD
 
+    
+    # CONSTRAINT section
+
+  inputFile += "  &CONSTRAINT\n"
+
+
+      #FIXED_ATOMS SUBSECTION
+  inputFile += "    &FIXED_ATOMS      \n"
+  if mot.CONSTRAINT.FIXED_ATOMS.LIST is not None:
+        
+    inputFile += "      LIST            {} \n".format(mot.CONSTRAINT.FIXED_ATOMS.LIST)
+  if mot.CONSTRAINT.FIXED_ATOMS.COMPONENTS_TO_FIX is not None:
+        
+    inputFile += "      COMPONENTS_TO_FIX           {} \n".format(mot.CONSTRAINT.FIXED_ATOMS.COMPONENTS_TO_FIX)
+    
+ 
+  inputFile += "    &FIXED_ATOMS       \n"
+  
+ 
+
+
+  inputFile += "  &END CONSTRAINT\n \n"
+    #END CONSTRAINT    
+    
+    
+    
+    
     # MOTION PRINT
   pri=SimObject.MOTION.PRINT
   inputFile += "  &PRINT \n"
