@@ -162,7 +162,7 @@ class GEO_OPT:
   @TYPE.setter
   def TYPE(self,val):
     val = str(val).upper()
-    if val in TYPE_VALS_VALS:
+    if val in TYPE_VALS:
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GEO_OPT','Variable':'TYPE',
                                'Success':True,'Previous':self.__TYPE,'New':val,'ErrorMessage':None,
                                'Location':self.__location})
