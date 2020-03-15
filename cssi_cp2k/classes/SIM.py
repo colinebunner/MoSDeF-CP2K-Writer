@@ -3,7 +3,10 @@ import random
 import cssi_cp2k.utilities as utilities
 import cssi_cp2k.FileWriters as FileWriters
 from cssi_cp2k.classes import GLOBAL
+from cssi_cp2k.utilities1 import oneDimArray as oda
+from cssi_cp2k.utilities1 import objectArray as oba
 from cssi_cp2k.classes import MOTION
+from cssi_cp2k.classes import FORCE_EVAL
 
 class SIM:
 
@@ -25,6 +28,8 @@ class SIM:
     self.__GLOBAL             = GLOBAL.GLOBAL(errorLog=self.__errorLog,changeLog=self.__changeLog,
                                   location=self.__location)
     self.__MOTION             = MOTION.MOTION(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                                  location=self.__location)
+    self.__FORCE_EVAL= FORCE_EVAL.FORCE_EVAL(errorLog=self.__errorLog, changeLog=self.__changeLog,
                                   location=self.__location)
     
   @property
@@ -70,6 +75,10 @@ class SIM:
   @property
   def MOTION(self):
     return self.__MOTION
+
+  @property
+  def FORCE_EVAL(self):
+    return self.__FORCE_EVAL
 
   @restartWFN.setter
   def restartWFN(self,val):

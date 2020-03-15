@@ -2,6 +2,8 @@ import datetime
 import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import PRINT
 from cssi_cp2k.classes import MD
+from cssi_cp2k.classes import GEO_OPT
+from cssi_cp2k.classes import CONSTRAINT 
 
 class MOTION:
 
@@ -15,7 +17,10 @@ class MOTION:
                          location=self.__location)
     self.__MD        = MD.MD(errorLog=self.__errorLog,changeLog=self.__changeLog,
                          location=self.__location)
-
+    self.__GEO_OPT        = GEO_OPT.GEO_OPT(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                         location=self.__location)
+    self.__CONSTRAINT        = CONSTRAINT.CONSTRAINT(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                         location=self.__location)
   @property
   def errorLog(self):
     return self.__errorLog
@@ -35,3 +40,11 @@ class MOTION:
   @property
   def MD(self):
     return self.__MD
+
+  @property
+  def GEO_OPT(self):
+    return self.__GEO_OPT
+
+  @property
+  def CONSTRAINT(self):
+    return self.__CONSTRAINT

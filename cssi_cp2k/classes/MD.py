@@ -2,7 +2,7 @@ import datetime
 import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import THERMOSTAT as thermostat
 from cssi_cp2k.classes import MD_PRINT as md_print
-
+from cssi_cp2k.classes import AVERAGES as averages
 
 MD_ENSEMBLE_VALS = ["HYDROSTATICSHOCK","ISOKIN","LANGEVIN","MSST","MSST_DAMPED","NPE_F","NPE_I",
                     "NPT_F","NPT_I","NVE","NVT","NVT_ADIABATIC","REFTRAJ"]
@@ -62,6 +62,8 @@ class MD:
                            location=self.__location)
     self.__PRINT       = md_print.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog,
                            location=self.__location)
+    self.__AVERAGES = averages.AVERAGES(errorLog=self.__errorLog, changeLog=self.__changeLog,
+                                              location=self.__location)
 
   @property
   def ENSEMBLE(self):
@@ -96,6 +98,10 @@ class MD:
     return self.__THERMOSTAT
 
   @property
+  def AVERAGES(self):
+      return self.__AVERAGES
+
+  @property
   def PRINT(self):
     return self.__PRINT
 
@@ -108,7 +114,7 @@ class MD:
                                'Location':self.__location})
       self.__ENSEMBLE = val
     else:
-      errorMessage = "Invalid option for MD ENSEMBLE: {}. Valid options are: {}".format(MD_ENSEMBLE_VALS)
+      errorMessage = "Invalid option for MD ENSEMBLE: {}. Valid options are: {}".format(val,MD_ENSEMBLE_VALS)
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'ENSEMBLE',
                                'Success':False,'Previous':self.__ENSEMBLE,'New':val,
                                'ErrorMessage':errorMessage,'Location':self.__location})

@@ -19,7 +19,7 @@ mySim.MOTION.MD.THERMOSTAT.NOSE.TIMECON = 1000.0
 mySim.MOTION.MD.THERMOSTAT.NOSE.MTS = 2
 mySim.MOTION.MD.PRINT.ENERGY.EACH.MD = 20
 mySim.MOTION.MD.PRINT.PROGRAM_RUN_INFO.EACH.MD = 20
-
+mySim.MOTION.GEO_OPT.MAX_ITER= 2
 mySim.write_changeLog(fn="iodine-changeLog.out")
 mySim.write_errorLog()
 mySim.write_inputFile()
