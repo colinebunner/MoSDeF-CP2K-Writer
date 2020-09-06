@@ -1,0 +1,136 @@
+SIM/GLOBAL/RUN_TYPE
+
+New: MD
+Previous: None
+Date: 2020-09-05 09:52:47.262801
+Success: True
+ErrorMessage: None
+
+SIM/GLOBAL/PRINT_LEVEL
+
+New: LOW
+Previous: None
+Date: 2020-09-05 09:52:47.262821
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/ENSEMBLE
+
+New: NVT
+Previous: None
+Date: 2020-09-05 09:52:47.262826
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/STEPS
+
+New: 1000000
+Previous: None
+Date: 2020-09-05 09:52:47.262830
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/TIMESTEP
+
+New: 0.5
+Previous: None
+Date: 2020-09-05 09:52:47.262834
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/TEMPERATURE
+
+New: 409.0
+Previous: None
+Date: 2020-09-05 09:52:47.262837
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/THERMOSTAT/TYPE
+
+New: NOSE
+Previous: None
+Date: 2020-09-05 09:52:47.262841
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/THERMOSTAT/REGION
+
+New: MASSIVE
+Previous: None
+Date: 2020-09-05 09:52:47.262856
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/THERMOSTAT/NOSE/LENGTH
+
+New: 3
+Previous: None
+Date: 2020-09-05 09:52:47.262860
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/THERMOSTAT/NOSE/YOSHIDA
+
+New: 3
+Previous: None
+Date: 2020-09-05 09:52:47.262863
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/THERMOSTAT/NOSE/TIMECON
+
+New: 1000.0
+Previous: None
+Date: 2020-09-05 09:52:47.262867
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/THERMOSTAT/NOSE/MTS
+
+New: 2
+Previous: None
+Date: 2020-09-05 09:52:47.262870
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/MD_PRINT/ENERGY/EACH/MD
+
+New: 20
+Previous: None
+Date: 2020-09-05 09:52:47.262880
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/MD/MD_PRINT/PROGRAM_RUN_INFO/EACH/MD
+
+New: 20
+Previous: None
+Date: 2020-09-05 09:52:47.262884
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/GEO_OPT/MAX_ITER
+
+New: 2
+Previous: None
+Date: 2020-09-05 09:52:47.262888
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/SUBSYS/SUBSYS/EXCLUDE_EI
+
+New: 1-2
+Previous: None
+Date: 2020-09-05 09:52:47.262896
+Success: True
+ErrorMessage: None
+
+SIM/MOTION/SUBSYS/SUBSYS/AVERAGES/SECTION_PARAMETERS
+
+New: .TRUE.
+Previous: None
+Date: 2020-09-05 09:52:47.262900
+Success: True
+ErrorMessage: None
+
