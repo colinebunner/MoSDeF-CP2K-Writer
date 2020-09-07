@@ -3,7 +3,10 @@ import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import THERMOSTAT as thermostat
 from cssi_cp2k.classes import MD_PRINT as md_print
 from cssi_cp2k.classes import AVERAGES as averages
+<<<<<<< HEAD
 from cssi_cp2k.classes import BAROSTAT as barostat
+=======
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
 
 MD_ENSEMBLE_VALS = ["HYDROSTATICSHOCK","ISOKIN","LANGEVIN","MSST","MSST_DAMPED","NPE_F","NPE_I",
                     "NPT_F","NPT_I","NVE","NVT","NVT_ADIABATIC","REFTRAJ"]
@@ -41,7 +44,11 @@ def _validate_temperature(val,errorLog=[]):
   if utilities.is_number(val) or (val is None):
     return val
   else:
+<<<<<<< HEAD
     errorMessage = "MD TEMPERATURE must be a number. You provided {}".format(val)
+=======
+    errorMessage = "MD TEMPERATURE must be a number."
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
     errorLog.append({'Date':datetime.datetime.now(),'Type':'init','Module':'MD',
                             'Variable':'TEMPERATURE','ErrorMessage':errorMessage})
     raise TypeError
@@ -61,8 +68,11 @@ class MD:
     #MD subesctions
     self.__THERMOSTAT  = thermostat.THERMOSTAT(errorLog=self.__errorLog,changeLog=self.__changeLog,
                            location=self.__location)
+<<<<<<< HEAD
     self.__BAROSTAT  = barostat.BAROSTAT(errorLog=self.__errorLog,changeLog=self.__changeLog,
                            location=self.__location)
+=======
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
     self.__PRINT       = md_print.PRINT(errorLog=self.__errorLog,changeLog=self.__changeLog,
                            location=self.__location)
     self.__AVERAGES = averages.AVERAGES(errorLog=self.__errorLog, changeLog=self.__changeLog,
@@ -99,9 +109,12 @@ class MD:
   @property
   def THERMOSTAT(self):
     return self.__THERMOSTAT
+<<<<<<< HEAD
   @property
   def BAROSTAT(self):
     return self.__BAROSTAT
+=======
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
 
   @property
   def AVERAGES(self):
@@ -159,13 +172,21 @@ class MD:
 
   @TEMPERATURE.setter
   def TEMPERATURE(self,val):
+<<<<<<< HEAD
     if utilities.is_positive_number(val) or val is None:
+=======
+    if utilities.is_positive_number(val):
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'TEMPERATURE',
                                'Success':True,'Previous':self.__TEMPERATURE,'New':val,
                                'ErrorMessage':None,'Location':self.__location})
       self.__TEMPERATURE = val
     else:
+<<<<<<< HEAD
       errorMessage = "TEMPERATURE must be a positive number. You provided {}".format(val)
+=======
+      errorMessage = "TEMPERATURE must be a positive integer."
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'MD','Variable':'TEMPERATURE',
                                'Success':False,'Previous':self.__TEMPERATURE,'New':val,
                                'ErrorMessage':errorMessage,'Location':self.__location})

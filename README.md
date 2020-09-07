@@ -9,3 +9,7 @@ conda activate mosdef36
 conda install -c conda-forge openbabel  
 pip install unyt
 ```
+=======
+This is an input file generator for MD simulations in CP2K. 
+
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f

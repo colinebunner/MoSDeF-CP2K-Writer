@@ -21,11 +21,17 @@ def write_input(SimObject):
   glob = SimObject.GLOBAL
   inputFile += "&GLOBAL\n"
   inputFile += "  RUN_TYPE     {}\n".format(glob.RUN_TYPE)
+<<<<<<< HEAD
   inputFile += "  PROJECT      {}\n".format(glob.PROJECT_NAME)
   if glob.PRINT_LEVEL is not None:
    inputFile += "  PRINT_LEVEL  {}\n".format(glob.PRINT_LEVEL)
   if glob.SEED is not None:
    inputFile += "  SEED  {}\n".format(glob.SEED)
+=======
+  inputFile += "  PROJECT      {}\n".format(glob.PROJECT)
+  if glob.PRINT_LEVEL is not None:
+   inputFile += "  PRINT_LEVEL  {}\n".format(glob.PRINT_LEVEL)
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
 
 
   
@@ -38,6 +44,7 @@ def write_input(SimObject):
     # MD section
   inputFile += "&MOTION\n"
   inputFile += "  &MD\n"
+<<<<<<< HEAD
   if mot.MD.ENSEMBLE is not None:
     inputFile += "    ENSEMBLE        {}\n".format(mot.MD.ENSEMBLE)
   if mot.MD.TIMESTEP is not None:
@@ -46,11 +53,18 @@ def write_input(SimObject):
     inputFile += "    STEPS           {}\n".format(mot.MD.STEPS)
   if mot.MD.TEMPERATURE is not None:  
     inputFile += "    TEMPERATURE     {}\n".format(mot.MD.TEMPERATURE)
+=======
+  inputFile += "    ENSEMBLE        {}\n".format(mot.MD.ENSEMBLE)
+  inputFile += "    TIMESTEP        {}\n".format(mot.MD.TIMESTEP)
+  inputFile += "    STEPS           {}\n".format(mot.MD.STEPS)
+  inputFile += "    TEMPERATURE     {}\n".format(mot.MD.TEMPERATURE)
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
 
       #THERMOSTAT SUBSECTION
   inputFile += "    &THERMOSTAT       \n"
   if mot.MD.THERMOSTAT.TYPE is not None:
         
+<<<<<<< HEAD
         inputFile += "      TYPE            {} \n".format(mot.MD.THERMOSTAT.TYPE)
 
         if mot.MD.THERMOSTAT.REGION is not None:
@@ -104,6 +118,29 @@ def write_input(SimObject):
 
         
 
+=======
+    inputFile += "      TYPE            {} \n".format(mot.MD.THERMOSTAT.TYPE)
+    
+  if mot.MD.THERMOSTAT.REGION is not None:
+        
+    inputFile += "      REGION          {} \n".format(mot.MD.THERMOSTAT.REGION )
+    
+  inputFile += "      &{}             \n".format(mot.MD.THERMOSTAT.TYPE )
+
+  if mot.MD.THERMOSTAT.TYPE=='NOSE':
+    inputFile += "        LENGTH       {}\n".format(mot.MD.THERMOSTAT.NOSE.LENGTH )
+    inputFile += "        MTS          {}\n".format(mot.MD.THERMOSTAT.NOSE.MTS )
+    inputFile += "        TIMECON      {}\n".format(mot.MD.THERMOSTAT.NOSE.TIMECON )
+    inputFile += "        YOSHIDA      {}\n".format(mot.MD.THERMOSTAT.NOSE.YOSHIDA )
+
+  if mot.MD.THERMOSTAT.TYPE=='GLE':
+    inputFile += "       NDIM       {}\n".format(mot.MD.THERMOSTAT.GLE.NDIM)
+
+    inputFile += "       A_SCALE    {}\n".format(mot.MD.THERMOSTAT.GLE.A_SCALE )
+  inputFile += "      &END {}             \n".format(mot.MD.THERMOSTAT.TYPE )
+  inputFile += "    &END THERMOSTAT       \n"
+  
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
       #AVERAGES subsection
   inputFile += "    &AVERAGES       \n"
   if mot.MD.AVERAGES.SECTION_PARAMETERS is not None:
@@ -268,7 +305,11 @@ def write_input(SimObject):
     inputFile += "      COMPONENTS_TO_FIX           {} \n".format(mot.CONSTRAINT.FIXED_ATOMS.COMPONENTS_TO_FIX)
     
  
+<<<<<<< HEAD
   inputFile += "    &END FIXED_ATOMS       \n"
+=======
+  inputFile += "    &FIXED_ATOMS       \n"
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
   
  
 
@@ -500,10 +541,14 @@ def write_input(SimObject):
       # END RESTART
 
     # START TRAJECTORY
+<<<<<<< HEAD
     if pri.TRAJECTORY.SECTION_PARAMETERS is None:
       pri.TRAJECTORY.SECTION_PARAMETERS='LOW'
     if 1:
     
+=======
+    if pri.TRAJECTORY.SECTION_PARAMETERS is not None:
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
       inputFile += "    &TRAJECTORY       {}\n".format(pri.TRAJECTORY.SECTION_PARAMETERS)
       if pri.TRAJECTORY.ADD_LAST is not None:
         inputFile += "      ADD_LAST        {}\n".format(pri.TRAJECTORY.ADD_LAST)
@@ -519,8 +564,11 @@ def write_input(SimObject):
         inputFile += "      FILENAME        {}\n".format(pri.TRAJECTORY.FILENAME)
       if pri.TRAJECTORY.LOG_PRINT_KEY is not None:
         inputFile += "      LOG_PRINT_KEY        {}\n".format(pri.TRAJECTORY.LOG_PRINT_KEY)
+<<<<<<< HEAD
       if pri.TRAJECTORY.FORMAT is not None:
         inputFile += "      FORMAT        {}\n".format(pri.TRAJECTORY.FORMAT)
+=======
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
 
       # EACH SUBSECTION
       inputFile += "      &EACH       \n"
@@ -1426,6 +1474,7 @@ def write_input(SimObject):
       inputFile += "    &END KIND        \n"
     #end KIND
     
+<<<<<<< HEAD
        #start topology
     
   inputFile += "    &TOPOLOGY        \n"
@@ -1483,6 +1532,9 @@ def write_input(SimObject):
   inputFile += "    &END TOPOLOGY       \n"
     #end topology
         
+=======
+    
+>>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
   
   inputFile += "  &END SUBSYS        \n"
       #END subsys
