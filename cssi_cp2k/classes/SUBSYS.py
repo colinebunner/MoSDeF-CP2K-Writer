@@ -3,10 +3,7 @@ import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import CELL
 from cssi_cp2k.classes import KINDs
 from cssi_cp2k.classes import COORD
-<<<<<<< HEAD
 from cssi_cp2k.classes import TOPOLOGY
-=======
->>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
 from cssi_cp2k.utilities1 import oneDimArray as oda
 from cssi_cp2k.utilities1 import objectArray as oba
 
@@ -42,11 +39,8 @@ class SUBSYS:
                          location=self.__location)
     self.__COORD = COORD.COORD(errorLog=self.__errorLog, changeLog=self.__changeLog,
                          location=self.__location)
-<<<<<<< HEAD
     self.__TOPOLOGY = TOPOLOGY.TOPOLOGY(errorLog=self.__errorLog, changeLog=self.__changeLog,
                          location=self.__location)
-=======
->>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
     #self.__KIND       = KIND.KIND(errorLog=self.__errorLog,changeLog=self.__changeLog,
                            #location=self.__location)
 
@@ -79,12 +73,9 @@ class SUBSYS:
   @property
   def COORD(self):
       return self.__COORD
-<<<<<<< HEAD
   @property
   def TOPOLOGY(self):
       return self.__TOPOLOGY
-=======
->>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
 
 
   @property

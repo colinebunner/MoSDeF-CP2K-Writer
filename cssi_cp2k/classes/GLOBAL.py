@@ -642,11 +642,7 @@ class GLOBAL:
 
   @SEED.setter
   def SEED(self,val):
-<<<<<<< HEAD
     if utilities.is_integer(val) or val is None:
-=======
-    if utilities.is_integer(val):
->>>>>>> e3366933857742950e08ad98919fcf0d7eb7a25f
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
                                'Variable':'SEED','Success':True,
                                'Previous':self.__SEED,'New':val,'ErrorMessage':None,
