@@ -78,7 +78,7 @@ def write_input(SimObject):
 #BAROSTAT SUBSECTION
 
   if mot.MD.ENSEMBLE is not None:
-    if 1:
+    if pressure_ensemble(mot.MD.ENSEMBLE):
           
       inputFile += "    &BAROSTAT       \n"
       if mot.MD.BAROSTAT.PRESSURE is not None:

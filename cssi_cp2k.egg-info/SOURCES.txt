@@ -1,9 +1,6 @@
 README.md
 setup.py
 cssi_cp2k/FileWriters.py
-cssi_cp2k/__init__.py
-cssi_cp2k/iodine.py
-cssi_cp2k/setup.py
 cssi_cp2k/utilities.py
 cssi_cp2k.egg-info/PKG-INFO
 cssi_cp2k.egg-info/SOURCES.txt
@@ -15,6 +12,7 @@ cssi_cp2k/classes/ACC.py
 cssi_cp2k/classes/AVERAGES.py
 cssi_cp2k/classes/BAROSTAT.py
 cssi_cp2k/classes/CELL.py
+cssi_cp2k/classes/CENTER_COORDINATES.py
 cssi_cp2k/classes/CONSTRAINT.py
 cssi_cp2k/classes/COORD.py
 cssi_cp2k/classes/DBCSR.py
@@ -58,6 +56,7 @@ cssi_cp2k/classes/STRESS.py
 cssi_cp2k/classes/SUBSYS.py
 cssi_cp2k/classes/THERMOSTAT.py
 cssi_cp2k/classes/TIMINGS.py
+cssi_cp2k/classes/TOPOLOGY.py
 cssi_cp2k/classes/TRAJECTORY.py
 cssi_cp2k/classes/VDW_POTENTIAL.py
 cssi_cp2k/classes/VELOCITIES.py
