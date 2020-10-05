@@ -613,7 +613,7 @@ class GLOBAL:
       self.__RUN_TYPE = val
     else:
       errorMessage = ("RUN_TYPE {} not allowed. Check for typo. Allowed values " 
-        "are: {}".format(val,GLOBAL.RUN_TYPE_VALS))
+        "are: {}".format(val,RUN_TYPE_VALS))
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'GLOBAL',
                                'Variable':'RUN_TYPE','Success':False,
                                'Previous':self.__RUN_TYPE,'New':val,'ErrorMessage':errorMessage,
