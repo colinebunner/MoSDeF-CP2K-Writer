@@ -1,3 +1,16 @@
+def pressure_ensemble(val):
+    if val=='NPE_F' or val=='NPE_I' or val=='NPT_F' or val=='NPT_I':
+        return True
+    else:
+        return False
+
+def temperature_ensemble(val):
+    if val=='MSST' or val=='MSST_DAMPED' or val=='NPT_F' or val=='NPT_I' or val=='NVT' or val=='NVT_ADIABATIC':
+        return True
+    else:
+        return False
+
+
 def write_input(SimObject):
 
   ''' A function to convert a SIM object to a cp2k input file by converting variable information to formatted string. '''
@@ -8,9 +21,11 @@ def write_input(SimObject):
   glob = SimObject.GLOBAL
   inputFile += "&GLOBAL\n"
   inputFile += "  RUN_TYPE     {}\n".format(glob.RUN_TYPE)
-  inputFile += "  PROJECT      {}\n".format(glob.PROJECT)
+  inputFile += "  PROJECT      {}\n".format(glob.PROJECT_NAME)
   if glob.PRINT_LEVEL is not None:
    inputFile += "  PRINT_LEVEL  {}\n".format(glob.PRINT_LEVEL)
+  if glob.SEED is not None:
+   inputFile += "  SEED  {}\n".format(glob.SEED)
 
 
   
@@ -23,36 +38,72 @@ def write_input(SimObject):
     # MD section
   inputFile += "&MOTION\n"
   inputFile += "  &MD\n"
-  inputFile += "    ENSEMBLE        {}\n".format(mot.MD.ENSEMBLE)
-  inputFile += "    TIMESTEP        {}\n".format(mot.MD.TIMESTEP)
-  inputFile += "    STEPS           {}\n".format(mot.MD.STEPS)
-  inputFile += "    TEMPERATURE     {}\n".format(mot.MD.TEMPERATURE)
+  if mot.MD.ENSEMBLE is not None:
+    inputFile += "    ENSEMBLE        {}\n".format(mot.MD.ENSEMBLE)
+  if mot.MD.TIMESTEP is not None:
+    inputFile += "    TIMESTEP        {}\n".format(mot.MD.TIMESTEP)
+  if mot.MD.STEPS is not None:
+    inputFile += "    STEPS           {}\n".format(mot.MD.STEPS)
+  if mot.MD.TEMPERATURE is not None:  
+    inputFile += "    TEMPERATURE     {}\n".format(mot.MD.TEMPERATURE)
 
       #THERMOSTAT SUBSECTION
   inputFile += "    &THERMOSTAT       \n"
   if mot.MD.THERMOSTAT.TYPE is not None:
         
-    inputFile += "      TYPE            {} \n".format(mot.MD.THERMOSTAT.TYPE)
-    
-  if mot.MD.THERMOSTAT.REGION is not None:
-        
-    inputFile += "      REGION          {} \n".format(mot.MD.THERMOSTAT.REGION )
-    
-  inputFile += "      &{}             \n".format(mot.MD.THERMOSTAT.TYPE )
+        inputFile += "      TYPE            {} \n".format(mot.MD.THERMOSTAT.TYPE)
 
-  if mot.MD.THERMOSTAT.TYPE=='NOSE':
-    inputFile += "        LENGTH       {}\n".format(mot.MD.THERMOSTAT.NOSE.LENGTH )
-    inputFile += "        MTS          {}\n".format(mot.MD.THERMOSTAT.NOSE.MTS )
-    inputFile += "        TIMECON      {}\n".format(mot.MD.THERMOSTAT.NOSE.TIMECON )
-    inputFile += "        YOSHIDA      {}\n".format(mot.MD.THERMOSTAT.NOSE.YOSHIDA )
+        if mot.MD.THERMOSTAT.REGION is not None:
 
-  if mot.MD.THERMOSTAT.TYPE=='GLE':
-    inputFile += "       NDIM       {}\n".format(mot.MD.THERMOSTAT.GLE.NDIM)
+            inputFile += "      REGION          {} \n".format(mot.MD.THERMOSTAT.REGION )
+        if mot.MD.THERMOSTAT.TYPE is not None:
 
-    inputFile += "       A_SCALE    {}\n".format(mot.MD.THERMOSTAT.GLE.A_SCALE )
-  inputFile += "      &END {}             \n".format(mot.MD.THERMOSTAT.TYPE )
+            inputFile += "      &{}             \n".format(mot.MD.THERMOSTAT.TYPE )
+
+        if mot.MD.THERMOSTAT.TYPE=='NOSE':
+            inputFile += "        LENGTH       {}\n".format(mot.MD.THERMOSTAT.NOSE.LENGTH )
+            inputFile += "        MTS          {}\n".format(mot.MD.THERMOSTAT.NOSE.MTS )
+            inputFile += "        TIMECON      {}\n".format(mot.MD.THERMOSTAT.NOSE.TIMECON )
+            inputFile += "        YOSHIDA      {}\n".format(mot.MD.THERMOSTAT.NOSE.YOSHIDA )
+
+        if mot.MD.THERMOSTAT.TYPE=='GLE':
+            inputFile += "       NDIM       {}\n".format(mot.MD.THERMOSTAT.GLE.NDIM)
+
+            inputFile += "       A_SCALE    {}\n".format(mot.MD.THERMOSTAT.GLE.A_SCALE )
+        if mot.MD.THERMOSTAT.TYPE is not None:
+            inputFile += "      &END {}             \n".format(mot.MD.THERMOSTAT.TYPE )
   inputFile += "    &END THERMOSTAT       \n"
   
+  
+#BAROSTAT SUBSECTION
+
+  if mot.MD.ENSEMBLE is not None:
+    if pressure_ensemble(mot.MD.ENSEMBLE):
+          
+      inputFile += "    &BAROSTAT       \n"
+      if mot.MD.BAROSTAT.PRESSURE is not None:
+
+        inputFile += "      PRESSURE            {} \n".format(mot.MD.BAROSTAT.PRESSURE)
+      if mot.MD.BAROSTAT.TEMPERATURE is not None:
+
+        inputFile += "      TEMPERATURE            {} \n".format(mot.MD.BAROSTAT.TEMPERATURE)
+      if mot.MD.BAROSTAT.TEMP_TOL is not None:
+
+        inputFile += "      TEMP_TOL            {} \n".format(mot.MD.BAROSTAT.TEMP_TOL)
+      if mot.MD.BAROSTAT.TIMECON is not None:
+
+        inputFile += "      TIMECON            {} \n".format(mot.MD.BAROSTAT.TIMECON)
+      if mot.MD.BAROSTAT.VIRIAL is not None:
+
+        inputFile += "      VIRIAL            {} \n".format(mot.MD.BAROSTAT.VIRIAL)
+
+
+
+
+      inputFile += "    &END BAROSTAT       \n"
+
+        
+
       #AVERAGES subsection
   inputFile += "    &AVERAGES       \n"
   if mot.MD.AVERAGES.SECTION_PARAMETERS is not None:
@@ -217,7 +268,7 @@ def write_input(SimObject):
     inputFile += "      COMPONENTS_TO_FIX           {} \n".format(mot.CONSTRAINT.FIXED_ATOMS.COMPONENTS_TO_FIX)
     
  
-  inputFile += "    &FIXED_ATOMS       \n"
+  inputFile += "    &END FIXED_ATOMS       \n"
   
  
 
@@ -449,7 +500,10 @@ def write_input(SimObject):
       # END RESTART
 
     # START TRAJECTORY
-    if pri.TRAJECTORY.SECTION_PARAMETERS is not None:
+    if pri.TRAJECTORY.SECTION_PARAMETERS is None:
+      pri.TRAJECTORY.SECTION_PARAMETERS='LOW'
+    if 1:
+    
       inputFile += "    &TRAJECTORY       {}\n".format(pri.TRAJECTORY.SECTION_PARAMETERS)
       if pri.TRAJECTORY.ADD_LAST is not None:
         inputFile += "      ADD_LAST        {}\n".format(pri.TRAJECTORY.ADD_LAST)
@@ -465,6 +519,8 @@ def write_input(SimObject):
         inputFile += "      FILENAME        {}\n".format(pri.TRAJECTORY.FILENAME)
       if pri.TRAJECTORY.LOG_PRINT_KEY is not None:
         inputFile += "      LOG_PRINT_KEY        {}\n".format(pri.TRAJECTORY.LOG_PRINT_KEY)
+      if pri.TRAJECTORY.FORMAT is not None:
+        inputFile += "      FORMAT        {}\n".format(pri.TRAJECTORY.FORMAT)
 
       # EACH SUBSECTION
       inputFile += "      &EACH       \n"
@@ -1370,7 +1426,63 @@ def write_input(SimObject):
       inputFile += "    &END KIND        \n"
     #end KIND
     
+       #start topology
     
+  inputFile += "    &TOPOLOGY        \n"
+
+  if force.SUBSYS.TOPOLOGY.AUTOGEN_EXCLUDE_LISTS is not None:
+    inputFile += "      AUTOGEN_EXCLUDE_LISTS       {}\n".format(force.SUBSYS.TOPOLOGY.AUTOGEN_EXCLUDE_LISTS)
+  if force.SUBSYS.TOPOLOGY.CHARGE_BETA is not None:
+    inputFile += "      CHARGE_BETA       {}\n".format(force.SUBSYS.TOPOLOGY.CHARGE_BETA)
+  if force.SUBSYS.TOPOLOGY.CHARGE_EXTENDED is not None:
+    inputFile += "      CHARGE_EXTENDED       {}\n".format(force.SUBSYS.TOPOLOGY.CHARGE_EXTENDED)
+  if force.SUBSYS.TOPOLOGY.CHARGE_OCCUP is not None:
+    inputFile += "      CHARGE_OCCUP       {}\n".format(force.SUBSYS.TOPOLOGY.CHARGE_OCCUP)
+  if force.SUBSYS.TOPOLOGY.CONN_FILE_FORMAT is not None:
+    inputFile += "      CONN_FILE_FORMAT       {}\n".format(force.SUBSYS.TOPOLOGY.CONN_FILE_FORMAT)
+  if force.SUBSYS.TOPOLOGY.CONN_FILE_NAME is not None:
+    inputFile += "      CONN_FILE_NAME       {}\n".format(force.SUBSYS.TOPOLOGY.CONN_FILE_NAME)
+  if force.SUBSYS.TOPOLOGY.COORD_FILE_FORMAT is not None:
+    inputFile += "      COORD_FILE_FORMAT       {}\n".format(force.SUBSYS.TOPOLOGY.COORD_FILE_FORMAT)
+  if force.SUBSYS.TOPOLOGY.COORD_FILE_NAME is not None:
+    inputFile += "      COORD_FILE_NAME       {}\n".format(force.SUBSYS.TOPOLOGY.COORD_FILE_NAME)
+  if force.SUBSYS.TOPOLOGY.DISABLE_EXCLUSION_LISTS is not None:
+    inputFile += "      DISABLE_EXCLUSION_LISTS       {}\n".format(force.SUBSYS.TOPOLOGY.DISABLE_EXCLUSION_LISTS)
+  if force.SUBSYS.TOPOLOGY.EXCLUDE_EI is not None:
+    inputFile += "      EXCLUDE_EI       {}\n".format(force.SUBSYS.TOPOLOGY.EXCLUDE_EI)
+  if force.SUBSYS.TOPOLOGY.EXCLUDE_VDW is not None:
+    inputFile += "      EXCLUDE_VDW       {}\n".format(force.SUBSYS.TOPOLOGY.EXCLUDE_VDW)
+  if force.SUBSYS.TOPOLOGY.MEMORY_PROGRESSION_FACTOR is not None:
+    inputFile += "      MEMORY_PROGRESSION_FACTOR       {}\n".format(force.SUBSYS.TOPOLOGY.MEMORY_PROGRESSION_FACTOR)
+  if force.SUBSYS.TOPOLOGY.MOL_CHECK is not None:
+    inputFile += "      MOL_CHECK       {}\n".format(force.SUBSYS.TOPOLOGY.MOL_CHECK)
+  if force.SUBSYS.TOPOLOGY.MULTIPLE_UNIT_CELL is not None:
+    inputFile += "      MULTIPLE_UNIT_CELL       {}\n".format(force.SUBSYS.TOPOLOGY.MULTIPLE_UNIT_CELL)
+  if force.SUBSYS.TOPOLOGY.NUMBER_OF_ATOMS is not None:
+    inputFile += "      NUMBER_OF_ATOMS       {}\n".format(force.SUBSYS.TOPOLOGY.NUMBER_OF_ATOMS)
+  if force.SUBSYS.TOPOLOGY.PARA_RES is not None:
+    inputFile += "      PARA_RES       {}\n".format(force.SUBSYS.TOPOLOGY.PARA_RES)
+  if force.SUBSYS.TOPOLOGY.USE_ELEMENT_AS_KIND is not None:
+    inputFile += "      USE_ELEMENT_AS_KIND       {}\n".format(force.SUBSYS.TOPOLOGY.USE_ELEMENT_AS_KIND)
+  if force.SUBSYS.TOPOLOGY.USE_G96_VELOCITY is not None:
+    inputFile += "      USE_G96_VELOCITY       {}\n".format(force.SUBSYS.TOPOLOGY.USE_G96_VELOCITY)
+    
+    #CENTER_COORDINATES SUBSECTION
+  if force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.SECTION_PARAMETERS is not None:
+    inputFile += "      &CENTER_COORDINATES       {}\n".format(force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.SECTION_PARAMETERS)
+    if force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.CENTER_POINT is not None:
+        inputFile += "        CENTER_POINT       {}\n".format(force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.CENTER_POINT)
+    inputFile += "      &END CENTER_COORDINATES       \n"
+    
+
+
+
+    
+    
+
+  inputFile += "    &END TOPOLOGY       \n"
+    #end topology
+        
   
   inputFile += "  &END SUBSYS        \n"
       #END subsys

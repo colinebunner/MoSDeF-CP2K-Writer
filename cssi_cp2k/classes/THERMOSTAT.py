@@ -107,8 +107,9 @@ class THERMOSTAT:
 
   @TYPE.setter
   def TYPE(self,val):
-    val = str(val).upper()
-    if val in TYPE_VALS:
+    if val is not None:
+      val = str(val).upper()
+    if val in TYPE_VALS or val is None:
       self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'THERMOSTAT','Variable':'TYPE',
                                'Success':True,'Previous':self.__TYPE,'New':val,
                                'ErrorMessage':None,'Location':self.__location})

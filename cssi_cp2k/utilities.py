@@ -1,5 +1,6 @@
 import numpy as np
 import datetime
+import types
 
 # Numerical stuff
 def is_number(val):
@@ -28,3 +29,26 @@ def is_positive_number(val):
 #Make datetime string prettier
 def datetimePrettify(dt):
   return dt
+
+def is_string(val):
+    return isinstance(val, str)
+
+def is_list(val):
+    if type(val) is list:
+        return True
+    else:
+        return False
+    
+def is_list_of_numbers(val):
+    if is_list(val):
+        k=0
+        while k <len(val):
+            if not is_number(val[k]):
+                return False
+                break
+            else:
+                k+=1
+        return True
+             
+    else:
+        return False

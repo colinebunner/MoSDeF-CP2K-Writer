@@ -1,9 +1,9 @@
 import datetime
 import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import EACH
-BOOL_VALS   = [".TRUE.",".FALSE"]
+BOOL_VALS   = [".TRUE.",".FALSE."]
 SECTION_PARAMETERS_VALS=["DEBUG","HIGH","LOW","MEDIUM","OFF","ON","SILENT"]
-FORMAT_VALS=["ATOMIC","DCD","XMOL","XYZ"]
+FORMAT_VALS=["ATOMIC","DCD","DCD_ALIGNED_CELL","PDB","XMOL","XYZ"]
 
 def _validate_SECTION_PARAMETERS(val,errorLog=[]):
   if val is not None:
