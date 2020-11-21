@@ -1,4 +1,4 @@
-from cssi_cp2k.utilities1 import oneDimArray as oda
+from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
 
 class objectArray(oda.oneDimArray):
 
