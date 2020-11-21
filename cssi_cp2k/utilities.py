@@ -52,3 +52,18 @@ def is_list_of_numbers(val):
              
     else:
         return False
+    
+    
+def is_list_of_integers(val):
+    if is_list(val):
+        k=0
+        while k <len(val):
+            if not is_integer(val[k]):
+                return False
+                break
+            else:
+                k+=1
+        return True
+             
+    else:
+        return False

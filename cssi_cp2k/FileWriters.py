@@ -33,10 +33,182 @@ def write_input(SimObject):
 
   # MOTION section
   mot = SimObject.MOTION
-
-
-    # MD section
   inputFile += "&MOTION\n"
+
+  #MC section
+  if glob.RUN_TYPE == "MC":
+    inputFile += "  &MC\n"
+    #AVBMC subsection
+    inputFile += "    &AVBMC\n"
+    if mot.MC.AVBMC.AVBMC_ATOM is not None:
+        inputFile+="      AVBMC_ATOM        {}\n".format(" ".join(map(str,mot.MC.AVBMC.AVBMC_ATOM)))
+    if mot.MC.AVBMC.AVBMC_RMAX is not None:
+        inputFile+="      AVBMC_RMAX        {}\n".format(" ".join(map(str,mot.MC.AVBMC.AVBMC_RMAX)))
+    if mot.MC.AVBMC.AVBMC_RMIN is not None:
+        inputFile+="      AVBMC_RMIN        {}\n".format(" ".join(map(str,mot.MC.AVBMC.AVBMC_RMIN)))
+    if mot.MC.AVBMC.PBIAS is not None:
+        inputFile+="      PBIAS        {}\n".format(" ".join(map(str,mot.MC.AVBMC.PBIAS)))
+    inputFile += "    &END AVBMC\n"
+    
+    
+
+    #MAX_DISPLACEMENTS subsection
+    inputFile += "    &MAX_DISPLACEMENTS\n"
+    inputFile += "      &BOX_DISPLACEMENTS\n"
+    if mot.MC.MAX_DISPLACEMENTS.BOX_DISPLACEMENTS.RMCLTRANS is not None:
+        inputFile+="        RMCLTRANS        {}\n".format(mot.MC.MAX_DISPLACEMENTS.BOX_DISPLACEMENTS.RMCLTRANS)
+    if mot.MC.MAX_DISPLACEMENTS.BOX_DISPLACEMENTS.RMVOLUME is not None:
+        inputFile+="        RMVOLUME        {}\n".format(mot.MC.MAX_DISPLACEMENTS.BOX_DISPLACEMENTS.RMVOLUME)
+    inputFile += "      &END BOX_DISPLACEMENTS\n"
+    
+    inputFile += "      &MOL_DISPLACEMENTS\n"
+    if mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMANGLE is not None:
+        inputFile+="        RMANGLE        {}\n".format(" ".join(map(str,mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMANGLE)))
+        
+    if mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMBOND is not None:
+        inputFile+="        RMBOND        {}\n".format(" ".join(map(str,mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMBOND)))
+        
+    if mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMDIHEDRAL is not None:
+        inputFile+="        RMDIHEDRAL        {}\n".format(" ".join(map(str,mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMDIHEDRAL)))
+    if mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMROT is not None:
+        inputFile+="        RMROT        {}\n".format(" ".join(map(str,mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMROT)))
+    if mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMTRANS is not None:
+        inputFile+="        RMTRANS        {}\n".format(" ".join(map(str,mot.MC.MAX_DISPLACEMENTS.MOL_DISPLACEMENTS.RMTRANS)))
+
+    inputFile += "      &END MOL_DISPLACEMENTS\n"
+
+
+    inputFile += "    &END MAX_DISPLACEMENTS\n"
+
+    #MOVE_PROBABILITIES subsection
+    inputFile += "    &MOVE_PROBABILITIES\n"
+    
+    inputFile += "      &BOX_PROBABILITIES\n"
+    if mot.MC.MOVE_PROBABILITIES.BOX_PROBABILITIES.PMCLUS_BOX is not None:
+        inputFile+="        PMCLUS_BOX        {}\n".format(mot.MC.MOVE_PROBABILITIES.BOX_PROBABILITIES.PMCLUS_BOX)
+    if mot.MC.MOVE_PROBABILITIES.BOX_PROBABILITIES.PMHMC_BOX is not None:
+        inputFile+="        PMHMC_BOX        {}\n".format(mot.MC.MOVE_PROBABILITIES.BOX_PROBABILITIES.PMHMC_BOX)
+    if mot.MC.MOVE_PROBABILITIES.BOX_PROBABILITIES.PMVOL_BOX is not None:
+        inputFile+="        PMVOL_BOX        {}\n".format(mot.MC.MOVE_PROBABILITIES.BOX_PROBABILITIES.PMVOL_BOX)
+        
+    inputFile += "      &END BOX_PROBABILITIES\n"
+
+    inputFile += "      &MOL_PROBABILITIES\n"
+    if mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMAVBMC_MOL is not None:
+        inputFile+="        PMAVBMC_MOL        {}\n".format(" ".join(map(str,mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMAVBMC_MOL)))
+
+    if mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMROT_MOL is not None:
+        inputFile+="        PMROT_MOL        {}\n".format(" ".join(map(str,mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMROT_MOL)))
+        
+    if mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMSWAP_MOL is not None:
+        inputFile+="        PMSWAP_MOL        {}\n".format(" ".join(map(str,mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMSWAP_MOL)))
+        
+    if mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMTRAION_MOL is not None:
+        inputFile+="        PMTRAION_MOL        {}\n".format(" ".join(map(str,mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMTRAION_MOL)))
+        
+    if mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMTRANS_MOL is not None:
+        inputFile+="        PMTRANS_MOL        {}\n".format(" ".join(map(str,mot.MC.MOVE_PROBABILITIES.MOL_PROBABILITIES.PMTRANS_MOL)))
+    inputFile += "      &END MOL_PROBABILITIES\n" 
+
+    
+    if mot.MC.MOVE_PROBABILITIES.PMAVBMC is not None:
+        inputFile+="      PMAVBMC        {}\n".format(mot.MC.MOVE_PROBABILITIES.PMAVBMC)
+        
+    if mot.MC.MOVE_PROBABILITIES.PMCLTRANS is not None:
+        inputFile+="      PMCLTRANS        {}\n".format(mot.MC.MOVE_PROBABILITIES.PMCLTRANS)
+    if mot.MC.MOVE_PROBABILITIES.PMHMC is not None:
+        inputFile+="      PMHMC        {}\n".format(mot.MC.MOVE_PROBABILITIES.PMHMC)
+        
+    if mot.MC.MOVE_PROBABILITIES.PMSWAP is not None:
+        inputFile+="      PMSWAP        {}\n".format(mot.MC.MOVE_PROBABILITIES.PMSWAP)
+        
+    if mot.MC.MOVE_PROBABILITIES.PMTRAION is not None:
+        inputFile+="      PMTRAION        {}\n".format(mot.MC.MOVE_PROBABILITIES.PMTRAION)
+        
+    if mot.MC.MOVE_PROBABILITIES.PMTRANS is not None:
+        inputFile+="      PMTRANS        {}\n".format(mot.MC.MOVE_PROBABILITIES.PMTRANS)
+        
+    if mot.MC.MOVE_PROBABILITIES.PMVOLUME is not None:
+        inputFile+="      PMVOLUME        {}\n".format(mot.MC.MOVE_PROBABILITIES.PMVOLUME)
+        
+        
+
+    inputFile += "    &END MOVE_PROBABILITIES\n"
+
+    
+    inputFile += "    &MOVE_UPDATES\n"
+    if mot.MC.MOVE_UPDATES.IUPCLTRANS is not None:
+        inputFile+="      IUPCLTRANS        {}\n".format(mot.MC.MOVE_UPDATES.IUPCLTRANS)
+    if mot.MC.MOVE_UPDATES.IUPTRANS is not None:
+        inputFile+="      IUPTRANS        {}\n".format(mot.MC.MOVE_UPDATES.IUPTRANS)
+        
+    if mot.MC.MOVE_UPDATES.IUPVOLUME is not None:
+        inputFile+="      IUPVOLUME        {}\n".format(mot.MC.MOVE_UPDATES.IUPVOLUME)
+    inputFile += "    &END MOVE_UPDATES\n"
+    
+    
+    if mot.MC.BOX2_FILE_NAME is not None:
+        inputFile+="    BOX2_FILE_NAME        {}\n".format(mot.MC.BOX2_FILE_NAME)
+    if mot.MC.CELL_FILE_NAME is not None:
+        inputFile+="    CELL_FILE_NAME        {}\n".format(mot.MC.CELL_FILE_NAME)
+    if mot.MC.COORDINATE_FILE_NAME is not None:
+        inputFile+="    COORDINATE_FILE_NAME        {}\n".format(mot.MC.COORDINATE_FILE_NAME)
+    if mot.MC.DATA_FILE_NAME is not None:
+        inputFile+="    DATA_FILE_NAME        {}\n".format(mot.MC.DATA_FILE_NAME)
+    if mot.MC.DISCRETE_STEP is not None:
+        inputFile+="    DISCRETE_STEP        {}\n".format(mot.MC.DISCRETE_STEP)
+    if mot.MC.ENERGY_FILE_NAME is not None:
+        inputFile+="    ENERGY_FILE_NAME        {}\n".format(mot.MC.ENERGY_FILE_NAME)
+    if mot.MC.ENSEMBLE is not None:
+        inputFile+="    ENSEMBLE        {}\n".format(mot.MC.ENSEMBLE)
+    if mot.MC.ETA is not None:
+        inputFile+="    ETA        {}\n".format(mot.MC.ETA)
+    if mot.MC.IPRINT is not None:
+        inputFile+="    IPRINT        {}\n".format(mot.MC.IPRINT)
+    if mot.MC.LBIAS is not None:
+        inputFile+="    LBIAS        {}\n".format(mot.MC.LBIAS)
+    if mot.MC.LDISCRETE is not None:
+        inputFile+="    LDISCRETE        {}\n".format(mot.MC.LDISCRETE)
+    if mot.MC.LSTOP is not None:
+        inputFile+="    LSTOP        {}\n".format(mot.MC.LSTOP)
+    if mot.MC.MAX_DISP_FILE_NAME is not None:
+        inputFile+="    MAX_DISP_FILE_NAME        {}\n".format(mot.MC.MAX_DISP_FILE_NAME)
+    if mot.MC.MOLECULES_FILE_NAME is not None:
+        inputFile+="    MOLECULES_FILE_NAME        {}\n".format(mot.MC.MOLECULES_FILE_NAME)
+    if mot.MC.MOVES_FILE_NAME is not None:
+        inputFile+="    MOVES_FILE_NAME        {}\n".format(mot.MC.MOVES_FILE_NAME)
+    if mot.MC.NMOVES is not None:
+        inputFile+="    NMOVES        {}\n".format(mot.MC.NMOVES)
+    if mot.MC.NSTEP is not None:
+        inputFile+="    NSTEP        {}\n".format(mot.MC.NSTEP)
+    if mot.MC.NSWAPMOVES is not None:
+        inputFile+="    NSWAPMOVES        {}\n".format(mot.MC.NSWAPMOVES)
+        
+        
+    if mot.MC.NVIRIAL is not None:
+        inputFile+="    NVIRIAL        {}\n".format(mot.MC.NVIRIAL)
+    if mot.MC.PRESSURE is not None:
+        inputFile+="    PRESSURE        {}\n".format(mot.MC.PRESSURE)
+        
+        
+    if mot.MC.RANDOMTOSKIP is not None:
+        inputFile+="    RANDOMTOSKIP        {}\n".format(mot.MC.RANDOMTOSKIP)
+    if mot.MC.RCLUS is not None:
+        inputFile+="    RCLUS        {}\n".format(mot.MC.RCLUS)
+        
+        
+    if mot.MC.RESTART is not None:
+        inputFile+="    RESTART        {}\n".format(mot.MC.RESTART)
+    if mot.MC.RESTART_FILE_NAME is not None:
+        inputFile+="    RESTART_FILE_NAME        {}\n".format(mot.MC.RESTART_FILE_NAME)
+        
+    if mot.MC.TEMPERATURE is not None:
+        inputFile+="    TEMPERATURE        {}\n".format(mot.MC.TEMPERATURE)
+    if mot.MC.VIRIAL_TEMPS is not None:
+        inputFile+="    VIRIAL_TEMPS        {}\n".format(mot.MC.VIRIAL_TEMPS)
+    inputFile += "  &END MC\n"
+    # MD section
+  
   inputFile += "  &MD\n"
   if mot.MD.ENSEMBLE is not None:
     inputFile += "    ENSEMBLE        {}\n".format(mot.MD.ENSEMBLE)
@@ -1275,6 +1447,18 @@ def write_input(SimObject):
     
     
   inputFile += "      &END VDW_POTENTIAL        \n"
+  inputFile += "      &XC_GRID        \n"
+    
+  if force.DFT.XC.XC_GRID.USE_FINER_GRID is not None:
+    inputFile += "          USE_FINER_GRID       {}\n".format(force.DFT.XC.XC_GRID.USE_FINER_GRID)
+  if force.DFT.XC.XC_GRID.XC_DERIV is not None:
+    inputFile += "          XC_DERIV       {}\n".format(force.DFT.XC.XC_GRID.XC_DERIV)
+  if force.DFT.XC.XC_GRID.XC_SMOOTH_RHO is not None:
+    inputFile += "          XC_SMOOTH_RHO       {}\n".format(force.DFT.XC.XC_GRID.XC_SMOOTH_RHO)
+    
+  inputFile += "      &END XC_GRID        \n"
+
+    
     
     #END XC
   inputFile += "    &END XC        \n"
@@ -1470,16 +1654,27 @@ def write_input(SimObject):
     #CENTER_COORDINATES SUBSECTION
   if force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.SECTION_PARAMETERS is not None:
     inputFile += "      &CENTER_COORDINATES       {}\n".format(force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.SECTION_PARAMETERS)
-    if force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.CENTER_POINT is not None:
+  if force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.CENTER_POINT is not None:
         inputFile += "        CENTER_POINT       {}\n".format(force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.CENTER_POINT)
-    inputFile += "      &END CENTER_COORDINATES       \n"
+  inputFile += "      &END CENTER_COORDINATES       \n"
     
 
 
 
     
+  inputFile += "      &MOL_SET       \n"  
+  inputFile += "        &MOLECULE       \n"
+  if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_FORMAT is not None:
+    inputFile += "          CONN_FILE_FORMAT       {}\n".format(force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_FORMAT)
     
-
+  if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_NAME is not None:
+    inputFile += "          CONN_FILE_NAME       {}\n".format(force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_NAME)
+    
+  if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.NMOL is not None:
+    inputFile += "          NMOL       {}\n".format(force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.NMOL)
+    
+  inputFile += "        &END MOLECULE       \n" 
+  inputFile += "      &END MOL_SET       \n" 
   inputFile += "    &END TOPOLOGY       \n"
     #end topology
         

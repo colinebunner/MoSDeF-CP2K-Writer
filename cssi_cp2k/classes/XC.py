@@ -4,8 +4,8 @@ import cssi_cp2k.utilities as utilities
 from cssi_cp2k.classes import XC_FUNCTIONAL
 
 from cssi_cp2k.classes import VDW_POTENTIAL
-
-BOOL_VALS   = [".TRUE.",".FALSE"]
+from cssi_cp2k.classes import XC_GRID
+BOOL_VALS   = [".TRUE.",".FALSE.","TRUE","FALSE"]
 FUNCTIONAL_ROUTINE_VALS=['DEBUG','NEW','OLD','TEST_LSD']
 
 
@@ -59,10 +59,7 @@ class XC:
     self.__location  = "{}/XC".format(location)
     self.__XC_FUNCTIONAL      = XC_FUNCTIONAL.XC_FUNCTIONAL(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
     self.__VDW_POTENTIAL      = VDW_POTENTIAL.VDW_POTENTIAL(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
-    #ENERGY subsections
-    #self.__EACH      = EACH.EACH(errorLog=self.__errorLog,changeLog=self.__changeLog,
-                      #   location=self.__location)
-
+    self.__XC_GRID      = XC_GRID.XC_GRID(errorLog=self.__errorLog,changeLog=self.__changeLog,location=self.__location)
   @property
   def errorLog(self):
     return self.__errorLog
@@ -126,11 +123,10 @@ class XC:
   @property
   def VDW_POTENTIAL(self):
     return self.__VDW_POTENTIAL
-#  @property
-#  def PRINT(self):
- #   return self.__PRINT
-#
 
+  @property
+  def XC_GRID(self):
+    return self.__XC_GRID
 
 
 

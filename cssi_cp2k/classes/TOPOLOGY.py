@@ -1,7 +1,7 @@
 import datetime
 from cssi_cp2k.utilities import *
 from cssi_cp2k.classes import CENTER_COORDINATES as CENTER_COORDINATES
-
+from cssi_cp2k.classes import MOL_SET
 
 
 
@@ -261,7 +261,7 @@ class TOPOLOGY:
   def __init__(self,AUTOGEN_EXCLUDE_LISTS=None,CHARGE_BETA=None,CHARGE_EXTENDED=None,CHARGE_OCCUP=None,CONN_FILE_FORMAT=None,CONN_FILE_NAME=None,COORD_FILE_FORMAT=None, COORD_FILE_NAME=None, DISABLE_EXCLUSION_LISTS=None, EXCLUDE_EI=None, EXCLUDE_VDW=None, MEMORY_PROGRESSION_FACTOR=None, MOL_CHECK=None, MULTIPLE_UNIT_CELL=None, NUMBER_OF_ATOMS=None, PARA_RES=None, USE_ELEMENT_AS_KIND=None, USE_G96_VELOCITY=None, errorLog=[],changeLog=[],location=""):
     self.__errorLog = errorLog
     self.__changeLog = changeLog
-    self.__location  = "{}/SUBSYS".format(location)
+    self.__location  = "{}/TOPOLOGY".format(location)
     self.__AUTOGEN_EXCLUDE_LISTS=_validate_AUTOGEN_EXCLUDE_LISTS(AUTOGEN_EXCLUDE_LISTS, errorLog=self.__errorLog)
     self.__CHARGE_BETA=_validate_CHARGE_BETA(CHARGE_BETA, errorLog=self.__errorLog)
     self.__CHARGE_EXTENDED=_validate_CHARGE_EXTENDED(CHARGE_EXTENDED, errorLog=self.__errorLog)
@@ -280,8 +280,8 @@ class TOPOLOGY:
     self.__PARA_RES=_validate_PARA_RES(PARA_RES,errorLog=self.__errorLog)
     self.__USE_ELEMENT_AS_KIND=_validate_USE_ELEMENT_AS_KIND(USE_ELEMENT_AS_KIND,errorLog=self.__errorLog)
     self.__USE_G96_VELOCITY=_validate_USE_G96_VELOCITY(USE_G96_VELOCITY,errorLog=self.__errorLog)
-    self.__CENTER_COORDINATES = CENTER_COORDINATES.CENTER_COORDINATES(errorLog=self.__errorLog, changeLog=self.__changeLog,
-                                              location=self.__location)
+    self.__CENTER_COORDINATES = CENTER_COORDINATES.CENTER_COORDINATES(errorLog=self.__errorLog, changeLog=self.__changeLog,location=self.__location)
+    self.__MOL_SET = MOL_SET.MOL_SET(errorLog=self.__errorLog, changeLog=self.__changeLog,location=self.__location)
 
     
     
@@ -365,6 +365,9 @@ class TOPOLOGY:
   @property
   def CENTER_COORDINATES(self):
     return self.__CENTER_COORDINATES
+  @property
+  def MOL_SET(self):
+    return self.__MOL_SET
 
 
 
