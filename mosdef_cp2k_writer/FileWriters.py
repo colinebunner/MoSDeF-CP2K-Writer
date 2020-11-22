@@ -1656,7 +1656,8 @@ def write_input(SimObject):
     inputFile += "      &CENTER_COORDINATES       {}\n".format(force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.SECTION_PARAMETERS)
   if force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.CENTER_POINT is not None:
         inputFile += "        CENTER_POINT       {}\n".format(force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.CENTER_POINT)
-  inputFile += "      &END CENTER_COORDINATES       \n"
+  if force.SUBSYS.TOPOLOGY.CENTER_COORDINATES.SECTION_PARAMETERS is not None:
+    inputFile += "      &END CENTER_COORDINATES       \n"
     
 
 
