@@ -4,6 +4,7 @@ from mosdef_cp2k_writer.classes import PRINT
 from mosdef_cp2k_writer.classes import MD
 from mosdef_cp2k_writer.classes import DFT
 from mosdef_cp2k_writer.classes import SUBSYS
+from mosdef_cp2k_writer.classes import MM
 
 METHOD_VALS=['EIP','EMBED','FIST','MIXED','QMMM','QS','QUICKSTEP','SIRIUS']
 STRESS_TENSOR_VALS=['ANALYTICAL','DIAGONAL_ANALYTICAL','DIAGONAL_NUMERICAL','NUMERICAL','NONE']
@@ -57,6 +58,9 @@ class FORCE_EVAL:
                          location=self.__location)
     self.__SUBSYS        = SUBSYS.SUBSYS(errorLog=self.__errorLog,changeLog=self.__changeLog,
                          location=self.__location)
+    self.__MM        = MM.MM(errorLog=self.__errorLog,changeLog=self.__changeLog,
+                         location=self.__location)
+    
     
   @property
   def METHOD(self):
@@ -93,6 +97,9 @@ class FORCE_EVAL:
   def SUBSYS(self):
     return self.__SUBSYS
 
+  @property
+  def MM(self):
+    return self.__MM
 
 
   @METHOD.setter
