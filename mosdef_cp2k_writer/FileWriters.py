@@ -2149,7 +2149,6 @@ def write_input(SimObject):
     # start CELL
 
     inputFile += "    &CELL        \n"
-
     if force.SUBSYS.CELL.A is not None:
         inputFile += "      A       {}\n".format(force.SUBSYS.CELL.A)
     if force.SUBSYS.CELL.ABC is not None:
@@ -2178,6 +2177,30 @@ def write_input(SimObject):
         inputFile += "      PERIODIC       {}\n".format(force.SUBSYS.CELL.PERIODIC)
     if force.SUBSYS.CELL.SYMMETRY is not None:
         inputFile += "      SYMMETRY       {}\n".format(force.SUBSYS.CELL.SYMMETRY)
+
+    if force.SUBSYS.CELL.CELL_REF.ABC is not None:
+        inputFile += "      &CELL_REF        \n"
+        if force.SUBSYS.CELL.CELL_REF.A is not None:
+            inputFile += "        A       {}\n".format(force.SUBSYS.CELL.CELL_REF.A)
+        if force.SUBSYS.CELL.CELL_REF.ABC is not None:
+            inputFile += "        ABC       {}\n".format(force.SUBSYS.CELL.CELL_REF.ABC)
+        if force.SUBSYS.CELL.CELL_REF.ALPHA_BETA_GAMMA is not None:
+            inputFile += "        ALPHA_BETA_GAMMA       {}\n".format(force.SUBSYS.CELL.CELL_REF.ALPHA_BETA_GAMMA)
+        if force.SUBSYS.CELL.CELL_REF.B is not None:
+            inputFile += "        B       {}\n".format(force.SUBSYS.CELL.CELL_REF.B)
+        if force.SUBSYS.CELL.CELL_REF.C is not None:
+            inputFile += "        C       {}\n".format(force.SUBSYS.CELL.CELL_REF.C)
+        if force.SUBSYS.CELL.CELL_REF.CELL_FILE_FORMAT is not None:
+            inputFile += "        CELL_FILE_FORMAT       {}\n".format(force.SUBSYS.CELL.CELL_REF.CELL_FILE_FORMAT)        
+        if force.SUBSYS.CELL.CELL_REF.CELL_FILE_NAME is not None:
+            inputFile += "        CELL_FILE_NAME       {}\n".format(force.SUBSYS.CELL.CELL_REF.CELL_FILE_NAME)
+        if force.SUBSYS.CELL.CELL_REF.MULTIPLE_UNIT_CELL is not None:
+            inputFile += "        MULTIPLE_UNIT_CELL       {}\n".format(force.SUBSYS.CELL.CELL_REF.MULTIPLE_UNIT_CELL)        
+        if force.SUBSYS.CELL.CELL_REF.PERIODIC is not None:
+            inputFile += "        PERIODIC       {}\n".format(force.SUBSYS.CELL.CELL_REF.PERIODIC)
+        if force.SUBSYS.CELL.CELL_REF.SYMMETRY is not None:
+            inputFile += "        SYMMETRY       {}\n".format(force.SUBSYS.CELL.CELL_REF.SYMMETRY)        
+        inputFile += "      &END CELL_REF        \n"
 
     inputFile += "    &END CELL        \n"
     # end CELL

@@ -228,7 +228,48 @@ class EWALD:
             }
         )
         self.__EWALD_ACCURACY = val
-
+        
+    @EWALD_TYPE.setter
+    def EWALD_TYPE(self, val):
+        if val in EWALD_TYPE_VALS or val is None:
+            self.__changeLog.append(
+                {
+                    "Date": datetime.datetime.now(),
+                    "Module": "EWALD",
+                    "Variable": "EWALD_TYPE",
+                    "Success": True,
+                    "Previous": self.__EWALD_TYPE,
+                    "New": val,
+                    "ErrorMessage": None,
+                    "Location": self.__location,
+                }
+            )
+            self.__EWALD_TYPE = val
+        else:
+            errorMessage = "Invalid value for EWALD_TYPE: {}. Must be one of these {}".format(val,EWALD_TYPE_VALS)
+            self.__changeLog.append(
+                {
+                    "Date": datetime.datetime.now(),
+                    "Module": "EWALD",
+                    "Variable": "EWALD_TYPE",
+                    "Success": False,
+                    "Previous": self.__EWALD_TYPE,
+                    "New": val,
+                    "ErrorMessage": errorMessage,
+                    "Location": self.__location,
+                }
+            )
+            self.__errorLog.append(
+                {
+                    "Date": datetime.datetime.now(),
+                    "Type": "Setter",
+                    "Module": "EWALD",
+                    "Variable": "EWALD_TYPE",
+                    "ErrorMessage": errorMessage,
+                    "Location": self.__location,
+                }
+            )
+            
     @GMAX.setter
     def GMAX(self, val):
         if utilities.is_integer(val):

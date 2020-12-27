@@ -1,6 +1,6 @@
 import datetime
 import mosdef_cp2k_writer.utilities as utilities
-from mosdef_cp2k_writer.classes import CELL_REF
+
 
 BOOL_VALS = [".TRUE.", ".FALSE."]
 CELL_FILE_FORMAT_VALS = ["CIF", "CP2K", "XSC"]
@@ -94,7 +94,7 @@ def _validate_PERIODIC(val, errorLog=[]):
             {
                 "Date": datetime.datetime.now(),
                 "Type": "init",
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "PERIODIC",
                 "ErrorMessage": errorMessage,
             }
@@ -116,7 +116,7 @@ def _validate_SYMMETRY(val, errorLog=[]):
             {
                 "Date": datetime.datetime.now(),
                 "Type": "init",
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "SYMMETRY",
                 "ErrorMessage": errorMessage,
             }
@@ -124,7 +124,7 @@ def _validate_SYMMETRY(val, errorLog=[]):
         raise TypeError
 
 
-class CELL:
+class CELL_REF:
     def __init__(
         self,
         A=None,
@@ -143,7 +143,7 @@ class CELL:
     ):
         self.__errorLog = errorLog
         self.__changeLog = changeLog
-        self.__location = "{}/DFT".format(location)
+        self.__location = "{}/CELL_REF".format(location)
         self.__A = _validate_A(A, errorLog=self.__errorLog)
         self.__ABC = _validate_ABC(ABC, errorLog=self.__errorLog)
         self.__ALPHA_BETA_GAMMA = _validate_ALPHA_BETA_GAMMA(
@@ -162,13 +162,10 @@ class CELL:
         )
         self.__PERIODIC = _validate_PERIODIC(PERIODIC, errorLog=self.__errorLog)
         self.__SYMMETRY = _validate_SYMMETRY(SYMMETRY, errorLog=self.__errorLog)
-        self.__CELL_REF = CELL_REF.CELL_REF(
-            errorLog=self.__errorLog,
-            changeLog=self.__changeLog,
-            location=self.__location,
-        )
 
-      
+        # ENERGY subsections
+        # self.__EACH      = EACH.EACH(errorLog=self.__errorLog,changeLog=self.__changeLog,
+        #        location=self.__location)
 
     @property
     def errorLog(self):
@@ -221,10 +218,6 @@ class CELL:
     @property
     def SYMMETRY(self):
         return self.__SYMMETRY
-    
-    @property
-    def CELL_REF(self):
-        return self.__CELL_REF
 
     @A.setter
     def A(self, val):
@@ -232,7 +225,7 @@ class CELL:
         self.__changeLog.append(
             {
                 "Date": datetime.datetime.now(),
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "A",
                 "Success": True,
                 "Previous": self.__A,
@@ -249,7 +242,7 @@ class CELL:
         self.__changeLog.append(
             {
                 "Date": datetime.datetime.now(),
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "ABC",
                 "Success": True,
                 "Previous": self.__ABC,
@@ -266,7 +259,7 @@ class CELL:
         self.__changeLog.append(
             {
                 "Date": datetime.datetime.now(),
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "ALPHA_BETA_GAMMA",
                 "Success": True,
                 "Previous": self.__ALPHA_BETA_GAMMA,
@@ -283,7 +276,7 @@ class CELL:
         self.__changeLog.append(
             {
                 "Date": datetime.datetime.now(),
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "B",
                 "Success": True,
                 "Previous": self.__B,
@@ -300,7 +293,7 @@ class CELL:
         self.__changeLog.append(
             {
                 "Date": datetime.datetime.now(),
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "C",
                 "Success": True,
                 "Previous": self.__C,
@@ -318,7 +311,7 @@ class CELL:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": "CELL_FILE_FORMAT",
                     "Success": True,
                     "Previous": self.__CELL_FILE_FORMAT,
@@ -337,7 +330,7 @@ class CELL:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": "CELL_FILE_FORMAT",
                     "Success": False,
                     "Previous": self.__CELL_FILE_FORMAT,
@@ -350,7 +343,7 @@ class CELL:
                 {
                     "Date": datetime.datetime.now(),
                     "Type": "Setter",
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": " CELL_FILE_FORMAT",
                     "ErrorMessage": errorMessage,
                     "Location": self.__location,
@@ -363,7 +356,7 @@ class CELL:
         self.__changeLog.append(
             {
                 "Date": datetime.datetime.now(),
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "CELL_FILE_NAME",
                 "Success": True,
                 "Previous": self.__B,
@@ -380,7 +373,7 @@ class CELL:
         self.__changeLog.append(
             {
                 "Date": datetime.datetime.now(),
-                "Module": "SUBSYS.CELL",
+                "Module": "SUBSYS.CELL_REF",
                 "Variable": "MULTIPLE_UNIT_CELL",
                 "Success": True,
                 "Previous": self.__MULTIPLE_UNIT_CELL,
@@ -398,7 +391,7 @@ class CELL:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": "PERIODIC",
                     "Success": True,
                     "Previous": self.__PERIODIC,
@@ -417,7 +410,7 @@ class CELL:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": "PERIODIC",
                     "Success": False,
                     "Previous": self.__PERIODIC,
@@ -430,7 +423,7 @@ class CELL:
                 {
                     "Date": datetime.datetime.now(),
                     "Type": "Setter",
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": " PERIODIC",
                     "ErrorMessage": errorMessage,
                     "Location": self.__location,
@@ -444,7 +437,7 @@ class CELL:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": "SYMMETRY",
                     "Success": True,
                     "Previous": self.__SYMMETRY,
@@ -463,7 +456,7 @@ class CELL:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": "SYMMETRY",
                     "Success": False,
                     "Previous": self.__SYMMETRY,
@@ -476,7 +469,7 @@ class CELL:
                 {
                     "Date": datetime.datetime.now(),
                     "Type": "Setter",
-                    "Module": "SUBSYS.CELL",
+                    "Module": "SUBSYS.CELL_REF",
                     "Variable": " SYMMETRY",
                     "ErrorMessage": errorMessage,
                     "Location": self.__location,
