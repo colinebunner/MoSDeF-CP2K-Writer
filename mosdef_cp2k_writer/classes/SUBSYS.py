@@ -8,7 +8,7 @@ from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
 from mosdef_cp2k_writer.utilities1 import objectArray as oba
 
 
-BOOL_VALS = [".TRUE.", ".FALSE"]
+BOOL_VALS = [".TRUE.", ".FALSE."]
 
 
 def _validate_SEED(val, errorLog=[]):

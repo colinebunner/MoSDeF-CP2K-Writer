@@ -2448,23 +2448,27 @@ def write_input(SimObject):
         inputFile += "      &END CENTER_COORDINATES       \n"
 
     inputFile += "      &MOL_SET       \n"
-    inputFile += "        &MOLECULE       \n"
-    if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_FORMAT is not None:
-        inputFile += "          CONN_FILE_FORMAT       {}\n".format(
-            force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_FORMAT
-        )
+    
+    if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE is not None:
+        for i in range(force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.length):
+        
+            inputFile += "        &MOLECULE       \n"
+            if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE[i+1].CONN_FILE_FORMAT is not None:
+                inputFile += "          CONN_FILE_FORMAT       {}\n".format(
+                    force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE[i+1].CONN_FILE_FORMAT
+                )
 
-    if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_NAME is not None:
-        inputFile += "          CONN_FILE_NAME       {}\n".format(
-            force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.CONN_FILE_NAME
-        )
+            if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE[i+1].CONN_FILE_NAME is not None:
+                inputFile += "          CONN_FILE_NAME       {}\n".format(
+                    force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE[i+1].CONN_FILE_NAME
+                )
 
-    if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.NMOL is not None:
-        inputFile += "          NMOL       {}\n".format(
-            force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.NMOL
-        )
+            if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE[i+1].NMOL is not None:
+                inputFile += "          NMOL       {}\n".format(
+                    force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE[i+1].NMOL
+                )
 
-    inputFile += "        &END MOLECULE       \n"
+            inputFile += "        &END MOLECULE       \n"
     inputFile += "      &END MOL_SET       \n"
     inputFile += "    &END TOPOLOGY       \n"
     # end topology
