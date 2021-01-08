@@ -6,4 +6,4 @@ not all sections are supported yet. Below, we have listed the input sections cur
 full API in the near future. We will not cover the input sections in more detail, as they are already documented in the CP2K
 manual (https://manual.cp2k.org/).
 
-- I can add the sections later, Ramanish
+To be listed. See mosdef_cp2k_writer/classes.
