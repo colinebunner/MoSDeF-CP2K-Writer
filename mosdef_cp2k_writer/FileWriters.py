@@ -1140,7 +1140,7 @@ def write_input(SimObject):
 
     inputFile += "      &MOL_SET       \n"
     
-    if force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE is not None:
+    if hasattr(force.SUBSYS.TOPOLOGY.MOL_SET, 'MOLECULE'):
         for i in range(force.SUBSYS.TOPOLOGY.MOL_SET.MOLECULE.length):
         
             inputFile += "        &MOLECULE       \n"
