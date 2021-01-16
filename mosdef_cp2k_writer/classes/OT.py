@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 SECTION_PARAMETERS_VALS = [".TRUE.", ".FALSE"]
 BOOL_VALS = [".TRUE.", ".FALSE"]
@@ -235,7 +235,7 @@ def _validate_GOLD_TARGET(val, errorLog=[]):
 
 
 def _validate_IRAC_DEGREE(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "IRAC_DEGREE  must be AN integer."
@@ -276,7 +276,7 @@ def _validate_LINESEARCH(val, errorLog=[]):
 
 
 def _validate_MAX_IRAC(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAX_IRAC  must be AN integer."
@@ -293,7 +293,7 @@ def _validate_MAX_IRAC(val, errorLog=[]):
 
 
 def _validate_MAX_TAYLOR(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAX_TAYLOR  must be AN integer."
@@ -360,7 +360,7 @@ def _validate_NONDIAG_ENERGY_STRENGTH(val, errorLog=[]):
 
 
 def _validate_N_HISTORY_VEC(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "N_HISTORY_VEC  must be AN integer."

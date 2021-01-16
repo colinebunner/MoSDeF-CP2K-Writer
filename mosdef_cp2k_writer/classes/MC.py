@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import AVBMC as avbmc
 from mosdef_cp2k_writer.classes import MAX_DISPLACEMENTS as max_displacements
 from mosdef_cp2k_writer.classes import MOVE_PROBABILITIES as move_probabilities
@@ -12,34 +12,34 @@ BOOL_VALS = ["TRUE", "FALSE", ".TRUE.", ".FALSE."]
 def _validate_BOX2_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_CELL_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_COORDINATE_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_DATA_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_DISCRETE_STEP(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "DISCRETE_STEP must be a number."
@@ -58,7 +58,7 @@ def _validate_DISCRETE_STEP(val, errorLog=[]):
 def _validate_ENERGY_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
@@ -87,7 +87,7 @@ def _validate_ENSEMBLE(val, errorLog=[]):
 
 def _validate_ETA(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "ETA must be a number."
@@ -105,7 +105,7 @@ def _validate_ETA(val, errorLog=[]):
 
 def _validate_IPRINT(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "IPRINT must be an integer."
@@ -187,27 +187,27 @@ def _validate_LSTOP(val, errorLog=[]):
 def _validate_MAX_DISP_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_MOLECULES_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_MOVES_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_NMOVES(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NMOVES must be an integer."
@@ -225,7 +225,7 @@ def _validate_NMOVES(val, errorLog=[]):
 
 def _validate_NSTEP(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NSTEP must be an integer."
@@ -243,7 +243,7 @@ def _validate_NSTEP(val, errorLog=[]):
 
 def _validate_NSWAPMOVES(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NSWAPMOVES must be an integer."
@@ -261,7 +261,7 @@ def _validate_NSWAPMOVES(val, errorLog=[]):
 
 def _validate_NVIRIAL(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NVIRIAL must be an integer."
@@ -279,7 +279,7 @@ def _validate_NVIRIAL(val, errorLog=[]):
 
 def _validate_PRESSURE(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "PRESSURE must be a number."
@@ -297,7 +297,7 @@ def _validate_PRESSURE(val, errorLog=[]):
 
 def _validate_RANDOMTOSKIP(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "RANDOMTOSKIP must be an integer."
@@ -315,7 +315,7 @@ def _validate_RANDOMTOSKIP(val, errorLog=[]):
 
 def _validate_RCLUS(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "RCLUS must be a number."
@@ -355,13 +355,13 @@ def _validate_RESTART(val, errorLog=[]):
 def _validate_RESTART_FILE_NAME(val, errorLog=[]):
     if val is not None:
         val = str(val).upper()
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
 
 
 def _validate_TEMPERATURE(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "TEMPERATURE must be a number."
@@ -379,7 +379,7 @@ def _validate_TEMPERATURE(val, errorLog=[]):
 
 def _validate_VIRIAL_TEMPS(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "VIRIAL_TEMPS must be a number."
@@ -648,7 +648,7 @@ class MC:
 
     @BOX2_FILE_NAME.setter
     def BOX2_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -692,7 +692,7 @@ class MC:
 
     @CELL_FILE_NAME.setter
     def CELL_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -736,7 +736,7 @@ class MC:
 
     @COORDINATE_FILE_NAME.setter
     def COORDINATE_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -782,7 +782,7 @@ class MC:
 
     @DATA_FILE_NAME.setter
     def DATA_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -826,7 +826,7 @@ class MC:
 
     @DISCRETE_STEP.setter
     def DISCRETE_STEP(self, val):
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -870,7 +870,7 @@ class MC:
 
     @ENERGY_FILE_NAME.setter
     def ENERGY_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -958,7 +958,7 @@ class MC:
 
     @ETA.setter
     def ETA(self, val):
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1000,7 +1000,7 @@ class MC:
 
     @IPRINT.setter
     def IPRINT(self, val):
-        if val is None or utilities.is_integer(val):
+        if val is None or ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1180,7 +1180,7 @@ class MC:
 
     @MAX_DISP_FILE_NAME.setter
     def MAX_DISP_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1226,7 +1226,7 @@ class MC:
 
     @MOLECULES_FILE_NAME.setter
     def MOLECULES_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1272,7 +1272,7 @@ class MC:
 
     @MOVES_FILE_NAME.setter
     def MOVES_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1316,7 +1316,7 @@ class MC:
 
     @NMOVES.setter
     def NMOVES(self, val):
-        if val is None or utilities.is_integer(val):
+        if val is None or ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1360,7 +1360,7 @@ class MC:
 
     @NSTEP.setter
     def NSTEP(self, val):
-        if val is None or utilities.is_integer(val):
+        if val is None or ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1404,7 +1404,7 @@ class MC:
 
     @NSWAPMOVES.setter
     def NSWAPMOVES(self, val):
-        if val is None or utilities.is_integer(val):
+        if val is None or ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1448,7 +1448,7 @@ class MC:
 
     @NVIRIAL.setter
     def NVIRIAL(self, val):
-        if val is None or utilities.is_integer(val):
+        if val is None or ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1492,7 +1492,7 @@ class MC:
 
     @PRESSURE.setter
     def PRESSURE(self, val):
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1536,7 +1536,7 @@ class MC:
 
     @RANDOMTOSKIP.setter
     def RANDOMTOSKIP(self, val):
-        if val is None or utilities.is_integer(val):
+        if val is None or ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1580,7 +1580,7 @@ class MC:
 
     @RCLUS.setter
     def RCLUS(self, val):
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1666,7 +1666,7 @@ class MC:
 
     @RESTART_FILE_NAME.setter
     def RESTART_FILE_NAME(self, val):
-        if val is None or utilities.is_string(val):
+        if val is None or ti.is_string(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1710,7 +1710,7 @@ class MC:
 
     @TEMPERATURE.setter
     def TEMPERATURE(self, val):
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1754,7 +1754,7 @@ class MC:
 
     @VIRIAL_TEMPS.setter
     def VIRIAL_TEMPS(self, val):
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

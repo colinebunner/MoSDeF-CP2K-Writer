@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
    # url='https://github.com/ramanishsingh/cp2kmd',
-    packages=['mosdef_cp2k_writer','mosdef_cp2k_writer/classes','mosdef_cp2k_writer/utilities1'],
+    packages=['mosdef_cp2k_writer','mosdef_cp2k_writer/classes','mosdef_cp2k_writer/utilities'],
       install_requires = [
         'numpy',
       ],

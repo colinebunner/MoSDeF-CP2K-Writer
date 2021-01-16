@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 class ACC:
@@ -136,7 +136,7 @@ class ACC:
 
     @BINNING_BINSIZE.setter
     def BINNING_BINSIZE(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -179,7 +179,7 @@ class ACC:
 
     @BINNING_NBINS.setter
     def BINNING_NBINS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -222,7 +222,7 @@ class ACC:
 
     @MIN_FLOP_PROCESS.setter
     def MIN_FLOP_PROCESS(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -265,7 +265,7 @@ class ACC:
 
     @POSTERIOR_BUFFERS.setter
     def POSTERIOR_BUFFERS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -310,7 +310,7 @@ class ACC:
 
     @PRIORITY_BUFFERS.setter
     def PRIORITY_BUFFERS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -355,7 +355,7 @@ class ACC:
 
     @PRIORITY_STREAMS.setter
     def PRIORITY_STREAMS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

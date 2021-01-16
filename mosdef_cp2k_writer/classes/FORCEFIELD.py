@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import SPLINE
 
 
@@ -9,7 +9,7 @@ PARMTYPE_VALS = ["AMBER", "CHM", "G87", "G96", "OFF"]
 
 
 def _validate_PARM_FILE_NAME(val, errorLog=[]):
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
     else:
         errorMessage = "PARM_FILE_NAME must be string."
@@ -136,7 +136,7 @@ class FORCEFIELD:
 
     @PARM_FILE_NAME.setter
     def PARM_FILE_NAME(self, val):
-        if utilities.is_string(val) or (val is None):
+        if ti.is_string(val) or (val is None):
 
             self.__changeLog.append(
                 {

@@ -1,7 +1,7 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
-from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
-from mosdef_cp2k_writer.utilities1 import objectArray as oba
+from mosdef_cp2k_writer.utilities import test_instance as ti
+from mosdef_cp2k_writer.utilities import oneDimArray as oda
+from mosdef_cp2k_writer.utilities import objectArray as oba
 
 from mosdef_cp2k_writer.classes import MOLECULEs
 

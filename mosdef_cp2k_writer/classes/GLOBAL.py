@@ -8,7 +8,7 @@ from mosdef_cp2k_writer.classes import PRINT_ELPA
 from mosdef_cp2k_writer.classes import PROGRAM_RUN_INFO
 from mosdef_cp2k_writer.classes import REFERENCES
 from mosdef_cp2k_writer.classes import TIMINGS
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 BLACS_GRID_VALS = ["COLUMN", "ROW", "SQUARE"]
 CALLGRAPH_VALS = ["ALL", "MASTER", "NONE"]
@@ -875,7 +875,7 @@ class GLOBAL:
 
     @FFT_POOL_SCRATCH_LIMIT.setter
     def FFT_POOL_SCRATCH_LIMIT(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1235,7 +1235,7 @@ class GLOBAL:
 
     @SEED.setter
     def SEED(self, val):
-        if utilities.is_integer(val) or val is None:
+        if ti.is_integer(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1358,7 +1358,7 @@ class GLOBAL:
 
     @TRACE_MAX.setter
     def TRACE_MAX(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1405,12 +1405,12 @@ class GLOBAL:
     def WALLTIME(self, val):
         hhmmss = str(val).split(":")
         # If given in seconds, not HH:MM:SS
-        if len(hhmmss) == 1 and utilities.is_number(val):
+        if len(hhmmss) == 1 and ti.is_number(val):
             self.__WALLTIME = int(float(val) // 1)
         elif len(hhmmss) == 3:
             isn = True
             for v in hhmmss:
-                if not (utilities.is_number(v)):
+                if not (ti.is_number(v)):
                     isn = False
             if isn:
                 self.__WALLTIME = val

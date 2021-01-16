@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import ACC
 
 MM_DRIVER_VALS = ["AUTO", "BLAS", "MATMUL", "SMM", "XSMM"]
@@ -100,7 +100,7 @@ class DBCSR:
 
     @AVG_ELEMENTS_IMAGES.setter
     def AVG_ELEMENTS_IMAGES(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -145,7 +145,7 @@ class DBCSR:
 
     @COMM_THREAD_LOAD.setter
     def COMM_THREAD_LOAD(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -190,7 +190,7 @@ class DBCSR:
 
     @MAX_ELEMENTS_PER_BLOCK.setter
     def MAX_ELEMENTS_PER_BLOCK(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -278,7 +278,7 @@ class DBCSR:
 
     @MM_STACK_SIZE.setter
     def MM_STACK_SIZE(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -321,7 +321,7 @@ class DBCSR:
 
     @MULTREC_LIMIT.setter
     def MULTREC_LIMIT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -364,7 +364,7 @@ class DBCSR:
 
     @NUM_LAYERS_3D.setter
     def NUM_LAYERS_3D(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -407,7 +407,7 @@ class DBCSR:
 
     @NUM_MULT_IMAGES.setter
     def NUM_MULT_IMAGES(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -450,7 +450,7 @@ class DBCSR:
 
     @N_SIZE_MNK_STACKS.setter
     def N_SIZE_MNK_STACKS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

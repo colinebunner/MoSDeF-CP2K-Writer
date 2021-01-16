@@ -1,10 +1,10 @@
 import os
 import random
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 import mosdef_cp2k_writer.FileWriters as FileWriters
 from mosdef_cp2k_writer.classes import GLOBAL
-from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
-from mosdef_cp2k_writer.utilities1 import objectArray as oba
+from mosdef_cp2k_writer.utilities import oneDimArray as oda
+from mosdef_cp2k_writer.utilities import objectArray as oba
 from mosdef_cp2k_writer.classes import MOTION
 from mosdef_cp2k_writer.classes import FORCE_EVAL
 

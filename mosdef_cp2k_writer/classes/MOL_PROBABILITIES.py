@@ -1,10 +1,10 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 def _validate_PMAVBMC_MOL(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -24,7 +24,7 @@ def _validate_PMAVBMC_MOL(val, errorLog=[]):
 
 def _validate_PMROT_MOL(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMROT_MOL: {}. Valid options are: {}".format(
@@ -44,7 +44,7 @@ def _validate_PMROT_MOL(val, errorLog=[]):
 
 def _validate_PMSWAP_MOL(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -64,7 +64,7 @@ def _validate_PMSWAP_MOL(val, errorLog=[]):
 
 def _validate_PMTRAION_MOL(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -84,7 +84,7 @@ def _validate_PMTRAION_MOL(val, errorLog=[]):
 
 def _validate_PMTRANS_MOL(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -167,7 +167,7 @@ class MOL_PROBABILITIES:
     @PMAVBMC_MOL.setter
     def PMAVBMC_MOL(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -213,7 +213,7 @@ class MOL_PROBABILITIES:
     @PMROT_MOL.setter
     def PMROT_MOL(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -259,7 +259,7 @@ class MOL_PROBABILITIES:
     @PMSWAP_MOL.setter
     def PMSWAP_MOL(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -305,7 +305,7 @@ class MOL_PROBABILITIES:
     @PMTRAION_MOL.setter
     def PMTRAION_MOL(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -349,7 +349,7 @@ class MOL_PROBABILITIES:
     @PMTRANS_MOL.setter
     def PMTRANS_MOL(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

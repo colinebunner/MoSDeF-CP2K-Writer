@@ -1,3 +1,11 @@
-# mosdef_cp2k_writer
+# cssi_cp2k
 
-This is an input file writer conducting molecular dynamics and Monte Carlo simulations in CP2K. For more information please visit link_to_RTD.
+More information coming soon.
+Make a `mosdef36` conda environment:
+
+```bash
+conda create -n mosdef36 -c mosdef -c conda-forge -c omnia python=3.6 mbuild foyer signac signac-flow pandas
+conda activate mosdef36
+conda install -c conda-forge openbabel  
+pip install unyt
+```

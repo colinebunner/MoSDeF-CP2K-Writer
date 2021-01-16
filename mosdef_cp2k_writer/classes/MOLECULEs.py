@@ -1,7 +1,7 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
-from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
-from mosdef_cp2k_writer.utilities1 import objectArray as oba
+from mosdef_cp2k_writer.utilities import test_instance as ti
+from mosdef_cp2k_writer.utilities import oneDimArray as oda
+from mosdef_cp2k_writer.utilities import objectArray as oba
 
 CONN_FILE_FORMAT_VALS = [
     "AMBER",
@@ -43,7 +43,7 @@ def _validate_CONN_FILE_FORMAT(val, errorLog=[]):
 
 def _validate_CONN_FILE_NAME(val, errorLog=[]):
 
-    if utilities.is_string(val) or (val is None):
+    if ti.is_string(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -63,7 +63,7 @@ def _validate_CONN_FILE_NAME(val, errorLog=[]):
 
 def _validate_NMOL(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for NMOL: {}. Should be an integer".format(val)
@@ -176,7 +176,7 @@ class MOLECULEs:
     @CONN_FILE_NAME.setter
     def CONN_FILE_NAME(self, val):
 
-        if utilities.is_string(val) or val is None:
+        if ti.is_string(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -220,7 +220,7 @@ class MOLECULEs:
     @NMOL.setter
     def NMOL(self, val):
 
-        if utilities.is_integer(val) or val is None:
+        if ti.is_integer(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

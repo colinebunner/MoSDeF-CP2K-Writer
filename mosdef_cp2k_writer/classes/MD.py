@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import THERMOSTAT as thermostat
 from mosdef_cp2k_writer.classes import MD_PRINT as md_print
 from mosdef_cp2k_writer.classes import AVERAGES as averages
@@ -46,7 +46,7 @@ def _validate_ensemble(val, errorLog=[]):
 
 
 def _validate_steps(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MD STEPS must be an integer."
@@ -63,7 +63,7 @@ def _validate_steps(val, errorLog=[]):
 
 
 def _validate_timestep(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "MD TIMESTEP must be a number."
@@ -80,7 +80,7 @@ def _validate_timestep(val, errorLog=[]):
 
 
 def _validate_temperature(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "MD TEMPERATURE must be a number. You provided {}".format(val)
@@ -231,7 +231,7 @@ class MD:
 
     @STEPS.setter
     def STEPS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -272,7 +272,7 @@ class MD:
 
     @TIMESTEP.setter
     def TIMESTEP(self, val):
-        if utilities.is_positive_number(val):
+        if ti.is_positive_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -313,7 +313,7 @@ class MD:
 
     @TEMPERATURE.setter
     def TEMPERATURE(self, val):
-        if utilities.is_positive_number(val) or val is None:
+        if ti.is_positive_number(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

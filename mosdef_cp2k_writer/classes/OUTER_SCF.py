@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 SECTION_PARAMETERS_VALS = [".TRUE.", ".FALSE."]
 OPTIMIZER_VALS = [
@@ -46,7 +46,7 @@ def _validate_SECTION_PARAMETERS(val, errorLog=[]):
 
 
 def _validate_BISECT_TRUST_COUNT(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "BISECT_TRUST_COUNT  must be AN integer."
@@ -63,7 +63,7 @@ def _validate_BISECT_TRUST_COUNT(val, errorLog=[]):
 
 
 def _validate_DIIS_BUFFER_LENGTH(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "DIIS_BUFFER_LENGTH  must be AN integer."
@@ -84,7 +84,7 @@ def _validate_EPS_SCF(val, errorLog=[]):
 
 
 def _validate_EXTRAPOLATION_ORDER(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "EXTRAPOLATION_ORDER  must be AN integer."
@@ -101,7 +101,7 @@ def _validate_EXTRAPOLATION_ORDER(val, errorLog=[]):
 
 
 def _validate_MAX_SCF(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAX_SCF  must be AN integer."
@@ -300,7 +300,7 @@ class OUTER_SCF:
 
     @BISECT_TRUST_COUNT.setter
     def BISECT_TRUST_COUNT(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -341,7 +341,7 @@ class OUTER_SCF:
 
     @DIIS_BUFFER_LENGTH.setter
     def DIIS_BUFFER_LENGTH(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -398,7 +398,7 @@ class OUTER_SCF:
 
     @EXTRAPOLATION_ORDER.setter
     def EXTRAPOLATION_ORDER(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -439,7 +439,7 @@ class OUTER_SCF:
 
     @MAX_SCF.setter
     def MAX_SCF(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

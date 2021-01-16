@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 BOOL_VALS = [".TRUE.", ".FALSE."]
 
@@ -31,7 +31,7 @@ def _validate_SECTION_PARAMETERS(val, errorLog=[]):
 
 def _validate_ACQUISITION_START_TIME(val, errorLog=[]):
 
-    if utilities.is_positive_number(val) or (val is None):
+    if ti.is_positive_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for ACQUISITION_START_TIME: {}. Must be a positive number".format(
@@ -185,7 +185,7 @@ class AVERAGES:
 
     @ACQUISITION_START_TIME.setter
     def ACQUISITION_START_TIME(self, val):
-        if utilities.is_positive_number(val):
+        if ti.is_positive_number(val):
 
             self.__changeLog.append(
                 {

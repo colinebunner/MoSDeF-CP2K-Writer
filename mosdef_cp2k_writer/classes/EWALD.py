@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 BOOL_VALS = [".TRUE.", ".FALSE"]
 EWALD_TYPE_VALS = ["EWALD", "NONE", "PME", "SPME"]
@@ -45,7 +45,7 @@ def _validate_EWALD_TYPE(val, errorLog=[]):
 
 
 def _validate_GMAX(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "GMAX must be an integer."
@@ -62,7 +62,7 @@ def _validate_GMAX(val, errorLog=[]):
 
 
 def _validate_NS_MAX(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NS_MAX must be an integer."
@@ -79,7 +79,7 @@ def _validate_NS_MAX(val, errorLog=[]):
 
 
 def _validate_O_SPLINE(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "O_SPLINE must be an integer."
@@ -272,7 +272,7 @@ class EWALD:
             
     @GMAX.setter
     def GMAX(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -313,7 +313,7 @@ class EWALD:
 
     @NS_MAX.setter
     def NS_MAX(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -354,7 +354,7 @@ class EWALD:
 
     @O_SPLINE.setter
     def O_SPLINE(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

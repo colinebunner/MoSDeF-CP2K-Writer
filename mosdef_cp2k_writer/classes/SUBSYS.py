@@ -1,18 +1,18 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import CELL
 from mosdef_cp2k_writer.classes import KINDs
 from mosdef_cp2k_writer.classes import COORD
 from mosdef_cp2k_writer.classes import TOPOLOGY
-from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
-from mosdef_cp2k_writer.utilities1 import objectArray as oba
+from mosdef_cp2k_writer.utilities import oneDimArray as oda
+from mosdef_cp2k_writer.utilities import objectArray as oba
 
 
 BOOL_VALS = [".TRUE.", ".FALSE."]
 
 
 def _validate_SEED(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "SEED must be an integer."
@@ -110,7 +110,7 @@ class SUBSYS:
 
     @SEED.setter
     def SEED(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

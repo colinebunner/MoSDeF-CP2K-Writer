@@ -1,8 +1,8 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
-from mosdef_cp2k_writer.utilities1 import oneDimArray as oda
-from mosdef_cp2k_writer.utilities1 import objectArray as oba
+from mosdef_cp2k_writer.utilities import oneDimArray as oda
+from mosdef_cp2k_writer.utilities import objectArray as oba
 
 
 BOOL_VALS = [".TRUE.", ".FALSE."]
@@ -39,7 +39,7 @@ def _validate_DFTB3_PARAM(val, errorLog=[]):
 
 
 def _validate_ELEC_CONF(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "ELEC_CONF must be an integer."
@@ -142,7 +142,7 @@ def _validate_KG_POTENTIAL_FILE_NAME(val, errorLog=[]):
 
 
 def _validate_LEBEDEV_GRID(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "LEBEDEV_GRID must be an integer."
@@ -164,7 +164,7 @@ def _validate_ELEMENT(val, errorLog=[]):
 
 
 def _validate_LMAX_DFTB(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "LMAX_DFTB must be an integer."
@@ -196,7 +196,7 @@ def _validate_MAGNETIZATION(val, errorLog=[]):
 
 
 def _validate_MAO(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAO must be an integer."
@@ -252,7 +252,7 @@ def _validate_NO_OPTIMIZE(val, errorLog=[]):
 
 
 def _validate_PAO_BASIS_SIZE(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "PAO_BASIS_SIZE must be an integer."
@@ -284,7 +284,7 @@ def _validate_POTENTIAL_TYPE(val, errorLog=[]):
 
 
 def _validate_RADIAL_GRID(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "RADIAL_GRID must be an integer."
@@ -695,7 +695,7 @@ class KINDs:
 
     @ELEC_CONF.setter
     def ELEC_CONF(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -938,7 +938,7 @@ class KINDs:
 
     @LEBEDEV_GRID.setter
     def LEBEDEV_GRID(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -979,7 +979,7 @@ class KINDs:
 
     @LMAX_DFTB.setter
     def LMAX_DFTB(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1054,7 +1054,7 @@ class KINDs:
 
     @MAO.setter
     def MAO(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1192,7 +1192,7 @@ class KINDs:
 
     @PAO_BASIS_SIZE.setter
     def PAO_BASIS_SIZE(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1284,7 +1284,7 @@ class KINDs:
 
     @RADIAL_GRID.setter
     def RADIAL_GRID(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

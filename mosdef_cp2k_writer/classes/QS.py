@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 BOOL_VALS = [".TRUE.", ".FALSE"]
 CORE_PPL_VALS = ["ANALYTIC", "GRID"]
@@ -303,7 +303,7 @@ def _validate_EXTRAPOLATION(val, errorLog=[]):
 
 
 def _validate_EXTRAPOLATION_ORDER(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "EXTRAPOLATION_ORDER must be an integer."
@@ -386,7 +386,7 @@ def _validate_KG_METHOD(val, errorLog=[]):
 
 
 def _validate_LADDN0(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "LADDN0 must be an integer."
@@ -403,7 +403,7 @@ def _validate_LADDN0(val, errorLog=[]):
 
 
 def _validate_LMAXN0(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "LMAXN0 must be an integer."
@@ -420,7 +420,7 @@ def _validate_LMAXN0(val, errorLog=[]):
 
 
 def _validate_LMAXN1(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "LMAXN1 must be an integer."
@@ -556,7 +556,7 @@ def _validate_PW_GRID_BLOCKED(val, errorLog=[]):
 
 
 def _validate_PW_GRID_LAYOUT(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "PW_GRID_LAYOUT must be an integer."
@@ -621,7 +621,7 @@ def _validate_REF_EMBED_SUBSYS(val, errorLog=[]):
 
 
 def _validate_STO_NG(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "STO_NG must be an integer."
@@ -1627,7 +1627,7 @@ class QS:
 
     @EXTRAPOLATION_ORDER.setter
     def EXTRAPOLATION_ORDER(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1804,7 +1804,7 @@ class QS:
 
     @LADDN0.setter
     def LADDN0(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1845,7 +1845,7 @@ class QS:
 
     @LMAXN0.setter
     def LMAXN0(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1886,7 +1886,7 @@ class QS:
 
     @LMAXN1.setter
     def LMAXN1(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -2174,7 +2174,7 @@ class QS:
 
     @PW_GRID_LAYOUT.setter
     def PW_GRID_LAYOUT(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -2307,7 +2307,7 @@ class QS:
 
     @STO_NG.setter
     def STO_NG(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

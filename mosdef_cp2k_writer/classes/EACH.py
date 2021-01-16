@@ -1,9 +1,9 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 def _validate_band(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "BAND iteration level must be a positive integer."
@@ -20,7 +20,7 @@ def _validate_band(val, errorLog=[]):
 
 
 def _validate_bsse(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "BSSE iteration level must be a positive integer."
@@ -37,7 +37,7 @@ def _validate_bsse(val, errorLog=[]):
 
 
 def _validate_cell_opt(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "CELL_OPT iteration level must be a positive integer."
@@ -54,7 +54,7 @@ def _validate_cell_opt(val, errorLog=[]):
 
 
 def _validate_ep_lin_solver(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "EP_LIN_SOLVER iteration level must be a positive integer."
@@ -71,7 +71,7 @@ def _validate_ep_lin_solver(val, errorLog=[]):
 
 
 def _validate_geo_opt(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "GEO_OPT iteration level must be a positive integer."
@@ -88,7 +88,7 @@ def _validate_geo_opt(val, errorLog=[]):
 
 
 def _validate_just_energy(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "JUST_ENERGY iteration level must be a positive integer."
@@ -105,7 +105,7 @@ def _validate_just_energy(val, errorLog=[]):
 
 
 def _validate_md(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MD iteration level must be a positive integer."
@@ -122,7 +122,7 @@ def _validate_md(val, errorLog=[]):
 
 
 def _validate_metadynamics(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "METADYNAMICS iteration level must be a positive integer."
@@ -139,7 +139,7 @@ def _validate_metadynamics(val, errorLog=[]):
 
 
 def _validate_pint(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "PINT iteration level must be a positive integer."
@@ -156,7 +156,7 @@ def _validate_pint(val, errorLog=[]):
 
 
 def _validate_powell_opt(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "POWELL_OPT iteration level must be a positive integer."
@@ -173,7 +173,7 @@ def _validate_powell_opt(val, errorLog=[]):
 
 
 def _validate_qs_scf(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "QS_SCF iteration level must be a positive integer."
@@ -190,7 +190,7 @@ def _validate_qs_scf(val, errorLog=[]):
 
 
 def _validate_replica_eval(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "REPLICA_EVAL iteration level must be a positive integer."
@@ -207,7 +207,7 @@ def _validate_replica_eval(val, errorLog=[]):
 
 
 def _validate_rot_opt(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "ROT_OPT iteration level must be a positive integer."
@@ -224,7 +224,7 @@ def _validate_rot_opt(val, errorLog=[]):
 
 
 def _validate_shell_opt(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "SHELL_OPT iteration level must be a positive integer."
@@ -241,7 +241,7 @@ def _validate_shell_opt(val, errorLog=[]):
 
 
 def _validate_spline_find_coeffs(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "SPLINE_FIND_COEFFS iteration level must be a positive integer."
@@ -258,7 +258,7 @@ def _validate_spline_find_coeffs(val, errorLog=[]):
 
 
 def _validate_tddft_scf(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "TDDFT_SCF iteration level must be a positive integer."
@@ -275,7 +275,7 @@ def _validate_tddft_scf(val, errorLog=[]):
 
 
 def _validate_xas_scf(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "XAS_SCF iteration level must be a positive integer."
@@ -292,7 +292,7 @@ def _validate_xas_scf(val, errorLog=[]):
 
 
 def _validate_root(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "ROOT iteration level must be a positive integer."
@@ -452,7 +452,7 @@ class EACH:
 
     @BAND.setter
     def BAND(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -493,7 +493,7 @@ class EACH:
 
     @BSSE.setter
     def BSSE(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -534,7 +534,7 @@ class EACH:
 
     @CELL_OPT.setter
     def CELL_OPT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -575,7 +575,7 @@ class EACH:
 
     @EP_LIN_SOLVER.setter
     def EP_LIN_SOLVER(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -616,7 +616,7 @@ class EACH:
 
     @GEO_OPT.setter
     def GEO_OPT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -657,7 +657,7 @@ class EACH:
 
     @JUST_ENERGY.setter
     def JUST_ENERGY(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -698,7 +698,7 @@ class EACH:
 
     @MD.setter
     def MD(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -739,7 +739,7 @@ class EACH:
 
     @METADYNAMICS.setter
     def METADYNAMICS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -780,7 +780,7 @@ class EACH:
 
     @PINT.setter
     def PINT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -821,7 +821,7 @@ class EACH:
 
     @POWELL_OPT.setter
     def POWELL_OPT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -862,7 +862,7 @@ class EACH:
 
     @QS_SCF.setter
     def QS_SCF(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -903,7 +903,7 @@ class EACH:
 
     @REPLICA_EVAL.setter
     def REPLICA_EVAL(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -944,7 +944,7 @@ class EACH:
 
     @ROT_OPT.setter
     def ROT_OPT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -985,7 +985,7 @@ class EACH:
 
     @SHELL_OPT.setter
     def SHELL_OPT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1026,7 +1026,7 @@ class EACH:
 
     @SPLINE_FIND_COEFFS.setter
     def SPLINE_FIND_COEFFS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1069,7 +1069,7 @@ class EACH:
 
     @TDDFT_SCF.setter
     def TDDFT_SCF(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1110,7 +1110,7 @@ class EACH:
 
     @XAS_SCF.setter
     def XAS_SCF(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -1151,7 +1151,7 @@ class EACH:
 
     @ROOT.setter
     def ROOT(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

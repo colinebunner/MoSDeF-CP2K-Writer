@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 OPTIMIZER_VALS = ["BFGS", "CG", "LBFGS"]
@@ -50,7 +50,7 @@ def _validate_MAX_FORCE(val, errorLog=[]):
 
 
 def _validate_MAX_ITER(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "GEO_OPT MAX_ITER must be an integer."
@@ -69,7 +69,7 @@ def _validate_MAX_ITER(val, errorLog=[]):
 
 
 def _validate_STEP_START_VAL(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -284,7 +284,7 @@ class GEO_OPT:
 
     @MAX_DR.setter
     def MAX_DR(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -325,7 +325,7 @@ class GEO_OPT:
 
     @MAX_FORCE.setter
     def MAX_DR(self, val):
-        if utilities.is_positive_number(val):
+        if ti.is_positive_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -366,7 +366,7 @@ class GEO_OPT:
 
     @MAX_ITER.setter
     def MAX_ITER(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -407,7 +407,7 @@ class GEO_OPT:
 
     @RMS_DR.setter
     def RMS_DR(self, val):
-        if utilities.is_positive_number(val):
+        if ti.is_positive_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -448,7 +448,7 @@ class GEO_OPT:
 
     @RMS_FORCE.setter
     def RMS_FORCE(self, val):
-        if utilities.is_positive_number(val):
+        if ti.is_positive_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -489,7 +489,7 @@ class GEO_OPT:
 
     @STEP_START_VAL.setter
     def STEP_START_VAL(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

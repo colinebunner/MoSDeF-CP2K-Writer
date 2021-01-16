@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import EACH
 from mosdef_cp2k_writer.classes import OT
 from mosdef_cp2k_writer.classes import SCF_PRINT
@@ -21,7 +21,7 @@ SCF_GUESS_VALS = [
 
 
 def _validate_ADDED_MOS(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "ADDED_MOS  must be AN integer."
@@ -84,7 +84,7 @@ def _validate_LEVEL_SHIFT(val, errorLog=[]):
 
 
 def _validate_MAX_DIIS(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAX_DIIS  must be AN integer."
@@ -101,7 +101,7 @@ def _validate_MAX_DIIS(val, errorLog=[]):
 
 
 def _validate_MAX_ITER_LUMO(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAX_ITER_LUMO  must be AN integer."
@@ -118,7 +118,7 @@ def _validate_MAX_ITER_LUMO(val, errorLog=[]):
 
 
 def _validate_MAX_SCF(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAX_SCF  must be AN integer."
@@ -135,7 +135,7 @@ def _validate_MAX_SCF(val, errorLog=[]):
 
 
 def _validate_MAX_SCF_HISTORY(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MAX_SCF_HISTORY  must be AN integer."
@@ -152,7 +152,7 @@ def _validate_MAX_SCF_HISTORY(val, errorLog=[]):
 
 
 def _validate_NCOL_BLOCK(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NCOL_BLOCK  must be AN integer."
@@ -193,7 +193,7 @@ def _validate_NOTCONV_STOPALL(val, errorLog=[]):
 
 
 def _validate_NROW_BLOCK(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NROW_BLOCK level must be AN integer."
@@ -449,7 +449,7 @@ class SCF:
 
     @ADDED_MOS.setter
     def ADDED_MOS(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -560,7 +560,7 @@ class SCF:
 
     @MAX_DIIS.setter
     def MAX_DIIS(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -601,7 +601,7 @@ class SCF:
 
     @MAX_DIIS.setter
     def MAX_DIIS(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -642,7 +642,7 @@ class SCF:
 
     @MAX_ITER_LUMO.setter
     def MAX_ITER_LUMO(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -683,7 +683,7 @@ class SCF:
 
     @MAX_SCF.setter
     def MAX_SCF(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -724,7 +724,7 @@ class SCF:
 
     @MAX_SCF_HISTORY.setter
     def MAX_SCF_HISTORY(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -765,7 +765,7 @@ class SCF:
 
     @NCOL_BLOCK.setter
     def NCOL_BLOCK(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -852,7 +852,7 @@ class SCF:
 
     @NROW_BLOCK.setter
     def NROW_BLOCK(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -901,7 +901,7 @@ class SCF:
 
     @ROKS_SCHEME.setter
     def ROKS_SCHEME(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

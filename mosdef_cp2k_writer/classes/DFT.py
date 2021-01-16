@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import QS
 from mosdef_cp2k_writer.classes import POISSON
 from mosdef_cp2k_writer.classes import DFT_PRINT
@@ -37,7 +37,7 @@ def _validate_BASIS_SET_FILE_NAME(val, errorLog=[]):
 
 
 def _validate_CHARGE(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "CHARGE must be an integer."
@@ -78,7 +78,7 @@ def _validate_EXCITATIONS(val, errorLog=[]):
 
 
 def _validate_MULTIPLICITY(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "MULTIPLICITY must be an integer."
@@ -443,7 +443,7 @@ class DFT:
 
     @CHARGE.setter
     def CHARGE(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -530,7 +530,7 @@ class DFT:
 
     @MULTIPLICITY.setter
     def MULTIPLICITY(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

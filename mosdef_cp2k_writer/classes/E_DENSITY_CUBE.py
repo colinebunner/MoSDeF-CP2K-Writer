@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import EACH
 
 BOOL_VALS = [".TRUE.", ".FALSE"]
@@ -58,7 +58,7 @@ def _validate_APPEND(val, errorLog=[]):
 
 
 def _validate_COMMON_ITERATION_LEVELS(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "COMMON_ITERATION_LEVELS level must be a positive integer."
@@ -79,7 +79,7 @@ def _validate_FILENAME(val, errorLog=[]):
 
 
 def _validate_COMMON_ITERATION_LEVELS(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "COMMON_ITERATION_LEVELS level must be a positive integer."
@@ -120,7 +120,7 @@ def _validate_LOG_PRINT_KEY(val, errorLog=[]):
 
 
 def _validate_NGAUSS(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NGAUSS level must be a positive integer."
@@ -137,7 +137,7 @@ def _validate_NGAUSS(val, errorLog=[]):
 
 
 def _validate_STRIDE(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "STRIDE level must be a positive integer."
@@ -405,7 +405,7 @@ class E_DENSITY_CUBE:
 
     @COMMON_ITERATION_LEVELS.setter
     def COMMON_ITERATION_LEVELS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -496,7 +496,7 @@ class E_DENSITY_CUBE:
 
     @NGAUSS.setter
     def NGAUSS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -537,7 +537,7 @@ class E_DENSITY_CUBE:
 
     @STRIDE.setter
     def STRIDE(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

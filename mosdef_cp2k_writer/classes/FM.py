@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 TYPE_OF_MATRIX_MULTIPLICATION_VALS = ["DBCSR_MM", "PDGEMM"]
 
@@ -97,7 +97,7 @@ class FM:
 
     @NCOL_BLOCKS.setter
     def NCOL_BLOCKS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -140,7 +140,7 @@ class FM:
 
     @NROW_BLOCKS.setter
     def NROW_BLOCKS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

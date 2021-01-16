@@ -1,10 +1,10 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 def _validate_PMCLUS_BOX(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMCLUS_BOX: {}. Must be a number.".format(
@@ -24,7 +24,7 @@ def _validate_PMCLUS_BOX(val, errorLog=[]):
 
 def _validate_PMHMC_BOX(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMHMC_BOX: {}. Must be a number.".format(val)
@@ -42,7 +42,7 @@ def _validate_PMHMC_BOX(val, errorLog=[]):
 
 def _validate_PMVOL_BOX(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMVOL_BOX: {}. Must be a number.".format(val)
@@ -103,7 +103,7 @@ class BOX_PROBABILITIES:
     @PMCLUS_BOX.setter
     def PMCLUS_BOX(self, val):
 
-        if utilities.is_number(val) or val is None:
+        if ti.is_number(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -147,7 +147,7 @@ class BOX_PROBABILITIES:
     @PMHMC_BOX.setter
     def PMHMC_BOX(self, val):
 
-        if utilities.is_number(val) or val is None:
+        if ti.is_number(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -191,7 +191,7 @@ class BOX_PROBABILITIES:
     @PMVOL_BOX.setter
     def PMVOL_BOX(self, val):
 
-        if utilities.is_number(val) or val is None:
+        if ti.is_number(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

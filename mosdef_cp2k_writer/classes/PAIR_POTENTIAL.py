@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 BOOL_VALS = [".TRUE.", ".FALSE"]
@@ -55,7 +55,7 @@ def _validate_D3BJ_SCALING(val, errorLog=[]):
 
 
 def _validate_D3_EXCLUDE_KIND(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "D3_EXCLUDE_KIND must be an integer."
@@ -569,7 +569,7 @@ class PAIR_POTENTIAL:
 
     @D3_EXCLUDE_KIND.setter
     def D3_EXCLUDE_KIND(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

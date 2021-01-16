@@ -1,10 +1,10 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 def _validate_AVBMC_ATOM(val, errorLog=[]):
 
-    if utilities.is_list_of_integers(val) or (val is None):
+    if ti.is_list_of_integers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -26,7 +26,7 @@ def _validate_AVBMC_ATOM(val, errorLog=[]):
 
 def _validate_AVBMC_RMAX(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -48,7 +48,7 @@ def _validate_AVBMC_RMAX(val, errorLog=[]):
 
 def _validate_AVBMC_RMIN(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -70,7 +70,7 @@ def _validate_AVBMC_RMIN(val, errorLog=[]):
 
 def _validate_PBIAS(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -139,7 +139,7 @@ class AVBMC:
 
     @AVBMC_ATOM.setter
     def AVBMC_ATOM(self, val):
-        if utilities.is_list_of_integers(val) or val is None:
+        if ti.is_list_of_integers(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -182,7 +182,7 @@ class AVBMC:
 
     @AVBMC_RMAX.setter
     def AVBMC_RMAX(self, val):
-        if utilities.is_list_of_numbers(val) or val is None:
+        if ti.is_list_of_numbers(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -227,7 +227,7 @@ class AVBMC:
 
     @AVBMC_RMIN.setter
     def AVBMC_RMIN(self, val):
-        if utilities.is_list_of_numbers(val) or val is None:
+        if ti.is_list_of_numbers(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -272,7 +272,7 @@ class AVBMC:
 
     @AVBMC_RMAX.setter
     def AVBMC_RMAX(self, val):
-        if utilities.is_list_of_numbers(val) or val is None:
+        if ti.is_list_of_numbers(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -317,7 +317,7 @@ class AVBMC:
 
     @PBIAS.setter
     def PBIAS(self, val):
-        if utilities.is_list_of_numbers(val) or val is None:
+        if ti.is_list_of_numbers(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

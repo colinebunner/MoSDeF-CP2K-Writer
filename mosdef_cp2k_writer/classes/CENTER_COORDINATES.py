@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 BOOL_VALS = [".TRUE.", ".FALSE."]
 
@@ -31,7 +31,7 @@ def _validate_SECTION_PARAMETERS(val, errorLog=[]):
 
 def _validate_CENTER_POINT(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -125,7 +125,7 @@ class CENTER_COORDINATES:
 
     @CENTER_POINT.setter
     def CENTER_POINT(self, val):
-        if utilities.is_list_of_numbers(val):
+        if ti.is_list_of_numbers(val):
 
             self.__changeLog.append(
                 {

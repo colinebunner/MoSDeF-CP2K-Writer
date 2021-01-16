@@ -1,12 +1,12 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import NOSE
 from mosdef_cp2k_writer.classes import GLE
 
 
 def _validate_RMANGLE(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -26,7 +26,7 @@ def _validate_RMANGLE(val, errorLog=[]):
 
 def _validate_RMBOND(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -46,7 +46,7 @@ def _validate_RMBOND(val, errorLog=[]):
 
 def _validate_RMDIHEDRAL(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -66,7 +66,7 @@ def _validate_RMDIHEDRAL(val, errorLog=[]):
 
 def _validate_RMROT(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -86,7 +86,7 @@ def _validate_RMROT(val, errorLog=[]):
 
 def _validate_RMTRANS(val, errorLog=[]):
 
-    if utilities.is_list_of_numbers(val) or (val is None):
+    if ti.is_list_of_numbers(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -162,7 +162,7 @@ class MOL_DISPLACEMENTS:
     @RMANGLE.setter
     def RMANGLE(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -206,7 +206,7 @@ class MOL_DISPLACEMENTS:
     @RMBOND.setter
     def RMBOND(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -250,7 +250,7 @@ class MOL_DISPLACEMENTS:
     @RMDIHEDRAL.setter
     def RMDIHEDRAL(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -296,7 +296,7 @@ class MOL_DISPLACEMENTS:
     @RMROT.setter
     def RMROT(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -340,7 +340,7 @@ class MOL_DISPLACEMENTS:
     @RMTRANS.setter
     def RMTRANS(self, val):
 
-        if val is None or utilities.is_list_of_numbers(val):
+        if val is None or ti.is_list_of_numbers(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

@@ -1,10 +1,10 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 def _validate_IUPCLTRANS(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -24,7 +24,7 @@ def _validate_IUPCLTRANS(val, errorLog=[]):
 
 def _validate_IUPTRANS(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -44,7 +44,7 @@ def _validate_IUPTRANS(val, errorLog=[]):
 
 def _validate_IUPVOLUME(val, errorLog=[]):
 
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -108,7 +108,7 @@ class MOVE_UPDATES:
 
     @IUPCLTRANS.setter
     def IUPCLTRANS(self, val):
-        if utilities.is_integer(val) or val is None:
+        if ti.is_integer(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -151,7 +151,7 @@ class MOVE_UPDATES:
 
     @IUPTRANS.setter
     def IUPTRANS(self, val):
-        if utilities.is_integer(val) or val is None:
+        if ti.is_integer(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -194,7 +194,7 @@ class MOVE_UPDATES:
 
     @IUPVOLUME.setter
     def IUPVOLUME(self, val):
-        if utilities.is_integer(val) or val is None:
+        if ti.is_integer(val) or val is None:
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

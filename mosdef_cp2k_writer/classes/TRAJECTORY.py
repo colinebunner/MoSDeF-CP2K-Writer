@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import EACH
 
 BOOL_VALS = [".TRUE.", ".FALSE."]
@@ -108,7 +108,7 @@ def _validate_CHARGE_OCCUP(val, errorLog=[]):
 
 
 def _validate_COMMON_ITERATION_LEVELS(val, errorLog=[]):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "COMMON_ITERATION_LEVELS level must be a positive integer."
@@ -486,7 +486,7 @@ class TRAJECTORY:
 
     @COMMON_ITERATION_LEVELS.setter
     def COMMON_ITERATION_LEVELS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

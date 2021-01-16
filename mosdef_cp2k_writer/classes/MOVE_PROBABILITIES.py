@@ -1,12 +1,12 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import BOX_PROBABILITIES
 from mosdef_cp2k_writer.classes import MOL_PROBABILITIES
 
 
 def _validate_PMAVBMC(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMAVBMC: {}. Must be a number.".format(val)
@@ -24,7 +24,7 @@ def _validate_PMAVBMC(val, errorLog=[]):
 
 def _validate_PMCLTRANS(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMCLTRANS: {}. Must be a number.".format(val)
@@ -42,7 +42,7 @@ def _validate_PMCLTRANS(val, errorLog=[]):
 
 def _validate_PMHMC(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMHMC: {}. Must be a number.".format(val)
@@ -60,7 +60,7 @@ def _validate_PMHMC(val, errorLog=[]):
 
 def _validate_PMSWAP(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMSWAP: {}. Must be a number.".format(val)
@@ -78,7 +78,7 @@ def _validate_PMSWAP(val, errorLog=[]):
 
 def _validate_PMTRAION(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMTRAION: {}. Must be a number.".format(val)
@@ -96,7 +96,7 @@ def _validate_PMTRAION(val, errorLog=[]):
 
 def _validate_PMTRANS(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMTRANS: {}. Must be a number.".format(val)
@@ -114,7 +114,7 @@ def _validate_PMTRANS(val, errorLog=[]):
 
 def _validate_PMVOLUME(val, errorLog=[]):
 
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "Invalid option for PMVOLUME: {}. Must be a number.".format(val)
@@ -221,7 +221,7 @@ class MOVE_PROBABILITIES:
     @PMAVBMC.setter
     def PMAVBMC(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -265,7 +265,7 @@ class MOVE_PROBABILITIES:
     @PMCLTRANS.setter
     def PMCLTRANS(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -309,7 +309,7 @@ class MOVE_PROBABILITIES:
     @PMHMC.setter
     def PMHMC(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -353,7 +353,7 @@ class MOVE_PROBABILITIES:
     @PMSWAP.setter
     def PMSWAP(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -397,7 +397,7 @@ class MOVE_PROBABILITIES:
     @PMTRAION.setter
     def PMTRAION(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -441,7 +441,7 @@ class MOVE_PROBABILITIES:
     @PMTRANS.setter
     def PMTRANS(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -485,7 +485,7 @@ class MOVE_PROBABILITIES:
     @PMVOLUME.setter
     def PMVOLUME(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

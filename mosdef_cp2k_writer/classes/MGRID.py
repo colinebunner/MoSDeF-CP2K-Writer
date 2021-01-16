@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 BOOL_VALS = [".TRUE.", ".FALSE."]
@@ -70,7 +70,7 @@ def _validate_MULTIGRID_SET(val, errorLog=[]):
 
 
 def _validate_NGRIDS(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NGRIDS must be an integer."
@@ -365,7 +365,7 @@ class MGRID:
 
     @NGRIDS.setter
     def NGRIDS(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

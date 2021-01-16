@@ -1,10 +1,10 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 def _validate_RMCLTRANS(val, errorLog=[]):
 
-    if val is None or utilities.is_number(val):
+    if val is None or ti.is_number(val):
 
         return val
     else:
@@ -25,7 +25,7 @@ def _validate_RMCLTRANS(val, errorLog=[]):
 
 def _validate_RMVOLUME(val, errorLog=[]):
 
-    if val is None or utilities.is_number(val):
+    if val is None or ti.is_number(val):
 
         return val
     else:
@@ -76,7 +76,7 @@ class BOX_DISPLACEMENTS:
     @RMCLTRANS.setter
     def RMCLTRANS(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -120,7 +120,7 @@ class BOX_DISPLACEMENTS:
     @RMVOLUME.setter
     def RMVOLUME(self, val):
 
-        if val is None or utilities.is_number(val):
+        if val is None or ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

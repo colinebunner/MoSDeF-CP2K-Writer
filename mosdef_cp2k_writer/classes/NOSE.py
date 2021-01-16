@@ -1,9 +1,9 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 def _validate_length(val):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "Nose LENGTH must be a positive integer."
@@ -20,7 +20,7 @@ def _validate_length(val):
 
 
 def _validate_yoshida(val):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "Nose YOSHIDA integrator order must be a positive integer."
@@ -37,7 +37,7 @@ def _validate_yoshida(val):
 
 
 def _validate_timecon(val):
-    if utilities.is_positive_number(val) or (val is None):
+    if ti.is_positive_number(val) or (val is None):
         return val
     else:
         errorMessage = "Nose TIMECON must be a positive number."
@@ -54,7 +54,7 @@ def _validate_timecon(val):
 
 
 def _validate_mts(val):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "Nose MTS must be a positive number."
@@ -120,7 +120,7 @@ class NOSE:
 
     @LENGTH.setter
     def LENGTH(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -161,7 +161,7 @@ class NOSE:
 
     @MTS.setter
     def MTS(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -204,7 +204,7 @@ class NOSE:
 
     @TIMECON.setter
     def TIMECON(self, val):
-        if utilities.is_positive_number(val):
+        if ti.is_positive_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -245,7 +245,7 @@ class NOSE:
 
     @YOSHIDA.setter
     def YOSHIDA(self, val):
-        if utilities.is_positive_integer(val):
+        if ti.is_positive_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

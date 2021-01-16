@@ -1,9 +1,9 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 # def _validate_a_list(val):
-#  if utilities.is_positive_integer(val) or (val is None):
+#  if ti.is_positive_integer(val) or (val is None):
 #    return val
 #  else:
 #    errorMessage = "Nose LENGTH must be a positive integer."
@@ -13,7 +13,7 @@ import mosdef_cp2k_writer.utilities as utilities
 
 
 def _validate_a_scale(val):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = "scaling factor for matrix A (for generic matrix A, depends on the characteristic frequency of the system). must be a positive integer."
@@ -30,7 +30,7 @@ def _validate_a_scale(val):
 
 
 # def _validate_c_list(val):
-#  if utilities.is_positive_number(val) or (val is None):
+#  if ti.is_positive_number(val) or (val is None):
 #    return val
 #  else:
 #    errorMessage = "Nose TIMECON must be a positive number."
@@ -40,7 +40,7 @@ def _validate_a_scale(val):
 
 
 def _validate_ndim(val):
-    if utilities.is_positive_integer(val) or (val is None):
+    if ti.is_positive_integer(val) or (val is None):
         return val
     else:
         errorMessage = (
@@ -108,7 +108,7 @@ class GLE:
 
     @A_LIST.setter
     def A_LIST(self, val):
-        # if utilities.is_positive_integer(val):
+        # if ti.is_positive_integer(val):
         #  self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'NOSE','Variable':'LENGTH',
         #                          'Success':True,'Previous':self.__LENGTH,'New':val,'ErrorMessage':None,
         #                          'Location':self.__location})
@@ -123,7 +123,7 @@ class GLE:
 
     @A_SCALE.setter
     def A_SCALE(self, val):
-        # if utilities.is_positive_integer(val):
+        # if ti.is_positive_integer(val):
         #  self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'NOSE','Variable':'MTS',
         #                          'Success':True,'Previous':self.__MTS,'New':val,'ErrorMessage':None,
         #                         'Location':self.__location})
@@ -138,7 +138,7 @@ class GLE:
 
     @C_LIST.setter
     def C_LIST(self, val):
-        # if utilities.is_positive_number(val):
+        # if ti.is_positive_number(val):
         # self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'NOSE','Variable':'TIMECON',
         #                         'Success':True,'Previous':self.__MTS,'New':val,'ErrorMessage':None,
         #                        'Location':self.__location})
@@ -153,7 +153,7 @@ class GLE:
 
     @NDIM.setter
     def NDIM(self, val):
-        # if utilities.is_positive_integer(val):
+        # if ti.is_positive_integer(val):
         # self.__changeLog.append({'Date':datetime.datetime.now(),'Module':'NOSE','Variable':'YOSHIDA',
         #                         'Success':True,'Previous':self.__YOSHIDA,'New':val,'ErrorMessage':None,
         #                        'Location':self.__location})

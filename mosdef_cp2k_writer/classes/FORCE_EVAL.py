@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 from mosdef_cp2k_writer.classes import PRINT
 from mosdef_cp2k_writer.classes import MD
 from mosdef_cp2k_writer.classes import DFT

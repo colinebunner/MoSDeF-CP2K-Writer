@@ -1,12 +1,12 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 BOOL_VALS = [".TRUE.", ".FALSE.", "TRUE", "FALSE"]
 
 
 def _validate_EMAX_ACCURACY(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "EMAX_ACCURACY should be a number."
@@ -23,7 +23,7 @@ def _validate_EMAX_ACCURACY(val, errorLog=[]):
 
 
 def _validate_EMAX_SPLINE(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "EMAX_SPLINE should be a number."
@@ -40,7 +40,7 @@ def _validate_EMAX_SPLINE(val, errorLog=[]):
 
 
 def _validate_EPS_SPLINE(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "EPS_SPLINE should be a number."
@@ -57,7 +57,7 @@ def _validate_EPS_SPLINE(val, errorLog=[]):
 
 
 def _validate_NPOINTS(val, errorLog=[]):
-    if utilities.is_integer(val) or (val is None):
+    if ti.is_integer(val) or (val is None):
         return val
     else:
         errorMessage = "NPOINTS should be a number."
@@ -74,7 +74,7 @@ def _validate_NPOINTS(val, errorLog=[]):
 
 
 def _validate_R0_NB(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "R0_NB should be a number."
@@ -91,7 +91,7 @@ def _validate_R0_NB(val, errorLog=[]):
 
 
 def _validate_RCUT_NB(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "RCUT_NB should be a number."
@@ -204,7 +204,7 @@ class SPLINE:
 
     @EMAX_ACCURACY.setter
     def EMAX_ACCURACY(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -245,7 +245,7 @@ class SPLINE:
 
     @EMAX_SPLINE.setter
     def EMAX_SPLINE(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -286,7 +286,7 @@ class SPLINE:
 
     @EPS_SPLINE.setter
     def EPS_SPLINE(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -327,7 +327,7 @@ class SPLINE:
 
     @NPOINTS.setter
     def NPOINTS(self, val):
-        if utilities.is_integer(val):
+        if ti.is_integer(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -368,7 +368,7 @@ class SPLINE:
 
     @R0_NB.setter
     def R0_NB(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -409,7 +409,7 @@ class SPLINE:
 
     @RCUT_NB.setter
     def RCUT_NB(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),

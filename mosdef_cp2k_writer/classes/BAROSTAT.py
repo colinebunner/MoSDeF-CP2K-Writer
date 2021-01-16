@@ -1,5 +1,5 @@
 import datetime
-import mosdef_cp2k_writer.utilities as utilities
+from mosdef_cp2k_writer.utilities import test_instance as ti
 
 
 VIRIAL_VALS = ["X", "XY", "XYZ", "XZ", "Y", "YZ", "Z"]
@@ -31,7 +31,7 @@ def _validate_virial(val, errorLog=[]):
 
 
 def _validate_pressure(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "PRESSURE must be a number."
@@ -48,7 +48,7 @@ def _validate_pressure(val, errorLog=[]):
 
 
 def _validate_temperature(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "BAROSTAT TEMPERATURE must be a number."
@@ -65,7 +65,7 @@ def _validate_temperature(val, errorLog=[]):
 
 
 def _validate_temp_tol(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "BAROSTAT TEMP_TOL must be a number."
@@ -82,7 +82,7 @@ def _validate_temp_tol(val, errorLog=[]):
 
 
 def _validate_timecon(val, errorLog=[]):
-    if utilities.is_number(val) or (val is None):
+    if ti.is_number(val) or (val is None):
         return val
     else:
         errorMessage = "BAROSTAT TIMECON must be a number."
@@ -202,7 +202,7 @@ class BAROSTAT:
 
     @PRESSURE.setter
     def PRESSURE(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -243,7 +243,7 @@ class BAROSTAT:
 
     @TEMPERATURE.setter
     def TEMPERATURE(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -284,7 +284,7 @@ class BAROSTAT:
 
     @TEMP_TOL.setter
     def TEMP_TOL(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
@@ -325,7 +325,7 @@ class BAROSTAT:
 
     @TIMECON.setter
     def TIMECON(self, val):
-        if utilities.is_number(val):
+        if ti.is_number(val):
             self.__changeLog.append(
                 {
                     "Date": datetime.datetime.now(),
